@@ -1,0 +1,53 @@
+{
+  "name": "ieo-backend",
+  "version": "1.0.0",
+  "description": "ieo",
+  "private": true,
+  "egg": {
+    "declarations": true
+  },
+  "dependencies": {
+    "egg": "^2.15.1",
+    "egg-cors": "^2.2.0",
+    "egg-scripts": "^2.11.0",
+    "egg-security": "^2.5.0",
+    "egg-sequelize": "^4.3.1",
+    "jsonwebtoken": "^8.5.1",
+    "mysql2": "^1.6.5"
+  },
+  "devDependencies": {
+    "autod": "^3.0.1",
+    "autod-egg": "^1.1.0",
+    "egg-bin": "^4.11.0",
+    "egg-ci": "^1.11.0",
+    "egg-mock": "^3.21.0",
+    "egg-sequelize-auto": "^0.1.1",
+    "eslint": "^5.13.0",
+    "eslint-config-egg": "^7.1.0",
+    "webstorm-disable-index": "^1.2.0"
+  },
+  "engines": {
+    "node": ">=8.9.0"
+  },
+  "scripts": {
+    "start": "egg-scripts start --daemon --title=egg-server-ieo-backend",
+    "stop": "egg-scripts stop --title=egg-server-ieo-backend",
+    "dev": "egg-bin dev",
+    "debug": "egg-bin debug",
+    "test": "npm run lint -- --fix && npm run test-local",
+    "test-local": "egg-bin test",
+    "cov": "egg-bin cov",
+    "lint": "eslint .",
+    "ci": "npm run lint && npm run cov",
+    "autod": "autod"
+  },
+  "ci": {
+    "version": "8"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "author": "zx",
+  "license": "MIT"
+}
