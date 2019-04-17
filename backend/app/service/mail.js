@@ -17,14 +17,14 @@ class mailService extends Service {
         pass: 'Zx1994163',
       },
     });
-
+    const randomNumber = ctx.helper.randomNumber(6);
     const mailOptions = {
       from: '"MaxWell服务邮件" <shellteo@163.com>', // sender address
       to: '767070256@qq.com', // list of receivers
       subject: 'MaxWell注册服务', // Subject line
       // 发送text或者html格式
       // text: 'Hello world?', // plain text body
-      html: '<p>您的验证码：<b>321312</b></p>', // html body
+      html: `<p>您的验证码：<b>${randomNumber}</b></p>`, // html body
     };
 
     // send mail with defined transport object

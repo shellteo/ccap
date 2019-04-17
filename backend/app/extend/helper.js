@@ -4,4 +4,7 @@ module.exports = {
   nowUnixTime() {
     return Math.round(new Date().getTime() / 1000);
   },
+  randomNumber(len) {
+    return Math.random().toString().slice(-len);
+  },
 };
