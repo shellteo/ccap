@@ -5,8 +5,8 @@ const nodemailer = require('nodemailer');
 
 class mailService extends Service {
   // 发送验证码服务
-  async send() {
-    const { ctx } = this;
+  async send(toMail) {
+    const { ctx, app } = this;
     const transporter = nodemailer.createTransport({
       // host: 'smtp.ethereal.email',
       service: '163', // 使用了内置传输发送邮件 查看支持列表：https://nodemailer.com/smtp/well-known/
@@ -18,9 +18,11 @@ class mailService extends Service {
       },
     });
     const randomNumber = ctx.helper.randomNumber(6);
+    // 过期时间：秒
+    app.redis.set(`register:${toMail}`, randomNumber, 'EX', 600);
     const mailOptions = {
       from: '"MaxWell服务邮件" <shellteo@163.com>', // sender address
-      to: '767070256@qq.com', // list of receivers
+      to: toMail, // list of receivers
       subject: 'MaxWell注册服务', // Subject line
       // 发送text或者html格式
       // text: 'Hello world?', // plain text body
@@ -31,14 +33,16 @@ class mailService extends Service {
     try {
       const info = await transporter.sendMail(mailOptions);
       console.log('Message sent: %s', info.messageId);
+      return ctx.msg.success;
     } catch (e) {
       console.log(e);
+      return ctx.msg.mailSendFailed;
     }
   }
 
   // 验证验证码服务
-  async verify(phone, verifyCode) {
-    const ret = await this.app.redis.get(`sms:register:${phone}`);
+  async verify(mail, verifyCode) {
+    const ret = await this.app.redis.get(`register:${mail}`);
     return ret === verifyCode;
   }
 }

@@ -1,4 +1,5 @@
 'use strict';
+const crypto = require('crypto');
 
 module.exports = {
   nowUnixTime() {
@@ -6,5 +7,9 @@ module.exports = {
   },
   randomNumber(len) {
     return Math.random().toString().slice(-len);
+  },
+  md5(data) {
+    const md5 = crypto.createHash('md5');
+    return md5.update(data).digest('hex');
   },
 };

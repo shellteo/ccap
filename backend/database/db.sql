@@ -4,17 +4,18 @@
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user`  (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `nickname` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '用户名',
-  `avatar` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT '头像url',
-  `bio` varchar(400) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT '个人介绍',
+  `nickname` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT '' COMMENT '用户名',
+  `password` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '密码',
+  `avatar` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT '' COMMENT '头像url',
+  `bio` varchar(400) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT '' COMMENT '个人介绍',
   `createTime` bigint(20) NOT NULL COMMENT '创建时间',
   `lastLoginTime` bigint(20) NOT NULL COMMENT '最近登录时间',
-  `lastLoginIP` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT '最近登录的IP',
-  `email` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT '邮箱',
-  `emailStatus` tinyint(1) NULL DEFAULT 0 COMMENT '邮箱状态：是否验证',
-  `mobile` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT '手机号',
-  `mobileStatus` tinyint(1) NULL DEFAULT 0 COMMENT '手机状态：是否验证',
-  `deleted` tinyint(1) NULL DEFAULT 0 COMMENT '是否删除',
+  `lastLoginIP` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT '' COMMENT '最近登录的IP',
+  `email` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '邮箱',
+  `emailStatus` tinyint(1) DEFAULT 0 COMMENT '邮箱状态：是否验证',
+  `mobile` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT '' COMMENT '手机号',
+  `mobileStatus` tinyint(1) DEFAULT 0 COMMENT '手机状态：是否验证',
+  `deleted` tinyint(1) DEFAULT 0 COMMENT '是否删除',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx_createTime`(`createTime`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户表' ROW_FORMAT = Dynamic;

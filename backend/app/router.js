@@ -21,6 +21,7 @@ module.exports = app => {
   // ieo
   router.get('/api/ieo', controller.ieo.index);
   router.get('/api/ieo/:id', controller.ieo.show);
+  router.post('/api/ieo', controller.ieo.create);
   // mail
   router.post('/api/mail', controller.mail.send);
 };

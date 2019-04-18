@@ -6,8 +6,9 @@ class MailController extends Controller {
   // sendcloud 发送短信验证码
   async send() {
     const { ctx } = this;
-    await ctx.service.mail.send();
-    ctx.body = ctx.msg.success;
+    const { mail } = ctx.request.body;
+    const ret = await ctx.service.mail.send(mail);
+    ctx.body = ret;
   }
 
   // 验证手机号

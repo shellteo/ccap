@@ -12,6 +12,11 @@ module.exports = app => {
     },
     nickname: {
       type: DataTypes.STRING(100),
+      allowNull: true,
+      defaultValue: '',
+    },
+    password: {
+      type: DataTypes.STRING(255),
       allowNull: false,
       defaultValue: '',
     },
@@ -40,7 +45,7 @@ module.exports = app => {
     },
     email: {
       type: DataTypes.STRING(100),
-      allowNull: true,
+      allowNull: false,
       defaultValue: '',
     },
     emailStatus: {

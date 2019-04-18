@@ -9,6 +9,7 @@
   "dependencies": {
     "egg": "^2.15.1",
     "egg-cors": "^2.2.0",
+    "egg-redis": "^2.3.1",
     "egg-scripts": "^2.11.0",
     "egg-security": "^2.5.0",
     "egg-sequelize": "^4.3.1",
