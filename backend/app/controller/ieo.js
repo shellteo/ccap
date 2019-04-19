@@ -6,8 +6,8 @@ class IEOController extends Controller {
   async index() {
     const { ctx } = this;
     const msg = ctx.msg.success;
-    const pageSize = parseInt(ctx.query.pageSize);
-    const pageIndex = parseInt(ctx.query.pageIndex);
+    const pageSize = parseInt(ctx.query.pageSize || 10);
+    const pageIndex = parseInt(ctx.query.pageIndex || 1);
     const offset = (pageIndex - 1) * pageSize;
     // status分为，所有，未开始，进行中，已结束，
     // 名称可以搜索 symbol 和 name
@@ -19,10 +19,14 @@ class IEOController extends Controller {
       status,
       query,
     });
+    ctx.body = msg;
   }
   async show() {
     const { ctx } = this;
-    ctx.body = 'hi, egg';
+    const id = ctx.params.id;
+    const msg = ctx.msg.success;
+    msg.data = await ctx.service.ieo.find(id);
+    ctx.body = msg;
   }
   async create() {
     const { ctx } = this;

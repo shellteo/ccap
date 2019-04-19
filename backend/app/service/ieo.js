@@ -38,9 +38,9 @@ class IEOService extends Service {
     ret.data = createResult;
     return ret;
   }
-  async find(email) {
+  async find(id) {
     const { ctx } = this;
-    return ctx.model.User.find({ where: { email } });
+    return ctx.model.Ieo.find({ where: { id } });
   }
   async list(offset, limit, { status, query }) {
     const { ctx } = this;
