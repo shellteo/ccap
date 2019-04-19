@@ -14,7 +14,7 @@ module.exports = app => {
       type: DataTypes.INTEGER(11),
       allowNull: false,
     },
-    createUserId: {
+    createUserEmail: {
       type: DataTypes.STRING(100),
       allowNull: false,
       defaultValue: '',
