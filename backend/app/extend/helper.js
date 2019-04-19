@@ -12,4 +12,7 @@ module.exports = {
     const md5 = crypto.createHash('md5');
     return md5.update(data).digest('hex');
   },
+  isNull(v) {
+    return v === '' || v === null || v === undefined || JSON.stringify(v) === '{}' || JSON.stringify(v) === '[]';
+  },
 };

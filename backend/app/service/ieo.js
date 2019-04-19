@@ -42,6 +42,38 @@ class IEOService extends Service {
     const { ctx } = this;
     return ctx.model.User.find({ where: { email } });
   }
+  async list(offset, limit, { status, query }) {
+    const { ctx } = this;
+    const result = {};
+    if (ctx.helper.isNull(status) && ctx.helper.isNull(query)) {
+      result.count = await ctx.model.Ieo.count();
+      result.rows = await ctx.model.Ieo.findAll({ offset, limit });
+    } else {
+      let sql = '';
+      if (!ctx.helper.isNull(query)) {
+        sql = 'SELECT * FROM ieo WHERE symbol LIKE \'%:Name%\' OR name LIKE \'%:Name%\' ';
+      }
+      // status: ongoing[进行中], upcoming[未开始], ended[已结束]
+      if (!ctx.helper.isNull(status)) {
+        if (status === 'ongoing') {
+          sql += 'OR startTime <= UNIX_TIMESTAMP(NOW()) AND endTime >= UNIX_TIMESTAMP(NOW())';
+        }
+        if (status === 'upcoming') {
+          sql += 'OR startTime >= UNIX_TIMESTAMP(NOW()) ';
+        }
+        if (status === 'ended') {
+          sql += 'endTime <= UNIX_TIMESTAMP(NOW())';
+        }
+      }
+      sql += ' LIMIT :offset, :limit ';
+      result.rows = await ctx.model.query(sql, {
+        raw: true,
+        model: ctx.model.Ieo,
+        replacements: { Name: query, offset, limit },
+      });
+    }
+    return result;
+  }
 }
 
 module.exports = IEOService;

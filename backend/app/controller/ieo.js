@@ -5,7 +5,20 @@ const Controller = require('egg').Controller;
 class IEOController extends Controller {
   async index() {
     const { ctx } = this;
-    ctx.body = 'hi, egg';
+    const msg = ctx.msg.success;
+    const pageSize = parseInt(ctx.query.pageSize);
+    const pageIndex = parseInt(ctx.query.pageIndex);
+    const offset = (pageIndex - 1) * pageSize;
+    // status分为，所有，未开始，进行中，已结束，
+    // 名称可以搜索 symbol 和 name
+    const {
+      status,
+      query,
+    } = ctx.query;
+    msg.data = await ctx.service.ieo.list(offset, pageSize, {
+      status,
+      query,
+    });
   }
   async show() {
     const { ctx } = this;
