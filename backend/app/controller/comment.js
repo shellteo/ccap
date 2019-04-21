@@ -5,7 +5,7 @@ const Controller = require('egg').Controller;
 class commentController extends Controller {
   async index() {
     const { ctx } = this;
-    let { pageSize, pageIndex, ieoId } = ctx.query;
+    let { pageSize = 10, pageIndex = 1, ieoId } = ctx.query;
     pageSize = parseInt(pageSize);
     pageIndex = parseInt(pageIndex);
     const offset = (pageIndex - 1) * pageSize;
