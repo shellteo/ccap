@@ -15,4 +15,7 @@
     height: 100%;
     max-width: 600px;
   }
+  * {
+    outline: none;
+  }
 </style>
