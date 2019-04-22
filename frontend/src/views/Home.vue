@@ -7,56 +7,42 @@
                 <van-icon v-else name="user-o" size="1.2rem"/>
             </span>
     </van-nav-bar>
-    <div class="home-main">
-      <section>
-        <div class="tbl-header">
-          <table cellpadding="0" cellspacing="0" border="0">
-            <thead>
-            <tr>
-              <th style="width: 50%;text-align: left;">IEO名称</th>
-              <th style="width: 30%;">起止时间</th>
-              <th style="width: 20%;">评分</th>
-            </tr>
-            </thead>
-          </table>
-        </div>
-        <div class="tbl-content">
-          <table cellpadding="0" cellspacing="0" border="0">
-            <tbody>
-              <CoinCard></CoinCard>
-              <CoinCard></CoinCard>
-              <CoinCard></CoinCard>
-              <CoinCard></CoinCard>
-              <CoinCard></CoinCard>
-              <CoinCard></CoinCard>
-              <CoinCard></CoinCard>
-              <CoinCard></CoinCard>
-              <CoinCard></CoinCard>
-              <CoinCard></CoinCard>
-              <CoinCard></CoinCard>
-              <CoinCard></CoinCard>
-              <CoinCard></CoinCard>
-              <CoinCard></CoinCard>
-              <CoinCard></CoinCard>
-              <CoinCard></CoinCard>
-              <CoinCard></CoinCard>
-              <CoinCard></CoinCard>
-              <CoinCard></CoinCard>
-              <CoinCard></CoinCard>
-              <CoinCard></CoinCard>
-              <CoinCard></CoinCard>
-              <CoinCard></CoinCard>
-              <CoinCard></CoinCard>
-              <CoinCard></CoinCard>
-              <CoinCard></CoinCard>
-              <CoinCard></CoinCard>
-              <CoinCard></CoinCard>
-              <CoinCard></CoinCard>
-            </tbody>
-          </table>
-        </div>
-      </section>
-    </div>
+    <section class="home-main">
+      <div class="tbl-header">
+        <table cellpadding="0" cellspacing="0" border="0">
+          <thead>
+          <tr>
+            <th style="width: 50%;">IEO名称</th>
+            <th style="width: 30%;">起止时间</th>
+            <th style="width: 20%;text-align: right;">评分</th>
+          </tr>
+          </thead>
+        </table>
+      </div>
+      <div class="tbl-content">
+        <table cellpadding="0" cellspacing="0" border="0">
+          <tbody>
+            <CoinCard></CoinCard>
+            <CoinCard></CoinCard>
+            <CoinCard></CoinCard>
+            <CoinCard></CoinCard>
+            <CoinCard></CoinCard>
+            <CoinCard></CoinCard>
+            <CoinCard></CoinCard>
+            <CoinCard></CoinCard>
+            <CoinCard></CoinCard>
+            <CoinCard></CoinCard>
+            <CoinCard></CoinCard>
+            <CoinCard></CoinCard>
+            <CoinCard></CoinCard>
+            <CoinCard></CoinCard>
+            <CoinCard></CoinCard>
+            <CoinCard></CoinCard>
+            <CoinCard></CoinCard>
+          </tbody>
+        </table>
+      </div>
+    </section>
     <van-popup v-model="sidebarShow" position="left" class="sidebar">
       <div class="container">
         <van-cell title="👉 IEO列表" is-link to="/"/>
@@ -100,58 +86,52 @@ export default {
 
 <style lang="scss" scoped>
   .home-page {
-    min-height: 100%;
-    box-sizing: border-box;
-    //background-color: #f2f3f5;
-  }
-  .sidebar {
     height: 100%;
-    width: 50%;
-    .container {
-      margin-top: 30px;
-    }
+    box-sizing: border-box;
+    position: relative;
   }
   .home-main {
+    height: 100%;
     position: relative;
-    padding: 46px 0;
     box-sizing: border-box;
-    .ieo-table-header {
-      table-layout: fixed;
-      margin-bottom: 0;
-    }
-    .ieo-table-body {
-      table-layout: fixed
-    }
+    padding: 46px 0 0 0;
   }
   .aTag {
     color: #1989fa;
     font-size: 12px;
   }
+  .sidebar {
+    height: 100%;
+    width: 50%;
+    .container {
+      margin-top: 50px;
+    }
+  }
 </style>
 <style lang="scss">
   table{
-    width:100%;
+    width: 100%;
     table-layout: fixed;
   }
   .tbl-header{
-    background-color: rgba(0,0,0,0.3);
+    background-color: rgba(102,102,102,0.1);
+    height: 32px;
   }
   .tbl-content{
-    height:300px;
-    overflow-x:auto;
+    height: calc(100% - 32px);
+    overflow-x: auto;
     margin-top: 0;
   }
   th{
-    padding: 20px 15px;
+    padding: 8px 15px;
     font-weight: 500;
     font-size: 12px;
-    color: #000;
-    text-transform: uppercase;
-    text-align: center;
+    color: #999;
+    text-align: left;
   }
   td{
     padding: 15px;
-    text-align: center;
+    text-align: left;
     vertical-align:middle;
     font-weight: 300;
     font-size: 12px;
