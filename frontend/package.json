@@ -23,6 +23,7 @@
     "eslint-plugin-vue": "^5.0.0",
     "node-sass": "^4.11.0",
     "sass-loader": "^7.1.0",
+    "url-loader": "^1.1.2",
     "vue-cli-plugin-axios": "^0.0.4",
     "vue-template-compiler": "^2.5.21"
   },

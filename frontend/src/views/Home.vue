@@ -3,18 +3,17 @@
     <van-nav-bar title="list" @click-left="sidebarShow = true" @click-right="login" fixed :z-index="3">
       <van-icon name="wap-nav" slot="left" size="1.2rem"/>
       <span slot="right">
-                <span v-if="!isLogin">登录</span>
-                <van-icon v-else name="user-o" size="1.2rem"/>
-            </span>
+        <van-icon name="search" size="1.2rem" />
+      </span>
     </van-nav-bar>
     <section class="home-main">
       <div class="tbl-header">
         <table cellpadding="0" cellspacing="0" border="0">
           <thead>
           <tr>
-            <th style="width: 50%;">IEO名称</th>
-            <th style="width: 30%;">起止时间</th>
-            <th style="width: 20%;text-align: right;">评分</th>
+            <th style="width: 50%;">IEO名称<van-icon class-prefix="my-icon" name="down" /></th>
+            <th style="width: 30%;">起止时间<van-icon name="ascending" size="1rem" /></th>
+            <th style="width: 20%;text-align: right;">评分<van-icon name="ascending" size="1rem" /></th>
           </tr>
           </thead>
         </table>

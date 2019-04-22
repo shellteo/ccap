@@ -4,3 +4,9 @@
   align-items: $alignItems;
   justify-content: $justifyContent;
 }
+.my-icon {
+  font-family: 'my-icon';
+}
+.my-icon-down::before {
+  content: '\f0dd';
+}
