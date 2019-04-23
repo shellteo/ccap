@@ -24,4 +24,10 @@ module.exports = app => {
   router.post('/api/ieo', controller.ieo.create);
   // mail
   router.post('/api/mail', controller.mail.send);
+  // coin
+  router.get('/api/all_coins', controller.coincodex.all_coins);
+  router.get('/api/get_firstpage_history/:days/:samples/:coins_limit', controller.coincodex.get_firstpage_history);
+  router.get('/api/get_coin_history/:symbol/:start_date/:end_date/:samples', controller.coincodex.get_coin_history);
+  router.get('/api/get_coin/:symbol', controller.coincodex.get_coin);
+  router.get('/api/get_markets_by_coin/:symbol', controller.coincodex.get_markets_by_coin);
 };
