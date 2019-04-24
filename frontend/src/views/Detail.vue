@@ -1,5 +1,8 @@
 <template>
   <div class="detail-page">
+    <div>
+
+    </div>
     <van-nav-bar title="BTT"
                  left-text="返回"
                  left-arrow fixed :z-index="3"
@@ -8,7 +11,8 @@
       <!--<div class="image-container">
         <img :src="'https://crypto-ycy.oss-cn-shanghai.aliyuncs.com' + girl.imageLink" alt="" class="ycy">
       </div>-->
-      <ve-line :data="chartData"></ve-line>
+      <!--<ve-line :data="chartData" :settings="{}"></ve-line>-->
+      <div id="myChart" :style="{width: '100%', height: '400px'}"></div>
       <div class="box-container">
         <van-cell title="币种名称" label="BlockCloud" value="BLOC"/>
         <van-cell title="上线交易所" is-link>
@@ -95,6 +99,13 @@
 <script>
 import { ImagePreview } from 'vant';
 import CommentCard from '@/components/CommentCard'
+
+// 引入基本模板
+import echarts from 'echarts/lib/echarts'
+import 'echarts/lib/chart/line';
+import 'echarts/lib/component/tooltip';
+import 'echarts/lib/component/title';
+
 export default {
   name: "Detail",
   components: {
@@ -110,16 +121,9 @@ export default {
       commentCount: 0,
       commentList: [],
       chartData: {
-        columns: ['日期', '访问用户', '下单用户', '下单率'],
-        rows: [
-          { '日期': '1/1', '访问用户': 1393, '下单用户': 1093, '下单率': 0.32 },
-          { '日期': '1/2', '访问用户': 3530, '下单用户': 3230, '下单率': 0.26 },
-          { '日期': '1/3', '访问用户': 2923, '下单用户': 2623, '下单率': 0.76 },
-          { '日期': '1/4', '访问用户': 1723, '下单用户': 1423, '下单率': 0.49 },
-          { '日期': '1/5', '访问用户': 3792, '下单用户': 3492, '下单率': 0.323 },
-          { '日期': '1/6', '访问用户': 4593, '下单用户': 4293, '下单率': 0.78 }
-        ]
-      }
+        rows: [1393, 3530, 3530, 2923, 3792]
+      },
+      coinInfo: {}
     }
   },
   methods: {
@@ -140,19 +144,64 @@ export default {
     },
     get_markets(symbol) {
       this.$axios.get(`${this.apis.get_markets_by_coin}/${symbol}`).then((res) => {
-        console.log(res);
+        this.coinInfo = res.data;
       })
     },
-    get_coin_history() {
-      this.$axios.get(`${this.apis.get_coin_history}/BLOC/2019-04-22/2019-04-23/100`).then((res) => {
+    get_coin_history(symbol) {
+      this.$axios.get(`${this.apis.get_coin_history}/${symbol}/2019-04-23 18:54:00/2019-04-24 18:54:00/100`).then((res) => {
         console.log(res);
+        let xData = [];
+        let yData = [];
+        const data = res.data.BTT;
+        for (let i = 0; i < data.length; i++) {
+          xData.push(data[i][0]);
+          yData.push(data[i][1]);
+        }
+        this.drawLine(xData, yData);
+        console.log(xData, yData);
       })
+    },
+    drawLine(xData, yData) {
+      // 基于准备好的dom，初始化echarts实例
+      let myChart = echarts.init(document.getElementById('myChart'))
+      // 绘制图表
+      myChart.setOption({
+        xAxis: {
+          type: 'category',
+          data: xData,
+          //show: false
+        },
+        yAxis: {
+          type: 'value',
+          //show: false
+        },
+        /*grid: {
+          top: '0',
+          right: '0',
+          bottom: '0',
+          left: '0',
+        },*/
+        series: [{
+          data: yData,
+          type: 'line',
+          symbol: 'none',
+          areaStyle: {
+            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+              offset: 0,
+              color: 'rgb(255, 158, 68)'
+            }, {
+              offset: 1,
+              color: 'rgb(255, 70, 131)'
+            }])
+          }
+        }]
+      });
     }
   },
   mounted() {
     this.ieoId = this.$route.params.id;
-    this.get_coin('IZI');
-    this.get_coin_history();
+    this.get_coin('BTT');
+    this.get_coin_history('BTT');
   }
 }
 </script>
