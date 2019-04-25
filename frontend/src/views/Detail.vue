@@ -155,7 +155,7 @@ export default {
         const data = res.data.BTT;
         for (let i = 0; i < data.length; i++) {
           xData.push(data[i][0]);
-          yData.push(data[i][1]);
+          yData.push(data[i][1]*10000);
         }
         this.drawLine(xData, yData);
         console.log(xData, yData);
