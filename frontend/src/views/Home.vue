@@ -11,7 +11,15 @@
         <table cellpadding="0" cellspacing="0" border="0">
           <thead>
           <tr>
-            <th style="width: 50%;">IEO名称<van-icon class-prefix="my-icon" name="down" /></th>
+            <th style="width: 50%;">
+              <div class="header-cell">
+                <span>IEO名称</span>
+                <span class="sort-ico">
+                  <van-icon class-prefix="my-icon" name="up" style="margin-bottom: -6px;color: #4491e9;"/>
+                  <van-icon class-prefix="my-icon" name="down" style="margin-top: -7px"/>
+                </span>
+              </div>
+            </th>
             <th style="width: 30%;">起止时间<van-icon name="ascending" size="1rem" /></th>
             <th style="width: 20%;text-align: right;">评分<van-icon name="ascending" size="1rem" /></th>
           </tr>
@@ -79,6 +87,14 @@ export default {
       isLogin: false,
       nickname: '',
     }
+  },
+  methods: {
+    login() {
+
+    },
+    register() {
+
+    },
   }
 }
 </script>
@@ -105,6 +121,15 @@ export default {
     .container {
       margin-top: 50px;
     }
+  }
+  .header-cell {
+    @include flexSetting(row, center, flex-start);
+    span:first-child {
+      margin-right: 4px;
+    }
+  }
+  .sort-ico {
+    @include flexSetting(column, center, center);
   }
 </style>
 <style lang="scss">

@@ -4,9 +4,20 @@
   align-items: $alignItems;
   justify-content: $justifyContent;
 }
+@font-face {
+  font-family: 'my-icon';
+  src: url('/fa-solid-900.ttf') format('truetype');
+}
 .my-icon {
   font-family: 'my-icon';
+  font-size:12px;font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-stroke-width: 0.2px;
+  -moz-osx-font-smoothing: grayscale;
 }
 .my-icon-down::before {
   content: '\f0dd';
+}
+.my-icon-up::before {
+  content: '\f0de';
 }
