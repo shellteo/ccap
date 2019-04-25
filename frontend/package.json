@@ -10,7 +10,6 @@
   "dependencies": {
     "core-js": "^2.6.5",
     "echarts": "^4.2.1",
-    "v-charts": "^1.19.0",
     "vant": "^1.6.15",
     "vue": "^2.6.10",
     "vue-router": "^3.0.3"

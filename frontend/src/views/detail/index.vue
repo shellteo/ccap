@@ -12,61 +12,73 @@
         <img :src="'https://crypto-ycy.oss-cn-shanghai.aliyuncs.com' + girl.imageLink" alt="" class="ycy">
       </div>-->
       <!--<ve-line :data="chartData" :settings="{}"></ve-line>-->
-      <div id="myChart" :style="{width: '100%', height: '400px'}"></div>
-      <div class="box-container">
-        <van-cell title="币种名称" label="BlockCloud" value="BLOC"/>
-        <van-cell title="上线交易所" is-link>
-          <template slot="right-icon">
-            <a href="https://okex.com">OKEX</a>
-          </template>
-        </van-cell>
-        <van-cell title="交易所平台" is-link>
-          <template slot="right-icon">
-            <a href="https://www.okex.com/activity/jumpstart">jumpstart</a>
-          </template>
-        </van-cell>
-        <van-cell title="官网" is-link>
-          <template slot="right-icon">
-            <a href="https://www.jimyun.com/">https://www.jimyun.com/</a>
-          </template>
-        </van-cell>
-        <van-cell title="所有者" label="" />
-        <van-cell title="简介" label="" />
-      </div>
-      <div class="box-container">
-        <van-cell>
-          <template slot="title">
-            <span class="custom-text">村民说(112)</span>
-          </template>
-          <van-button slot="right-icon" plain hairline type="danger" size="small" @click="commentShow = true">查看全部</van-button>
-        </van-cell>
-        <div class="comments-wrap">
-          <CommentCard v-for="(item, i) in commentList" :key="i" :comment="item"></CommentCard>
-        </div>
-      </div>
+      <div id="myChart" :style="{width: '100%', height: '200px'}"></div>
+      <van-tabs v-model="active">
+        <van-tab title="简况">
+          <div class="box-container">
+            <van-cell-group>
+              <van-cell title="币种名称" label="BlockCloud" value="BLOC"/>
+              <van-cell title="上线交易所">
+                <template slot="right-icon">OKEX</template>
+              </van-cell>
+              <van-cell title="交易所平台" is-link>
+                <template slot="right-icon">jumpstart</template>
+              </van-cell>
+            </van-cell-group>
+          </div>
+          <div class="box-container">
+            <van-cell>
+              <template slot="title">
+                <b>相关连接</b>
+              </template>
+            </van-cell>
+            <div class="cell-container">
+              <van-button plain type="default" size="small">朴素按钮</van-button>
+            </div>
+          </div>
+        </van-tab>
+        <van-tab title="评论">
+          <div class="box-container">
+            <van-cell>
+              <template slot="title">
+                <span class="custom-text">评论(112)</span>
+              </template>
+              <van-button slot="right-icon" plain hairline type="danger" size="small" @click="commentShow = true">查看全部</van-button>
+            </van-cell>
+            <div class="comments-wrap">
+              <CommentCard v-for="(item, i) in commentList" :key="i" :comment="item"></CommentCard>
+            </div>
+          </div>
+        </van-tab>
+        <van-tab title="资讯">
+          <div class="box-container">
+            <van-cell>
+              <template slot="title">
+                <span class="custom-text">资讯(112)</span>
+              </template>
+              <van-button slot="right-icon" plain hairline type="danger" size="small" @click="commentShow = true">查看全部</van-button>
+            </van-cell>
+            <div class="comments-wrap">
+              <CommentCard v-for="(item, i) in commentList" :key="i" :comment="item"></CommentCard>
+            </div>
+          </div>
+        </van-tab>
+      </van-tabs>
     </div>
     <van-goods-action>
       <van-goods-action-mini-btn
               :info="girl.likeCount"
-              icon="like-o"
-              text="喜欢"
-      />
-      <van-goods-action-mini-btn
-              :info="commentCount"
-              icon="comment-o"
-              text="村民说"
-              @click="editCommentShow = true"
-      />
-      <van-goods-action-mini-btn
-              icon="share"
-              text="分享"
+              icon="like"
+              info="5"
+              text="已喜欢"
       />
       <van-goods-action-big-btn
-              text="燃烧卡路里"
+              text="查看IEO规则"
       />
       <van-goods-action-big-btn
               primary
-              text="领养"
+              disabled
+              text="未开始"
       />
     </van-goods-action>
     <van-popup v-model="commentShow" position="bottom" class="sidebar">
@@ -209,6 +221,9 @@ export default {
 <style lang="scss" scoped>
   .detail-page {
     color: #2a2825;
+    .cell-container {
+      padding: 10px 15px;
+    }
     .detail-container {
       background-color: #f2f3f5;
       margin-top: 46px;
