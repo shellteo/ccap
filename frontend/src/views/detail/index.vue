@@ -16,6 +16,9 @@
       <van-tabs v-model="active">
         <van-tab title="简况">
           <div class="box-container">
+            <div class="cell-container">
+              积木云是全球首个基于区块链技术的互联网底层协议体系，致力于升级和改造现有互联网，让生活更美好。 积木云于2018年7月获得全球28个国家和地区的100余家知名投资机构投资。由科学家级的团队组成，团队成员来自普林斯顿、清华、北大等高校，成员超过50%拥有博士学位，并且拥有诺贝尔经济学奖得主Oliver Hart担任经济顾问和白宫经济顾问委员会经济学家Hoan Soo Lee作为项目顾问。
+            </div>
             <van-cell-group>
               <van-cell title="币种名称" label="BlockCloud" value="BLOC"/>
               <van-cell title="上线交易所">
@@ -33,7 +36,18 @@
               </template>
             </van-cell>
             <div class="cell-container">
-              <van-button plain type="default" size="small">朴素按钮</van-button>
+              <van-button plain type="default">
+                  <van-icon class-prefix="my-icon" name="home"/>官网
+              </van-button>
+              <van-button plain type="default">
+                  <van-icon class-prefix="my-icon" name="rocket"/>发售平台
+              </van-button>
+              <van-button plain type="default">
+                  <van-icon class-prefix="my-icon" name="book"/>白皮书
+              </van-button>
+              <van-button plain type="default">
+                  <van-icon class-prefix="brand" name="telegram"/>电报群
+              </van-button>
             </div>
           </div>
         </van-tab>
@@ -223,6 +237,7 @@ export default {
     color: #2a2825;
     .cell-container {
       padding: 10px 15px;
+      font-size: 14px;
     }
     .detail-container {
       background-color: #f2f3f5;
