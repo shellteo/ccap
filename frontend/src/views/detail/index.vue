@@ -1,18 +1,20 @@
 <template>
   <div class="detail-page">
-    <div>
-
-    </div>
     <van-nav-bar title="BTT"
                  left-text="返回"
                  left-arrow fixed :z-index="3"
                  @click-left="$router.push({path: '/'})"/>
     <div class="detail-container">
-      <!--<div class="image-container">
-        <img :src="'https://crypto-ycy.oss-cn-shanghai.aliyuncs.com' + girl.imageLink" alt="" class="ycy">
-      </div>-->
-      <!--<ve-line :data="chartData" :settings="{}"></ve-line>-->
-      <div id="myChart" :style="{width: '100%', height: '200px'}"></div>
+      <!--红跌绿涨，参考：https://coinmarketcap.com/currencies/bitcoin/、https://m.feixiaohao.com/currencies/topnetwork/-->
+      <div>
+        <h1></h1>
+        <p>最新价：${{coinInfo.last_price_usd}}</p>
+        <p>24H跌涨：{{parseFloat(coinInfo.price_change_1D_percent)}}%</p>
+        <p>24H高：${{coinInfo.price_high_24_usd}}</p>
+        <p>24H低：${{coinInfo.price_low_24_usd}}</p>
+        <p>24H额：${{coinInfo.volume_24_usd}}</p>
+      </div>
+      <div id="myChart" :style="{width: '100%', height: '100px'}"></div>
       <van-tabs v-model="active">
         <van-tab title="简况">
           <div class="box-container">
@@ -26,6 +28,9 @@
               </van-cell>
               <van-cell title="交易所平台" is-link>
                 <template slot="right-icon">jumpstart</template>
+              </van-cell>
+              <van-cell title="IEO时间">
+                <template slot="label">2019.03.27 21:00:00- 2019.03.27 22:00:00</template>
               </van-cell>
             </van-cell-group>
           </div>
@@ -149,7 +154,10 @@ export default {
       chartData: {
         rows: [1393, 3530, 3530, 2923, 3792]
       },
-      coinInfo: {}
+      coinInfo: {},
+      xData: [],
+      yData: [],
+      symbol: 'TOP2'
     }
   },
   methods: {
@@ -163,28 +171,23 @@ export default {
       }).then(res => {
       })
     },
-    get_coin(symbol) {
-      this.$axios.get(`${this.apis.get_coin}/${symbol}`).then((res) => {
-        console.log(res);
-      })
-    },
-    get_markets(symbol) {
-      this.$axios.get(`${this.apis.get_markets_by_coin}/${symbol}`).then((res) => {
+    async get_coin(symbol) {
+      await this.$axios.get(`${this.apis.get_coin}/${symbol}`).then((res) => {
         this.coinInfo = res.data;
       })
     },
-    get_coin_history(symbol) {
-      this.$axios.get(`${this.apis.get_coin_history}/${symbol}/2019-04-23 18:54:00/2019-04-24 18:54:00/100`).then((res) => {
+    async get_coin_history(symbol) {
+      await this.$axios.get(`${this.apis.get_coin_history}/${symbol}/2019-04-25/2019-04-26/1000`).then((res) => {
         console.log(res);
         let xData = [];
         let yData = [];
-        const data = res.data.BTT;
+        const data = res.data[this.symbol];
         for (let i = 0; i < data.length; i++) {
           xData.push(data[i][0]);
-          yData.push(data[i][1]*10000);
+          yData.push(data[i][1]);
         }
-        this.drawLine(xData, yData);
-        console.log(xData, yData);
+        this.xData = xData;
+        this.yData = yData;
       })
     },
     drawLine(xData, yData) {
@@ -194,23 +197,33 @@ export default {
       myChart.setOption({
         xAxis: {
           type: 'category',
-          data: xData,
-          //show: false
+          data: this.xData,
+          show: false
         },
         yAxis: {
           type: 'value',
-          //show: false
+          show: false,
+          min: this.coinInfo.price_low_24_usd,
+          max: this.coinInfo.price_high_24_usd
         },
-        /*grid: {
+        grid: {
           top: '0',
           right: '0',
           bottom: '0',
           left: '0',
-        },*/
+        },
         series: [{
-          data: yData,
+          data: this.yData,
           type: 'line',
           symbol: 'none',
+          itemStyle: {
+            normal: {
+              color: '#ccc',
+              lineStyle:{
+                width: 1
+              }
+            }
+          },
           areaStyle: {
             color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
               offset: 0,
@@ -224,10 +237,11 @@ export default {
       });
     }
   },
-  mounted() {
+  async mounted() {
     this.ieoId = this.$route.params.id;
-    this.get_coin('BTT');
-    this.get_coin_history('BTT');
+    await this.get_coin(this.symbol);
+    await this.get_coin_history(this.symbol);
+    this.drawLine();
   }
 }
 </script>

@@ -15,6 +15,11 @@ module.exports = app => {
       allowNull: false,
       defaultValue: '',
     },
+    displaySymbol: {
+      type: DataTypes.STRING(255),
+      allowNull: true,
+      defaultValue: '',
+    },
     name: {
       type: DataTypes.STRING(50),
       allowNull: false,
