@@ -1,0 +1,1442 @@
+[
+    {
+      "en": "Afghanistan",
+      "locale": "AF",
+      "code": "93",
+      "zh": "阿富汗"
+    },
+    {
+      "en": "Albania",
+      "locale": "AL",
+      "code": "355",
+      "zh": "阿尔巴尼亚"
+    },
+    {
+      "en": "Algeria",
+      "locale": "DZ",
+      "code": "213",
+      "zh": "阿尔及利亚"
+    },
+    {
+      "en": "American Samoa",
+      "locale": "AS",
+      "code": "1684",
+      "zh": "东萨摩亚(美)"
+    },
+    {
+      "en": "Andorra",
+      "locale": "AD",
+      "code": "376",
+      "zh": "安道尔共和国"
+    },
+    {
+      "en": "Angola",
+      "locale": "AO",
+      "code": "244",
+      "zh": "安哥拉"
+    },
+    {
+      "en": "Anguilla",
+      "locale": "AI",
+      "code": "1264",
+      "zh": "安圭拉岛"
+    },
+    {
+      "en": "Antigua and Barbuda",
+      "locale": "AG",
+      "code": "1268",
+      "zh": "安提瓜和巴布达"
+    },
+    {
+      "en": "Argentina",
+      "locale": "AR",
+      "code": "54",
+      "zh": "阿根廷"
+    },
+    {
+      "en": "Armenia",
+      "locale": "AM",
+      "code": "374",
+      "zh": "亚美尼亚"
+    },
+    {
+      "en": "Australia",
+      "locale": "AU",
+      "code": "61",
+      "zh": "澳大利亚"
+    },
+    {
+      "en": "Austria",
+      "locale": "AT",
+      "code": "43",
+      "zh": "奥地利"
+    },
+    {
+      "en": "Azerbaijan",
+      "locale": "AZ",
+      "code": "994",
+      "zh": "阿塞拜疆"
+    },
+    {
+      "en": "Bahamas",
+      "locale": "BS",
+      "code": "1242",
+      "zh": "巴哈马"
+    },
+    {
+      "en": "Bahrain",
+      "locale": "BH",
+      "code": "973",
+      "zh": "巴林"
+    },
+    {
+      "en": "Bangladesh",
+      "locale": "BD",
+      "code": "880",
+      "zh": "孟加拉国"
+    },
+    {
+      "en": "Barbados",
+      "locale": "BB",
+      "code": "1246",
+      "zh": "巴巴多斯"
+    },
+    {
+      "en": "Belarus",
+      "locale": "BY",
+      "code": "375",
+      "zh": "白俄罗斯"
+    },
+    {
+      "en": "Belgium",
+      "locale": "BE",
+      "code": "32",
+      "zh": "比利时"
+    },
+    {
+      "en": "Belize",
+      "locale": "BZ",
+      "code": "501",
+      "zh": "伯利兹"
+    },
+    {
+      "en": "Benin",
+      "locale": "BJ",
+      "code": "229",
+      "zh": "贝宁"
+    },
+    {
+      "en": "Bermuda",
+      "locale": "BM",
+      "code": "1441",
+      "zh": "百慕大群岛"
+    },
+    {
+      "en": "Bolivia",
+      "locale": "BO",
+      "code": "591",
+      "zh": "玻利维亚"
+    },
+    {
+      "en": "Botswana",
+      "locale": "BW",
+      "code": "267",
+      "zh": "博茨瓦纳"
+    },
+    {
+      "en": "Brazil",
+      "locale": "BR",
+      "code": "55",
+      "zh": "巴西"
+    },
+    {
+      "en": "Brunei",
+      "locale": "BN",
+      "code": "673",
+      "zh": "文莱"
+    },
+    {
+      "en": "Bulgaria",
+      "locale": "BG",
+      "code": "359",
+      "zh": "保加利亚"
+    },
+    {
+      "en": "Burkina Faso",
+      "locale": "BF",
+      "code": "226",
+      "zh": "布基纳法索"
+    },
+    {
+      "en": "Burundi",
+      "locale": "BI",
+      "code": "257",
+      "zh": "布隆迪"
+    },
+    {
+      "en": "Cambodia",
+      "locale": "KH",
+      "code": "855",
+      "zh": "柬埔寨"
+    },
+    {
+      "en": "Cameroon",
+      "locale": "CM",
+      "code": "237",
+      "zh": "喀麦隆"
+    },
+    {
+      "en": "Canada",
+      "locale": "CA",
+      "code": "1",
+      "zh": "加拿大"
+    },
+    {
+      "en": "Cayman Islands",
+      "locale": "KY",
+      "code": "1345",
+      "zh": "开曼群岛"
+    },
+    {
+      "en": "Central African Republic",
+      "locale": "CF",
+      "code": "236",
+      "zh": "中非共和国"
+    },
+    {
+      "en": "Chad",
+      "locale": "TD",
+      "code": "235",
+      "zh": "乍得"
+    },
+    {
+      "en": "Chile",
+      "locale": "CL",
+      "code": "56",
+      "zh": "智利"
+    },
+    {
+      "en": "China",
+      "locale": "CN",
+      "code": "86",
+      "zh": "中国"
+    },
+    {
+      "en": "Colombia",
+      "locale": "CO",
+      "code": "57",
+      "zh": "哥伦比亚"
+    },
+    {
+      "en": "Cook Islands",
+      "locale": "CK",
+      "code": "682",
+      "zh": "库克群岛"
+    },
+    {
+      "en": "Costa Rica",
+      "locale": "CR",
+      "code": "506",
+      "zh": "哥斯达黎加"
+    },
+    {
+      "en": "Croatia",
+      "locale": "HR",
+      "code": "385",
+      "zh": "克罗地亚"
+    },
+    {
+      "en": "Cuba",
+      "locale": "CU",
+      "code": "53",
+      "zh": "古巴"
+    },
+    {
+      "en": "Cyprus",
+      "locale": "CY",
+      "code": "357",
+      "zh": "塞浦路斯"
+    },
+    {
+      "en": "Czech Republic",
+      "locale": "CZ",
+      "code": "420",
+      "zh": "捷克"
+    },
+    {
+      "en": "Denmark",
+      "locale": "DK",
+      "code": "45",
+      "zh": "丹麦"
+    },
+    {
+      "en": "Djibouti",
+      "locale": "DJ",
+      "code": "253",
+      "zh": "吉布提"
+    },
+    {
+      "en": "Dominican Republic",
+      "locale": "DO",
+      "code": "1809",
+      "zh": "多米尼加共和国"
+    },
+    {
+      "en": "Ecuador",
+      "locale": "EC",
+      "code": "593",
+      "zh": "厄瓜多尔"
+    },
+    {
+      "en": "Egypt",
+      "locale": "EG",
+      "code": "20",
+      "zh": "埃及"
+    },
+    {
+      "en": "El Salvador",
+      "locale": "SV",
+      "code": "503",
+      "zh": "萨尔瓦多"
+    },
+    {
+      "en": "Estonia",
+      "locale": "EE",
+      "code": "372",
+      "zh": "爱沙尼亚"
+    },
+    {
+      "en": "Ethiopia",
+      "locale": "ET",
+      "code": "251",
+      "zh": "埃塞俄比亚"
+    },
+    {
+      "en": "Fiji",
+      "locale": "FJ",
+      "code": "679",
+      "zh": "斐济"
+    },
+    {
+      "en": "Finland",
+      "locale": "FI",
+      "code": "358",
+      "zh": "芬兰"
+    },
+    {
+      "en": "France",
+      "locale": "FR",
+      "code": "33",
+      "zh": "法国"
+    },
+    {
+      "en": "French Polynesia",
+      "locale": "PF",
+      "code": "689",
+      "zh": "法属玻利尼西亚"
+    },
+    {
+      "en": "Gabon",
+      "locale": "GA",
+      "code": "241",
+      "zh": "加蓬"
+    },
+    {
+      "en": "Gambia",
+      "locale": "GM",
+      "code": "220",
+      "zh": "冈比亚"
+    },
+    {
+      "en": "Georgia",
+      "locale": "GE",
+      "code": "995",
+      "zh": "格鲁吉亚"
+    },
+    {
+      "en": "Germany",
+      "locale": "DE",
+      "code": "49",
+      "zh": "德国"
+    },
+    {
+      "en": "Ghana",
+      "locale": "GH",
+      "code": "233",
+      "zh": "加纳"
+    },
+    {
+      "en": "Gibraltar",
+      "locale": "GI",
+      "code": "350",
+      "zh": "直布罗陀"
+    },
+    {
+      "en": "Greece",
+      "locale": "GR",
+      "code": "30",
+      "zh": "希腊"
+    },
+    {
+      "en": "Grenada",
+      "locale": "GD",
+      "code": "1473",
+      "zh": "格林纳达"
+    },
+    {
+      "en": "Guam",
+      "locale": "GU",
+      "code": "1671",
+      "zh": "关岛"
+    },
+    {
+      "en": "Guatemala",
+      "locale": "GT",
+      "code": "502",
+      "zh": "危地马拉"
+    },
+    {
+      "en": "Guinea",
+      "locale": "GN",
+      "code": "224",
+      "zh": "几内亚"
+    },
+    {
+      "en": "Guyana",
+      "locale": "GY",
+      "code": "592",
+      "zh": "圭亚那"
+    },
+    {
+      "en": "Haiti",
+      "locale": "HT",
+      "code": "509",
+      "zh": "海地"
+    },
+    {
+      "en": "Honduras",
+      "locale": "HN",
+      "code": "504",
+      "zh": "洪都拉斯"
+    },
+    {
+      "en": "Hong Kong",
+      "locale": "HK",
+      "code": "852",
+      "zh": "中国香港"
+    },
+    {
+      "en": "Hungary",
+      "locale": "HU",
+      "code": "36",
+      "zh": "匈牙利"
+    },
+    {
+      "en": "Iceland",
+      "locale": "IS",
+      "code": "354",
+      "zh": "冰岛"
+    },
+    {
+      "en": "India",
+      "locale": "IN",
+      "code": "91",
+      "zh": "印度"
+    },
+    {
+      "en": "Indonesia",
+      "locale": "ID",
+      "code": "62",
+      "zh": "印度尼西亚"
+    },
+    {
+      "en": "Iran",
+      "locale": "IR",
+      "code": "98",
+      "zh": "伊朗"
+    },
+    {
+      "en": "Iraq",
+      "locale": "IQ",
+      "code": "964",
+      "zh": "伊拉克"
+    },
+    {
+      "en": "Ireland",
+      "locale": "IE",
+      "code": "353",
+      "zh": "爱尔兰"
+    },
+    {
+      "en": "Israel",
+      "locale": "IL",
+      "code": "972",
+      "zh": "以色列"
+    },
+    {
+      "en": "Italy",
+      "locale": "IT",
+      "code": "39",
+      "zh": "意大利"
+    },
+    {
+      "en": "Ivory Coast",
+      "locale": "CI",
+      "code": "225",
+      "zh": "科特迪瓦"
+    },
+    {
+      "en": "Jamaica",
+      "locale": "JM",
+      "code": "1876",
+      "zh": "牙买加"
+    },
+    {
+      "en": "Japan",
+      "locale": "JP",
+      "code": "81",
+      "zh": "日本"
+    },
+    {
+      "en": "Jordan",
+      "locale": "JO",
+      "code": "962",
+      "zh": "约旦"
+    },
+    {
+      "en": "Kazakhstan",
+      "locale": "KZ",
+      "code": "7",
+      "zh": "哈萨克斯坦"
+    },
+    {
+      "en": "Kenya",
+      "locale": "KE",
+      "code": "254",
+      "zh": "肯尼亚"
+    },
+    {
+      "en": "Kuwait",
+      "locale": "KW",
+      "code": "965",
+      "zh": "科威特"
+    },
+    {
+      "en": "Kyrgyzstan",
+      "locale": "KG",
+      "code": "996",
+      "zh": "吉尔吉斯坦"
+    },
+    {
+      "en": "Laos",
+      "locale": "LA",
+      "code": "856",
+      "zh": "老挝"
+    },
+    {
+      "en": "Latvia",
+      "locale": "LV",
+      "code": "371",
+      "zh": "拉脱维亚"
+    },
+    {
+      "en": "Lebanon",
+      "locale": "LB",
+      "code": "961",
+      "zh": "黎巴嫩"
+    },
+    {
+      "en": "Lesotho",
+      "locale": "LS",
+      "code": "266",
+      "zh": "莱索托"
+    },
+    {
+      "en": "Liberia",
+      "locale": "LR",
+      "code": "231",
+      "zh": "利比里亚"
+    },
+    {
+      "en": "Libya",
+      "locale": "LY",
+      "code": "218",
+      "zh": "利比亚"
+    },
+    {
+      "en": "Liechtenstein",
+      "locale": "LI",
+      "code": "423",
+      "zh": "列支敦士登"
+    },
+    {
+      "en": "Lithuania",
+      "locale": "LT",
+      "code": "370",
+      "zh": "立陶宛"
+    },
+    {
+      "en": "Luxembourg",
+      "locale": "LU",
+      "code": "352",
+      "zh": "卢森堡"
+    },
+    {
+      "en": "Macau",
+      "locale": "MO",
+      "code": "853",
+      "zh": "中国澳门"
+    },
+    {
+      "en": "Madagascar",
+      "locale": "MG",
+      "code": "261",
+      "zh": "马达加斯加"
+    },
+    {
+      "en": "Malawi",
+      "locale": "MW",
+      "code": "265",
+      "zh": "马拉维"
+    },
+    {
+      "en": "Malaysia",
+      "locale": "MY",
+      "code": "60",
+      "zh": "马来西亚"
+    },
+    {
+      "en": "Maldives",
+      "locale": "MV",
+      "code": "960",
+      "zh": "马尔代夫"
+    },
+    {
+      "en": "Mali",
+      "locale": "ML",
+      "code": "223",
+      "zh": "马里"
+    },
+    {
+      "en": "Malta",
+      "locale": "MT",
+      "code": "356",
+      "zh": "马耳他"
+    },
+    {
+      "en": "Mauritius",
+      "locale": "MU",
+      "code": "230",
+      "zh": "毛里求斯"
+    },
+    {
+      "en": "Mexico",
+      "locale": "MX",
+      "code": "52",
+      "zh": "墨西哥"
+    },
+    {
+      "en": "Moldova",
+      "locale": "MD",
+      "code": "373",
+      "zh": "摩尔多瓦"
+    },
+    {
+      "en": "Monaco",
+      "locale": "MC",
+      "code": "377",
+      "zh": "摩纳哥"
+    },
+    {
+      "en": "Mongolia",
+      "locale": "MN",
+      "code": "976",
+      "zh": "蒙古"
+    },
+    {
+      "en": "Montserrat",
+      "locale": "MS",
+      "code": "1664",
+      "zh": "蒙特塞拉特岛"
+    },
+    {
+      "en": "Morocco",
+      "locale": "MA",
+      "code": "212",
+      "zh": "摩洛哥"
+    },
+    {
+      "en": "Mozambique",
+      "locale": "MZ",
+      "code": "258",
+      "zh": "莫桑比克"
+    },
+    {
+      "en": "Myanmar",
+      "locale": "MM",
+      "code": "95",
+      "zh": "缅甸"
+    },
+    {
+      "en": "Namibia",
+      "locale": "NA",
+      "code": "264",
+      "zh": "纳米比亚"
+    },
+    {
+      "en": "Nauru",
+      "locale": "NR",
+      "code": "674",
+      "zh": "瑙鲁"
+    },
+    {
+      "en": "Nepal",
+      "locale": "NP",
+      "code": "977",
+      "zh": "尼泊尔"
+    },
+    {
+      "en": "Netherlands",
+      "locale": "NL",
+      "code": "31",
+      "zh": "荷兰"
+    },
+    {
+      "en": "Netherlands Antilles",
+      "locale": "AN",
+      "code": "599",
+      "zh": "荷属安的列斯"
+    },
+    {
+      "en": "New Zealand",
+      "locale": "NZ",
+      "code": "64",
+      "zh": "新西兰"
+    },
+    {
+      "en": "Nicaragua",
+      "locale": "NI",
+      "code": "505",
+      "zh": "尼加拉瓜"
+    },
+    {
+      "en": "Niger",
+      "locale": "NE",
+      "code": "227",
+      "zh": "尼日尔"
+    },
+    {
+      "en": "Nigeria",
+      "locale": "NG",
+      "code": "234",
+      "zh": "尼日利亚"
+    },
+    {
+      "en": "Norway",
+      "locale": "NO",
+      "code": "47",
+      "zh": "挪威"
+    },
+    {
+      "en": "Oman",
+      "locale": "OM",
+      "code": "968",
+      "zh": "阿曼"
+    },
+    {
+      "en": "Pakistan",
+      "locale": "PK",
+      "code": "92",
+      "zh": "巴基斯坦"
+    },
+    {
+      "en": "Panama",
+      "locale": "PA",
+      "code": "507",
+      "zh": "巴拿马"
+    },
+    {
+      "en": "Papua New Guinea",
+      "locale": "PG",
+      "code": "675",
+      "zh": "巴布亚新几内亚"
+    },
+    {
+      "en": "Paraguay",
+      "locale": "PY",
+      "code": "595",
+      "zh": "巴拉圭"
+    },
+    {
+      "en": "Peru",
+      "locale": "PE",
+      "code": "51",
+      "zh": "秘鲁"
+    },
+    {
+      "en": "Philippines",
+      "locale": "PH",
+      "code": "63",
+      "zh": "菲律宾"
+    },
+    {
+      "en": "Poland",
+      "locale": "PL",
+      "code": "48",
+      "zh": "波兰"
+    },
+    {
+      "en": "Portugal",
+      "locale": "PT",
+      "code": "351",
+      "zh": "葡萄牙"
+    },
+    {
+      "en": "Puerto Rico",
+      "locale": "PR",
+      "code": "1787",
+      "zh": "波多黎各"
+    },
+    {
+      "en": "Qatar",
+      "locale": "QA",
+      "code": "974",
+      "zh": "卡塔尔"
+    },
+    {
+      "en": "Republic of the Congo",
+      "locale": "CG",
+      "code": "242",
+      "zh": "刚果"
+    },
+    {
+      "en": "Reunion",
+      "locale": "RE",
+      "code": "262",
+      "zh": "留尼旺"
+    },
+    {
+      "en": "Romania",
+      "locale": "RO",
+      "code": "40",
+      "zh": "罗马尼亚"
+    },
+    {
+      "en": "Russia",
+      "locale": "RU",
+      "code": "7",
+      "zh": "俄罗斯"
+    },
+    {
+      "en": "Saint Lucia",
+      "locale": "LC",
+      "code": "1758",
+      "zh": "圣卢西亚"
+    },
+    {
+      "en": "Saint Vincent and the Grenadines",
+      "locale": "VC",
+      "code": "1784",
+      "zh": "圣文森特"
+    },
+    {
+      "en": "Samoa",
+      "locale": "WS",
+      "code": "685",
+      "zh": "西萨摩亚"
+    },
+    {
+      "en": "San Marino",
+      "locale": "SM",
+      "code": "378",
+      "zh": "圣马力诺"
+    },
+    {
+      "en": "Sao Tome and Principe",
+      "locale": "ST",
+      "code": "239",
+      "zh": "圣多美和普林西比"
+    },
+    {
+      "en": "Saudi Arabia",
+      "locale": "SA",
+      "code": "966",
+      "zh": "沙特阿拉伯"
+    },
+    {
+      "en": "Senegal",
+      "locale": "SN",
+      "code": "221",
+      "zh": "塞内加尔"
+    },
+    {
+      "en": "Seychelles",
+      "locale": "SC",
+      "code": "248",
+      "zh": "塞舌尔"
+    },
+    {
+      "en": "Sierra Leone",
+      "locale": "SL",
+      "code": "232",
+      "zh": "塞拉利昂"
+    },
+    {
+      "en": "Singapore",
+      "locale": "SG",
+      "code": "65",
+      "zh": "新加坡"
+    },
+    {
+      "en": "Slovakia",
+      "locale": "SK",
+      "code": "421",
+      "zh": "斯洛伐克"
+    },
+    {
+      "en": "Slovenia",
+      "locale": "SI",
+      "code": "386",
+      "zh": "斯洛文尼亚"
+    },
+    {
+      "en": "Solomon Islands",
+      "locale": "SB",
+      "code": "677",
+      "zh": "所罗门群岛"
+    },
+    {
+      "en": "Somalia",
+      "locale": "SO",
+      "code": "252",
+      "zh": "索马里"
+    },
+    {
+      "en": "South Africa",
+      "locale": "ZA",
+      "code": "27",
+      "zh": "南非"
+    },
+    {
+      "en": "South Korea",
+      "locale": "KR",
+      "code": "82",
+      "zh": "韩国"
+    },
+    {
+      "en": "Spain",
+      "locale": "ES",
+      "code": "34",
+      "zh": "西班牙"
+    },
+    {
+      "en": "Sri Lanka",
+      "locale": "LK",
+      "code": "94",
+      "zh": "斯里兰卡"
+    },
+    {
+      "en": "Sudan",
+      "locale": "SD",
+      "code": "249",
+      "zh": "苏丹"
+    },
+    {
+      "en": "Suriname",
+      "locale": "SR",
+      "code": "597",
+      "zh": "苏里南"
+    },
+    {
+      "en": "Swaziland",
+      "locale": "SZ",
+      "code": "268",
+      "zh": "斯威士兰"
+    },
+    {
+      "en": "Sweden",
+      "locale": "SE",
+      "code": "46",
+      "zh": "瑞典"
+    },
+    {
+      "en": "Switzerland",
+      "locale": "CH",
+      "code": "41",
+      "zh": "瑞士"
+    },
+    {
+      "en": "Syria",
+      "locale": "SY",
+      "code": "963",
+      "zh": "叙利亚"
+    },
+    {
+      "en": "Taiwan",
+      "locale": "TW",
+      "code": "886",
+      "zh": "中国台湾"
+    },
+    {
+      "en": "Tajikistan",
+      "locale": "TJ",
+      "code": "992",
+      "zh": "塔吉克斯坦"
+    },
+    {
+      "en": "Tanzania",
+      "locale": "TZ",
+      "code": "255",
+      "zh": "坦桑尼亚"
+    },
+    {
+      "en": "Thailand",
+      "locale": "TH",
+      "code": "66",
+      "zh": "泰国"
+    },
+    {
+      "en": "Togo",
+      "locale": "TG",
+      "code": "228",
+      "zh": "多哥"
+    },
+    {
+      "en": "Tonga",
+      "locale": "TO",
+      "code": "676",
+      "zh": "汤加"
+    },
+    {
+      "en": "Trinidad and Tobago",
+      "locale": "TT",
+      "code": "1868",
+      "zh": "特立尼达和多巴哥"
+    },
+    {
+      "en": "Tunisia",
+      "locale": "TN",
+      "code": "216",
+      "zh": "突尼斯"
+    },
+    {
+      "en": "Turkey",
+      "locale": "TR",
+      "code": "90",
+      "zh": "土耳其"
+    },
+    {
+      "en": "Turkmenistan",
+      "locale": "TM",
+      "code": "993",
+      "zh": "土库曼斯坦"
+    },
+    {
+      "en": "Uganda",
+      "locale": "UG",
+      "code": "256",
+      "zh": "乌干达"
+    },
+    {
+      "en": "Ukraine",
+      "locale": "UA",
+      "code": "380",
+      "zh": "乌克兰"
+    },
+    {
+      "en": "United Arab Emirates",
+      "locale": "AE",
+      "code": "971",
+      "zh": "阿拉伯联合酋长国"
+    },
+    {
+      "en": "United Kingdom",
+      "locale": "GB",
+      "code": "44",
+      "zh": "英国"
+    },
+    {
+      "en": "United States",
+      "locale": "US",
+      "code": "1",
+      "zh": "美国"
+    },
+    {
+      "en": "Uruguay",
+      "locale": "UY",
+      "code": "598",
+      "zh": "乌拉圭"
+    },
+    {
+      "en": "Uzbekistan",
+      "locale": "UZ",
+      "code": "998",
+      "zh": "乌兹别克斯坦"
+    },
+    {
+      "en": "Venezuela",
+      "locale": "VE",
+      "code": "58",
+      "zh": "委内瑞拉"
+    },
+    {
+      "en": "Vietnam",
+      "locale": "VN",
+      "code": "84",
+      "zh": "越南"
+    },
+    {
+      "en": "Yemen",
+      "locale": "YE",
+      "code": "967",
+      "zh": "也门"
+    },
+    {
+      "en": "Zambia",
+      "locale": "ZM",
+      "code": "260",
+      "zh": "赞比亚"
+    },
+    {
+      "en": "Zimbabwe",
+      "locale": "ZW",
+      "code": "263",
+      "zh": "津巴布韦"
+    },
+    {
+      "en": "Saint Martin",
+      "locale": "MF",
+      "code": "590",
+      "zh": "圣马丁"
+    },
+    {
+      "en": "Saint Pierre and Miquelon",
+      "locale": "PM",
+      "code": "508",
+      "zh": "圣皮埃尔和密克隆"
+    },
+    {
+      "en": "Serbia",
+      "locale": "RS",
+      "code": "381",
+      "zh": "塞尔维亚"
+    },
+    {
+      "en": "Sint Maarten",
+      "locale": "SX",
+      "code": "1721",
+      "zh": "圣马丁岛"
+    },
+    {
+      "en": "South Sudan",
+      "locale": "SS",
+      "code": "211",
+      "zh": "南苏丹"
+    },
+    {
+      "en": "Svalbard and Jan Mayen",
+      "locale": "SJ",
+      "code": "47",
+      "zh": "斯瓦尔巴和扬马延"
+    },
+    {
+      "en": "Tokelau",
+      "locale": "TK",
+      "code": "690",
+      "zh": "托克劳"
+    },
+    {
+      "en": "Turks and Caicos Islands",
+      "locale": "TC",
+      "code": "1649",
+      "zh": "特克斯和凯科斯群岛"
+    },
+    {
+      "en": "Tuvalu",
+      "locale": "TV",
+      "code": "688",
+      "zh": "图瓦卢"
+    },
+    {
+      "en": "U.S. Virgin Islands",
+      "locale": "VI",
+      "code": "1340",
+      "zh": "美属维尔京群岛"
+    },
+    {
+      "en": "Vanuatu",
+      "locale": "VU",
+      "code": "678",
+      "zh": "瓦努阿图"
+    },
+    {
+      "en": "Vatican",
+      "locale": "VA",
+      "code": "379",
+      "zh": "梵蒂冈"
+    },
+    {
+      "en": "Wallis and Futuna",
+      "locale": "WF",
+      "code": "681",
+      "zh": "瓦利斯群岛和富图纳群岛"
+    },
+    {
+      "en": "Western Sahara",
+      "locale": "EH",
+      "code": "212",
+      "zh": "西撒哈拉"
+    },
+    {
+      "en": "Antarctica",
+      "locale": "AQ",
+      "code": "672",
+      "zh": "南极洲"
+    },
+    {
+      "en": "Aruba",
+      "locale": "AW",
+      "code": "297",
+      "zh": "桑尼维尔"
+    },
+    {
+      "en": "Bhutan",
+      "locale": "BT",
+      "code": "975",
+      "zh": "不丹"
+    },
+    {
+      "en": "Bosnia and Herzegovina",
+      "locale": "BA",
+      "code": "387",
+      "zh": "波斯尼亚和黑塞哥维那"
+    },
+    {
+      "en": "British Indian Ocean Territory",
+      "locale": "IO",
+      "code": "246",
+      "zh": "英属印度洋领地"
+    },
+    {
+      "en": "British Virgin Islands",
+      "locale": "VG",
+      "code": "1284",
+      "zh": "英属维尔京群岛"
+    },
+    {
+      "en": "Cape Verde",
+      "locale": "CV",
+      "code": "238",
+      "zh": "佛得角"
+    },
+    {
+      "en": "Christmas Island",
+      "locale": "CX",
+      "code": "61",
+      "zh": "圣诞岛"
+    },
+    {
+      "en": "Cocos Islands",
+      "locale": "CC",
+      "code": "61",
+      "zh": "科科斯群岛"
+    },
+    {
+      "en": "Comoros",
+      "locale": "KM",
+      "code": "269",
+      "zh": "科摩罗伊斯兰联邦共和国"
+    },
+    {
+      "en": "Curacao",
+      "locale": "CW",
+      "code": "599",
+      "zh": "库拉索"
+    },
+    {
+      "en": "Democratic Republic of the Congo",
+      "locale": "CD",
+      "code": "243",
+      "zh": "刚果民主共和国"
+    },
+    {
+      "en": "Dominica",
+      "locale": "DM",
+      "code": "1767",
+      "zh": "多米尼克"
+    },
+    {
+      "en": "East Timor",
+      "locale": "TL",
+      "code": "670",
+      "zh": "东帝汶"
+    },
+    {
+      "en": "Mayotte",
+      "locale": "YT",
+      "code": "262",
+      "zh": "马约特"
+    },
+    {
+      "en": "Micronesia",
+      "locale": "FM",
+      "code": "691",
+      "zh": "密克罗尼西亚"
+    },
+    {
+      "en": "Montenegro",
+      "locale": "ME",
+      "code": "382",
+      "zh": "黑山"
+    },
+    {
+      "en": "New Caledonia",
+      "locale": "NC",
+      "code": "687",
+      "zh": "新喀里多尼亚"
+    },
+    {
+      "en": "Niue",
+      "locale": "NU",
+      "code": "683",
+      "zh": "纽埃岛"
+    },
+    {
+      "en": "North Korea",
+      "locale": "KP",
+      "code": "850",
+      "zh": "朝鲜"
+    },
+    {
+      "en": "Northern Mariana Islands",
+      "locale": "MP",
+      "code": "1670",
+      "zh": "北马里亚纳"
+    },
+    {
+      "en": "Palau",
+      "locale": "PW",
+      "code": "680",
+      "zh": "帕劳"
+    },
+    {
+      "en": "Palestine",
+      "locale": "PS",
+      "code": "970",
+      "zh": "巴勒斯坦"
+    },
+    {
+      "en": "Pitcairn",
+      "locale": "PN",
+      "code": "64",
+      "zh": "皮特凯恩"
+    },
+    {
+      "en": "Rwanda",
+      "locale": "RW",
+      "code": "250",
+      "zh": "卢旺达"
+    },
+    {
+      "en": "Saint Barthelemy",
+      "locale": "BL",
+      "code": "590",
+      "zh": "圣巴泰勒米"
+    },
+    {
+      "en": "Saint Helena",
+      "locale": "SH",
+      "code": "290",
+      "zh": "圣赫勒拿"
+    },
+    {
+      "en": "Saint Kitts and Nevis",
+      "locale": "KN",
+      "code": "1869",
+      "zh": "圣基茨和尼维斯"
+    },
+    {
+      "en": "Equatorial Guinea",
+      "locale": "GQ",
+      "code": "240",
+      "zh": "赤道几内亚"
+    },
+    {
+      "en": "Eritrea",
+      "locale": "ER",
+      "code": "291",
+      "zh": "厄立特里亚"
+    },
+    {
+      "en": "Falkland Islands",
+      "locale": "FK",
+      "code": "500",
+      "zh": "福克兰群岛"
+    },
+    {
+      "en": "Faroe Islands",
+      "locale": "FO",
+      "code": "298",
+      "zh": "法罗群岛"
+    },
+    {
+      "en": "Greenland",
+      "locale": "GL",
+      "code": "299",
+      "zh": "格陵兰"
+    },
+    {
+      "en": "Guernsey",
+      "locale": "GG",
+      "code": "441481",
+      "zh": "根西岛"
+    },
+    {
+      "en": "Guinea-Bissau",
+      "locale": "GW",
+      "code": "245",
+      "zh": "几内亚比绍"
+    },
+    {
+      "en": "Isle of Man",
+      "locale": "IM",
+      "code": "441624",
+      "zh": "马恩岛"
+    },
+    {
+      "en": "Jersey",
+      "locale": "JE",
+      "code": "441534",
+      "zh": "泽西岛"
+    },
+    {
+      "en": "Kiribati",
+      "locale": "KI",
+      "code": "686",
+      "zh": "基里巴斯"
+    },
+    {
+      "en": "Kosovo",
+      "locale": "XK",
+      "code": "383",
+      "zh": "科索沃"
+    },
+    {
+      "en": "Macedonia",
+      "locale": "MK",
+      "code": "389",
+      "zh": "马其顿"
+    },
+    {
+      "en": "Marshall Islands",
+      "locale": "MH",
+      "code": "692",
+      "zh": "马绍尔群岛"
+    },
+    {
+      "en": "Mauritania",
+      "locale": "MR",
+      "code": "222",
+      "zh": "毛里塔尼亚"
+    }
+  ]
