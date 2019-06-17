@@ -157,7 +157,7 @@ export default {
       coinInfo: {},
       xData: [],
       yData: [],
-      symbol: 'TOP2'
+      symbol: 'ATOM'
     }
   },
   methods: {
@@ -177,7 +177,7 @@ export default {
       })
     },
     async get_coin_history(symbol) {
-      await this.$axios.get(`${this.apis.get_coin_history}/${symbol}/2019-04-25/2019-04-26/1000`).then((res) => {
+      await this.$axios.get(`${this.apis.get_coin_history}/${symbol}/2019-06-09/2019-06-10/1000`).then((res) => {
         console.log(res);
         let xData = [];
         let yData = [];
@@ -193,6 +193,7 @@ export default {
     drawLine(xData, yData) {
       // 基于准备好的dom，初始化echarts实例
       let myChart = echarts.init(document.getElementById('myChart'))
+      console.log(this.coinInfo.price_low_24_usd, this.coinInfo.price_high_24_usd);
       // 绘制图表
       myChart.setOption({
         xAxis: {
