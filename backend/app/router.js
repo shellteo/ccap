@@ -30,4 +30,5 @@ module.exports = app => {
   router.get('/api/get_coin_history/:symbol/:start_date/:end_date/:samples', controller.coincodex.get_coin_history);
   router.get('/api/get_coin/:symbol', controller.coincodex.get_coin);
   router.get('/api/get_markets_by_coin/:symbol', controller.coincodex.get_markets_by_coin);
+  router.get('/api/edgeware', controller.edgeware.data);
 };

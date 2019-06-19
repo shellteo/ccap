@@ -1,0 +1,186 @@
+[
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "LOCK_START_TIME",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "LOCK_END_TIME",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "LOCK_DROP_PERIOD",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "_origin",
+        "type": "address"
+      },
+      {
+        "name": "_nonce",
+        "type": "uint32"
+      }
+    ],
+    "name": "addressFrom",
+    "outputs": [
+      {
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "pure",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "contractAddr",
+        "type": "address"
+      },
+      {
+        "name": "nonce",
+        "type": "uint32"
+      },
+      {
+        "name": "edgewareAddr",
+        "type": "bytes"
+      }
+    ],
+    "name": "signal",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "term",
+        "type": "uint8"
+      },
+      {
+        "name": "edgewareAddr",
+        "type": "bytes"
+      },
+      {
+        "name": "isValidator",
+        "type": "bool"
+      }
+    ],
+    "name": "lock",
+    "outputs": [],
+    "payable": true,
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "name": "startTime",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "name": "owner",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "name": "eth",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "lockAddr",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "name": "term",
+        "type": "uint8"
+      },
+      {
+        "indexed": false,
+        "name": "edgewareAddr",
+        "type": "bytes"
+      },
+      {
+        "indexed": false,
+        "name": "isValidator",
+        "type": "bool"
+      },
+      {
+        "indexed": false,
+        "name": "time",
+        "type": "uint256"
+      }
+    ],
+    "name": "Locked",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "name": "contractAddr",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "name": "edgewareAddr",
+        "type": "bytes"
+      },
+      {
+        "indexed": false,
+        "name": "time",
+        "type": "uint256"
+      }
+    ],
+    "name": "Signaled",
+    "type": "event"
+  }
+]
