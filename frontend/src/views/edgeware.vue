@@ -53,6 +53,9 @@
             <el-table-column
                     prop="lockTime"
                     label="锁仓时间">
+                <template slot-scope="scope">
+                    <span>{{lockTime(scope.row.lockTime)}}</span>
+                </template>
             </el-table-column>
             <el-table-column
                     prop="value"
@@ -281,6 +284,12 @@ export default {
           }
         ]
       })
+    },
+    lockTime(t) {
+      if (t === -1) return '不锁仓'
+      if (t === 0) return '3个月'
+      if (t === 1) return '6个月'
+      if (t === 2) return '12个月'
     }
   },
   mounted() {
