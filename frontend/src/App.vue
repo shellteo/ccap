@@ -13,7 +13,6 @@
   }
   body,html {
     height: 100%;
-    max-width: 600px;
     outline: none;
     font-family: "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
   }

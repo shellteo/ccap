@@ -2,21 +2,69 @@
     <div style="padding: 20px;">
         <h1>edgeware</h1>
         <el-table border
-                  :data="tableData"
+                  :data="tArr"
                   style="width: 100%">
             <el-table-column
-                    prop="date"
-                    label="日期"
+                    prop="time"
+                    label="时间"
                     width="180">
             </el-table-column>
             <el-table-column
-                    prop="name"
-                    label="姓名"
+                    prop="from"
+                    label="用户地址">
+            </el-table-column>
+            <el-table-column
+                    prop="method"
+                    label="方法">
+            </el-table-column>
+            <el-table-column
+                    prop="lockTime"
+                    label="锁仓时间">
+            </el-table-column>
+            <el-table-column
+                    prop="value"
+                    label="锁仓数量（eth）">
+            </el-table-column>
+            <el-table-column
+                    prop="blockNumber"
+                    label="块高度">
+            </el-table-column>
+            <el-table-column
+                    prop="blockHash"
+                    label="出块Hash">
+            </el-table-column>
+        </el-table>
+        <el-table border
+                  :data="mArr"
+                  style="width: 100%">
+            <el-table-column
+                    prop="time"
+                    label="时间"
                     width="180">
             </el-table-column>
             <el-table-column
-                    prop="address"
-                    label="地址">
+                    prop="from"
+                    label="用户地址">
+            </el-table-column>
+            <el-table-column
+                    prop="method"
+                    label="方法">
+            </el-table-column>
+            <el-table-column
+                    prop="lockTime"
+                    label="锁仓时间">
+            </el-table-column>
+            <el-table-column
+                    prop="value"
+                    label="锁仓数量（eth）">
+            </el-table-column>
+            <el-table-column
+                    prop="blockNumber"
+                    label="块高度">
+            </el-table-column>
+            <el-table-column
+                    prop="blockHash"
+                    label="出块Hash">
             </el-table-column>
         </el-table>
         <div id="myChart" :style="{width: '100%', height: '600px'}"></div>
@@ -55,23 +103,8 @@ export default {
       lock3M_arr: [],
       lock6M_arr: [],
       lock12M_arr: [],
-      tableData: [{
-        date: '2016-05-02',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
-      }, {
-        date: '2016-05-04',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1517 弄'
-      }, {
-        date: '2016-05-01',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1519 弄'
-      }, {
-        date: '2016-05-03',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1516 弄'
-      }]
+      tArr: [],
+      mArr: []
     }
   },
   methods: {
@@ -85,7 +118,8 @@ export default {
         let amount = 0;
         let xData = [];
         let yData = [];
-        let dhu = [];
+        let tArr = [];
+        let mArr = [];
         let max = 0;
         let min = 0;
         let signal_amount = 0;
@@ -105,10 +139,29 @@ export default {
           let input = decoder.decodeData(res[i].input);
           res[i].inputObj = input;
           if (res[i].isError === "0") {
-            xData.push(moment(parseInt(res[i].timeStamp)*1000).format('MM/DD hh:mm:ss'));
+            let time = moment(parseInt(res[i].timeStamp)*1000).format('MM/DD hh:mm:ss')
+            xData.push(time);
             let v = parseFloat(web3js.utils.fromWei(res[i].value));
-            if (v > 10000) {
-              dhu.push([res[i], v])
+            if (v >= 1000 & v < 10000) {
+              tArr.push({
+                time: time,
+                from: res[i].from,
+                method: input.method,
+                lockTime: input.method === 'lock' ? hexToNumberString(input.inputs[0]) : '-1',
+                value: v,
+                blockHash: res[i].blockHash,
+                blockNumber: res[i].blockNumber
+              })
+            } else if (v > 10000){
+              mArr.push({
+                time: time,
+                from: res[i].from,
+                method: input.method,
+                lockTime: input.method === 'lock' ? hexToNumberString(input.inputs[0]) : '-1',
+                value: v,
+                blockHash: res[i].blockHash,
+                blockNumber: res[i].blockNumber
+              })
             }
             if (v < min) min = v;
             if (v > max) max = v;
@@ -153,10 +206,12 @@ export default {
         this.lock3M_arr = lock3M_arr;
         this.lock6M_arr = lock6M_arr;
         this.lock12M_arr = lock12M_arr;
+        this.tArr = tArr;
+        this.mArr = mArr;
         this.drawLine(xData, yData);
         this.drawPie();
         console.log(amount, signal_amount,lock_amount,lock3M_amount,lock6M_amount,lock12M_amount,signal_arr,lock_arr,lock3M_arr,lock6M_arr,lock12M_arr);
-        console.log(dhu, res);
+        console.log(res);
         console.log(lockElseArr, elseArr, errorArr);
       })
     },
