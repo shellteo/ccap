@@ -9,8 +9,11 @@
   },
   "dependencies": {
     "core-js": "^2.6.5",
+    "decimal.js": "^10.2.0",
     "echarts": "^4.2.1",
+    "element-ui": "^2.9.1",
     "ethereum-input-data-decoder": "^0.2.0",
+    "mathjs": "^6.0.2",
     "moment": "^2.24.0",
     "vant": "^1.6.15",
     "vue": "^2.6.10",
