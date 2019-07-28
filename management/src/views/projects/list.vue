@@ -21,12 +21,12 @@
       <el-table-column label="display_symbol" width="150" prop="display_symbol" />
       <el-table-column label="开始时间" align="center">
         <template slot-scope="scope">
-          <el-tag>{{ formatTime(scope.row.start) }}</el-tag>
+          <span :title="scope.row.start">{{ formatTime(scope.row.start) }}</span>
         </template>
       </el-table-column>
       <el-table-column label="开始时间" align="center">
         <template slot-scope="scope">
-          <el-tag>{{ formatTime(scope.row.end) }}</el-tag>
+          <span :title="scope.row.end">{{ formatTime(scope.row.end) }}</span>
         </template>
       </el-table-column>
       <el-table-column label="belong" align="center">
