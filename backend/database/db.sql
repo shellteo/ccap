@@ -88,3 +88,40 @@ CREATE TABLE `favorite`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx_createTime`(`createTime`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '自选表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for coin
+-- ----------------------------
+DROP TABLE IF EXISTS `coin`;
+CREATE TABLE `coin`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `logo` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT 'ieo logo',
+  `symbol` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '标识符',
+  `coin_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT '币名称',
+  `shortname` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT '短名称',
+  `slug` varchar(400) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT 'slug',
+  `display_symbol` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT '展示名称',
+  `display` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT '显示状态',
+  `release_date` int(11) NULL DEFAULT NULL COMMENT '发布时间',
+  `ico_price` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT 'ico 价格',
+  `today_open` decimal(28, 18) NULL DEFAULT 0.000000000000000000 COMMENT '当前价格',
+  `description` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '描述',
+  `start` int(11) NULL DEFAULT NULL COMMENT '开始时间',
+  `end` int(11) NULL DEFAULT NULL COMMENT '结束时间',
+  `is_promoted` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT 'is promoted',
+  `message` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT 'message',
+  `website`  varchar(400) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT '项目官网',
+  `whitepaper`  varchar(400) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT '白皮书官网',
+  `total_supply` bigint(20) NULL DEFAULT NULL COMMENT '总供应量',
+  `supply` bigint(20) NULL DEFAULT NULL COMMENT '当前供应量',
+  `platform` varchar(400) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT '平台，比如IEO就是LAUNCHPAD交易所，ICO就是eth或者其他',
+  `how_to_buy_url` varchar(400) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT '如何购买',
+  `trading_since` int(11) NULL DEFAULT NULL COMMENT '交易时间',
+  `stages_start` int(11) NULL DEFAULT NULL COMMENT '阶段开始时间',
+  `stages_end` int(11) NULL DEFAULT NULL COMMENT '阶段结束时间',
+  `belong` tinyint(1) NULL DEFAULT null COMMENT '属于什么，0:IEOs,1:STOs,2:ICOs',
+  `rating` int(11) NULL DEFAULT NULL COMMENT '评分',
+  `createTime` bigint(20) NOT NULL COMMENT '创建时间',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `idx_createTime`(`createTime`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = 'coin' ROW_FORMAT = Dynamic;

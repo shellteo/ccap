@@ -17,8 +17,11 @@ module.exports = options => {
     }
     const token = auths[1];
     try {
-      const user = jwt.verify(token, ctx.app.config.login.secretKey);
-      ctx.user = user;
+      if (options.management) {
+        ctx.user = jwt.verify(token, ctx.app.config.managementLogin.secretKey);
+      } else {
+        ctx.user = jwt.verify(token, ctx.app.config.login.secretKey);
+      }
     } catch (err) {
       // jwt expired
       ctx.throw(401, 'The token is error.');

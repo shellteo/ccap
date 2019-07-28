@@ -9,10 +9,10 @@ class mailService extends Service {
     const { ctx, app } = this;
     const transporter = nodemailer.createTransport({
       // host: 'smtp.ethereal.email',
-      service: '163', // 使用了内置传输发送邮件 查看支持列表：https://nodemailer.com/smtp/well-known/
+      service: '126', // 使用了内置传输发送邮件 查看支持列表：https://nodemailer.com/smtp/well-known/
       secureConnection: true, // 使用了 SSL
       auth: {
-        user: 'shellteo@163.com',
+        user: 'chattingroom@126.com',
         // 这里密码不是qq密码，是你设置的smtp授权码
         pass: 'Zx1994163',
       },
@@ -21,9 +21,9 @@ class mailService extends Service {
     // 过期时间：秒
     app.redis.set(`register:${toMail}`, randomNumber, 'EX', 600);
     const mailOptions = {
-      from: '"MaxWell服务邮件" <shellteo@163.com>', // sender address
+      from: '"什么币值得买服务邮件" <chattingroom@126.com>', // sender address
       to: toMail, // list of receivers
-      subject: 'MaxWell注册服务', // Subject line
+      subject: '什么币值得买注册服务', // Subject line
       // 发送text或者html格式
       // text: 'Hello world?', // plain text body
       html: `<p>您的验证码：<b>${randomNumber}</b></p>`, // html body

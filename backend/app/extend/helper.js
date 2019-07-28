@@ -14,5 +14,5 @@ module.exports = {
   },
   isNull(v) {
     return v === '' || v === null || v === undefined || JSON.stringify(v) === '{}' || JSON.stringify(v) === '[]';
-  },
+  }
 };

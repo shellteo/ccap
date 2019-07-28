@@ -19,7 +19,9 @@ module.exports = {
       ieoNotExist: { code: 2000004, message: 'IEO不存在' },
       APNotEnough: { code: 2000005, message: '次数已用完' },
       createFailed: { code: 2000006, message: '创建失败' },
-      mailSendFailed: { code: 2000006, message: '邮件发送失败' },
+      mailSendFailed: { code: 2000007, message: '邮件发送失败' },
+
+      loginFailed: { code: 3000001, message: '登录失败' },
     };
     let message;
 

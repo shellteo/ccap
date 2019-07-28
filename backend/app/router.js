@@ -4,7 +4,11 @@
  * @param {Egg.Application} app - egg application
  */
 module.exports = app => {
+  // 前端jwt鉴权
   const passport = app.middleware.passport();
+  // 后台管理系统jwt鉴权
+  const managementPassport = app.middleware.passport({management: true});
+
   const { router, controller } = app;
   router.post('/api/user/register', controller.user.register);
   router.post('/api/user/login', controller.user.login);
@@ -24,11 +28,19 @@ module.exports = app => {
   router.post('/api/ieo', controller.ieo.create);
   // mail
   router.post('/api/mail', controller.mail.send);
-  // coin
+  // coincodex
   router.get('/api/all_coins', controller.coincodex.all_coins);
   router.get('/api/get_firstpage_history/:days/:samples/:coins_limit', controller.coincodex.get_firstpage_history);
   router.get('/api/get_coin_history/:symbol/:start_date/:end_date/:samples', controller.coincodex.get_coin_history);
   router.get('/api/get_coin/:symbol', controller.coincodex.get_coin);
   router.get('/api/get_markets_by_coin/:symbol', controller.coincodex.get_markets_by_coin);
   router.get('/api/edgeware', controller.edgeware.data);
+  // coin
+  router.get('/api/coin', controller.coin.index);
+  router.get('/api/coin/:symbol', controller.coin.show);
+
+  /*-----------------后台管理系统接口------------------*/
+  router.post('/management/login', controller.management.login);
+  router.post('/api/coin', managementPassport, controller.coin.create);
+  router.put('/api/coin/:symbol', managementPassport, controller.coin.update);
 };

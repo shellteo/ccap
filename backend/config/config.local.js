@@ -22,6 +22,10 @@ module.exports = () => {
       password: '123456',
       db: 1,
     },
+  };
+  config.login = {
+    username: 'admin',
+    password: 'admin'
   }
   return config;
 };

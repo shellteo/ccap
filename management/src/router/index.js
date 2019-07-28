@@ -26,6 +26,39 @@ export const constantRouterMap = [
   { path: '/login', component: () => import('@/views/login/index'), hidden: true },
   { path: '/404', component: () => import('@/views/404'), hidden: true },
   {
+    path: '/',
+    component: Layout,
+    redirect: '/projects/list',
+  },
+  {
+    path: '/projects',
+    component: Layout,
+    redirect: '/projects/list',
+    name: 'Projects',
+    meta: { title: 'Coin管理', icon: 'example' },
+    children: [
+      {
+        path: 'list',
+        name: 'List',
+        component: () => import('@/views/projects/list'),
+        meta: { title: 'Coin列表', icon: 'tree' }
+      },
+      {
+        path: 'create',
+        name: 'Create',
+        component: () => import('@/views/projects/create'),
+        meta: { title: '创建Coin', icon: 'form' }
+      },
+      {
+        path: 'detail/:symbol',
+        name: 'Detail',
+        hidden: true,
+        component: () => import('@/views/projects/detail'),
+        meta: { title: 'Coin详情' }
+      }
+    ]
+  },
+  {
     path: '/user',
     component: Layout,
     redirect: '/user/list',
