@@ -21,11 +21,7 @@ module.exports = appInfo => {
   };
 
   config.login = {
-    secretKey: 'zxplus', // jwt密钥
-    expires: 60 * 60 * 24, // 超时时间24小时
-  };
-  config.managementLogin = {
-    secretKey: 'zxmanagement', // jwt密钥
+    secretKey: '9PE31Ju1La0KFM15vVc2uybgyJfVVkbq', // jwt密钥
     expires: 60 * 60 * 24, // 超时时间24小时
   };
 
