@@ -49,8 +49,8 @@ CREATE TABLE `ieo`  (
 DROP TABLE IF EXISTS `comment`;
 CREATE TABLE `comment`  (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `ieoId` int(11) NOT NULL COMMENT 'ieo ID',
-  `createUserId` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '评论用户ID',
+  `symbol` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '标识符',
+  `createUserEmail` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '评论用户邮箱',
   `createUserName` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT '评论用户名',
   `createUserAvatar` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT '评论用户头像url',
   `content` varchar(1000) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '评论内容',
@@ -65,7 +65,7 @@ CREATE TABLE `comment`  (
 DROP TABLE IF EXISTS `news`;
 CREATE TABLE `news`  (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `ieoId` int(11) NOT NULL COMMENT 'ieo ID',
+  `symbol` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '标识符',
   `media` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '发布媒体',
   `publishTime` bigint(20) NOT NULL COMMENT '发布时间',
   `mediaLogo` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT '媒体logo',
@@ -82,7 +82,7 @@ CREATE TABLE `news`  (
 DROP TABLE IF EXISTS `favorite`;
 CREATE TABLE `favorite`  (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `ieoId` int(11) NOT NULL COMMENT 'ieo ID',
+  `symbol` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '标识符',
   `createUserId` int(11) NOT NULL COMMENT '用户id',
   `createTime` bigint(20) NOT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`) USING BTREE,

@@ -15,9 +15,9 @@ class commentController extends Controller {
   }
   async create() {
     const { ctx } = this;
-    const { content, ieoId } = ctx.request.body;
+    const { content, symbol } = ctx.request.body;
     const email = ctx.user.email;
-    const ret = await ctx.service.comment.create({ ieoId, email, content });
+    const ret = await ctx.service.comment.create({ symbol, email, content });
     ctx.body = ret;
   }
 }

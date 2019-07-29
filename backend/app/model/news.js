@@ -10,9 +10,10 @@ module.exports = app => {
       primaryKey: true,
       autoIncrement: true,
     },
-    ieoId: {
-      type: DataTypes.INTEGER(11),
+    symbol: {
+      type: DataTypes.STRING(50),
       allowNull: false,
+      defaultValue: ''
     },
     media: {
       type: DataTypes.STRING(100),

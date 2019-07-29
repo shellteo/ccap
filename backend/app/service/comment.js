@@ -9,19 +9,19 @@ class CommentService extends Service {
     result.rows = await ctx.model.Comment.findAll({ offset, limit, where: { ieoId } });
     return result;
   }
-  async create({ ieoId, email, content }) {
+  async create({ symbol, email, content }) {
     const { ctx } = this;
     const userRow = await ctx.service.user.find(email);
     if (userRow === null) {
-      return ctx.message.userNotExist;
+      return ctx.msg.userNotExist;
     }
-    const ieoRow = await ctx.service.ieo.find(ieoId);
+    const ieoRow = await ctx.service.coin.find(symbol);
     if (ieoRow === null) {
-      return ctx.message.ieoNotExist;
+      return ctx.msg.ieoNotExist;
     }
     const nowUnixTime = ctx.helper.nowUnixTime();
     const data = await ctx.model.Comment.create({
-      ieoId,
+      symbol,
       createUserEmail: email,
       createUserName: userRow.nickname,
       createUserAvatar: userRow.avatar,

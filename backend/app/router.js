@@ -5,7 +5,7 @@
  */
 module.exports = app => {
   // 前端jwt鉴权
-  const passport = app.middleware.passport();
+  const passport = app.middleware.passport({management: false});
   // 后台管理系统jwt鉴权
   const managementPassport = app.middleware.passport({management: true});
 
