@@ -13,3 +13,8 @@ run/
 typings/
 .nyc_output/
 config/config.prod.js
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
