@@ -7,8 +7,6 @@ module.exports = app => {
   // 前端jwt鉴权
   const passport = app.middleware.passport({ management: false });
   const parseUser = app.middleware.parseUser();
-  // 后台管理系统jwt鉴权
-  const managementPassport = app.middleware.passport({ management: true });
   // geetest
   const gtVerify = app.middleware.geetest();
   // 加载app
@@ -55,10 +53,6 @@ module.exports = app => {
   router.get('/gt/register-slide', controller.geetest.register);
   router.post('/gt/validate-slide', controller.geetest.validate);
 
-  /* -----------------后台管理系统接口------------------*/
-  router.post('/management/login', controller.management.login);
-  router.post('/api/coin', managementPassport, controller.coin.create);
-  router.put('/api/coin/:symbol', managementPassport, controller.coin.update);
   /* -----------------爬虫------------------*/
   router.get('/api/spider/coin', controller.management.spider);
   router.get('/api/spider/list', controller.management.coinlist);
