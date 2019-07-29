@@ -1,7 +1,7 @@
 {
-  "name": "ieo-backend",
-  "version": "1.0.0",
-  "description": "ieo",
+  "name": "ccap",
+  "version": "1.0.1",
+  "description": "open source and transparent cryptocurrency analysis platform",
   "private": true,
   "egg": {
     "declarations": true
@@ -57,7 +57,7 @@
   },
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/shellteo/ccap"
   },
   "author": "zx",
   "license": "MIT"
