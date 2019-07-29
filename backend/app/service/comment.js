@@ -2,11 +2,11 @@
 const Service = require('egg').Service;
 
 class CommentService extends Service {
-  async list(offset, limit, ieoId) {
+  async list(offset, limit, symbol) {
     const { ctx } = this;
     const result = {};
-    result.count = await ctx.model.Comment.count({ where: { ieoId } });
-    result.rows = await ctx.model.Comment.findAll({ offset, limit, where: { ieoId } });
+    result.count = await ctx.model.Comment.count({ where: { symbol } });
+    result.rows = await ctx.model.Comment.findAll({ offset, limit, where: { symbol } });
     return result;
   }
   async create({ symbol, email, content }) {
