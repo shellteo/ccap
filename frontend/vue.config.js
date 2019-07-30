@@ -24,20 +24,20 @@ module.exports = {
     },
   },
   configureWebpack: {
-    module: {
+    /*module: {
       rules: [
         {
           test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
           use: [{
             loader: 'url-loader',
             options:{
-              limit: 10000,
+              limit: 80000,
               name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
             }
           }],
         },
       ],
-    }
+    }*/
   },
   pluginOptions: {},
   devServer: {

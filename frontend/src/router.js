@@ -22,7 +22,7 @@ export default new Router({
       component: () => import(/* webpackChunkName: "detail" */ './views/detail/index.vue')
     },
     {
-      path: '/p',
+      path: '/pc',
       name: 'pc',
       component: () => import(/* webpackChunkName: "pc" */ './views/pc.vue')
     }

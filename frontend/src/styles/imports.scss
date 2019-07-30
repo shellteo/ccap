@@ -4,6 +4,9 @@
   align-items: $alignItems;
   justify-content: $justifyContent;
 }
+@mixin mw() {
+  width: 1200px;
+}
 @font-face {
   font-family: 'my-icon';
   src: url('/fa-solid-900.ttf') format('truetype');
@@ -66,5 +69,8 @@
 .brand-discord::before {
   content: '\f392';
 }
+
+
+
 
 

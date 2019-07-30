@@ -1,12 +1,16 @@
 import Vue from "vue";
 import {
-  Table,
-  TableColumn,
-  Loading
+  Menu,
+  Submenu,
+  MenuItem,
+  Icon,
+  Button,
+  Input
 } from "element-ui";
-import 'element-ui/lib/theme-chalk/index.css';
 
-Vue.component("elTable", Table);
-Vue.component("elTableColumn", TableColumn);
-Vue.use(Loading.directive);
-Vue.prototype.$loading = Loading.service;
+Vue.use(Icon)
+Vue.use(Menu)
+Vue.use(Submenu)
+Vue.use(MenuItem)
+Vue.use(Button)
+Vue.use(Input)
