@@ -28,5 +28,8 @@ yarn run lint
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
+## Reference
 参考 [coinList](https://coinlist.co/)
+
+参考 [hub.storyscript.io](https://hub.storyscript.io/?c=Authentication)
 
