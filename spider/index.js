@@ -2,7 +2,9 @@ const express = require('express');
 const app = express();
 
 // ...
-
+/*
+https://juejin.im/post/5b4f007fe51d4519277b9707#heading-15
+*/
 let server = app.listen(3000, function () {
   let host = server.address().address;
   let port = server.address().port;
@@ -35,16 +37,26 @@ superagent.get('https://coincodex.com/ieo/top-network/').end((err, res) => {
 
 let getCoinList = (res) => {
   let $ = cheerio.load(res.text);
-  
+
 }
 
+
+/*
+* 需要做的事情
+* 1.网页信息保存的数据库
+* 2.图片保存存储oss
+* 3.news信息存储
+* 4.管理后台更新
+* 5.根据设计图处理前端开发
+*
+* */
 // 需要获取的信息
-/* 
+/*
 coin_name: 'TOP'
 symbol: 'TOP Network'
 website: 'https://www.topnetwork.org/'
 
-logoUrl: 
+logoUrl:
 socials: {
   bitcointalk: "https://bitcointalk.org/index.php?topic=5049339.msg46810572#msg46810572"
   blog: "https://www.topnetwork.org/blog"
@@ -56,13 +68,12 @@ socials: {
   steem: "https://steemit.com/@topnetwork-top"
   twitter: "https://twitter.com/topnetwork_top"
   youtube: "https://www.youtube.com/channel/UCmqgnSFc6JoebcT3FJWSv-g"
-} 
-rating: 4.0 
-overview: {
-  Launchpad: 
-  For Sale: 
 }
-
+rating: 4.0
+overview: {
+  Launchpad:
+  For Sale:
+}
 
 */
 
@@ -89,13 +100,13 @@ let localNews = [];                              // 本地新闻
  * index.js
  * [description] - 抓取热点新闻页面
  */
-// 引入所需要的第三方包 
+// 引入所需要的第三方包
 const cheerio = require('cheerio');
 
 let getHotNews = (res) => {
   let hotNews = [];
   // 访问成功，请求http://news.baidu.com/页面所返回的数据会包含在res.text中。
-  
+
   /* 使用cheerio模块的cherrio.load()方法，将HTMLdocument作为参数传入函数
      以后就可以使用类似jQuery的$(selectior)的方式来获取页面元素
    */
@@ -120,7 +131,7 @@ let getHotNews = (res) => {
 let getLocalNews = (res) => {
   let localNews = [];
   let $ = cheerio.load(res);
-    
+
   // 本地新闻
   $('ul#localnews-focus li a').each((idx, ele) => {
     let news = {
@@ -129,7 +140,7 @@ let getLocalNews = (res) => {
     };
     localNews.push(news)
   });
-    
+
   // 本地资讯
   $('div#localnews-zixun ul li a').each((index, item) => {
     let news = {
