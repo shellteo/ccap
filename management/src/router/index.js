@@ -59,6 +59,21 @@ export const constantRouterMap = [
     ]
   },
   {
+    path: '/spider',
+    component: Layout,
+    redirect: '/spider/list',
+    name: 'Projects',
+    meta: { title: 'spider', icon: 'example' },
+    children: [
+      {
+        path: 'list',
+        name: 'List',
+        component: () => import('@/views/spider/index'),
+        meta: { title: 'spider', icon: 'tree' }
+      },
+    ]
+  },
+  {
     path: '/user',
     component: Layout,
     redirect: '/user/list',

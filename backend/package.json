@@ -7,6 +7,8 @@
     "declarations": true
   },
   "dependencies": {
+    "ali-oss": "^6.1.1",
+    "cheerio": "^1.0.0-rc.3",
     "egg": "^2.15.1",
     "egg-cors": "^2.2.0",
     "egg-redis": "^2.3.1",
@@ -14,9 +16,12 @@
     "egg-security": "^2.5.0",
     "egg-sequelize": "^4.3.1",
     "jsonwebtoken": "^8.5.1",
+    "moment": "^2.24.0",
     "mysql2": "^1.6.5",
+    "nightmare": "^3.0.2",
     "nodemailer": "^6.1.0",
-    "request": "^2.88.0"
+    "request": "^2.88.0",
+    "superagent": "^5.1.0"
   },
   "devDependencies": {
     "autod": "^3.0.1",

@@ -8,6 +8,7 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "ali-oss": "^6.1.1",
     "core-js": "^2.6.5",
     "decimal.js": "^10.2.0",
     "echarts": "^4.2.1",

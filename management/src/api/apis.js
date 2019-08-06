@@ -5,5 +5,7 @@ export default {
   get_coin: '/api/get_coin',
   get_markets_by_coin: '/api/get_markets_by_coin',
   login: `/management/login`,
-  coin: `/api/coin`
+  coin: `/api/coin`,
+  spider: `/api/spider/coin`,
+  spiderList: `/api/spider/list`
 }

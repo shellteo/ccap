@@ -43,4 +43,7 @@ module.exports = app => {
   router.post('/management/login', controller.management.login);
   router.post('/api/coin', managementPassport, controller.coin.create);
   router.put('/api/coin/:symbol', managementPassport, controller.coin.update);
+  /*-----------------爬虫------------------*/
+  router.get('/api/spider/coin', controller.management.spider);
+  router.get('/api/spider/list', controller.management.coinlist);
 };
