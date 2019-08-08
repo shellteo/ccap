@@ -66,7 +66,8 @@ DROP TABLE IF EXISTS `news`;
 CREATE TABLE `news`  (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `symbol` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '标识符',
-  `media` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '发布媒体',
+  `from` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '来源',
+  `media` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT '发布媒体',
   `publishTime` bigint(20) NOT NULL COMMENT '发布时间',
   `mediaLogo` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT '媒体logo',
   `title` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT '标题',
@@ -75,6 +76,7 @@ CREATE TABLE `news`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx_createTime`(`createTime`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '新闻表' ROW_FORMAT = Dynamic;
+
 
 -- ----------------------------
 -- Table structure for favorite
@@ -122,6 +124,34 @@ CREATE TABLE `coin`  (
   `belong` tinyint(1) NULL DEFAULT null COMMENT '属于什么，0:IEOs,1:STOs,2:ICOs',
   `rating` int(11) NULL DEFAULT NULL COMMENT '评分',
   `createTime` bigint(20) NOT NULL COMMENT '创建时间',
+  `detail_link` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT '详情连接',
+  `init_price` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT 'ico 价格2',
+  `launchpad` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT 'Launchpad',
+  `roi` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT 'ROI投资回报率',
+  `softcap` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT 'Softcap软顶',
+  `hardcap` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT 'Hardcap硬顶',
+  `raised` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT 'Raised募资',
+  `bonuses` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT 'Bonuses最高多少奖金红利，可以根据这个计算 Current Bonus',
+  `bounties` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT 'Bounties赏金',
+  `distribution` varchar(400) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT 'Distribution令牌分发',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx_createTime`(`createTime`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = 'coin' ROW_FORMAT = Dynamic;
+
+
+-- ----------------------------
+-- Table structure for stage
+-- ----------------------------
+DROP TABLE IF EXISTS `stage`;
+CREATE TABLE `stage`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `symbol` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '标识符',
+  `stage` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT '第几阶段',
+  `start` int(11) NULL DEFAULT NULL COMMENT '开始时间',
+  `end` int(11) NULL DEFAULT NULL COMMENT '结束时间',
+  `bonuses` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT '奖金红利',
+  `softcap` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT '软顶',
+  `hardcap` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT '硬顶',
+  `personalcap` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT '个人顶',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = 'stage' ROW_FORMAT = Dynamic;

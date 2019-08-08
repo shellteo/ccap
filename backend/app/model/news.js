@@ -7,50 +7,54 @@ module.exports = app => {
     id: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
-      primaryKey: true,
-      autoIncrement: true,
+      primaryKey: true
     },
     symbol: {
       type: DataTypes.STRING(50),
       allowNull: false,
       defaultValue: ''
     },
+    from: {
+      type: DataTypes.STRING(50),
+      allowNull: false,
+      defaultValue: ''
+    },
     media: {
       type: DataTypes.STRING(100),
-      allowNull: false,
-      defaultValue: '',
+      allowNull: true,
+      defaultValue: ''
     },
     publishTime: {
       type: DataTypes.BIGINT,
-      allowNull: false,
+      allowNull: false
     },
     mediaLogo: {
       type: DataTypes.STRING(100),
       allowNull: true,
-      defaultValue: '',
+      defaultValue: ''
     },
     title: {
       type: DataTypes.STRING(100),
       allowNull: true,
-      defaultValue: '',
+      defaultValue: ''
     },
     link: {
       type: DataTypes.STRING(1000),
       allowNull: false,
-      defaultValue: '',
+      defaultValue: ''
     },
     createTime: {
       type: DataTypes.BIGINT,
-      allowNull: false,
-    },
+      allowNull: false
+    }
   }, {
     tableName: 'news',
-    timestamps: false,
+    timestamps: false
   });
 
   Model.associate = function() {
 
-  };
+  }
 
   return Model;
 };

@@ -129,6 +129,56 @@ module.exports = app => {
 			type: DataTypes.INTEGER(11),
 			allowNull: true
 		},
+		detail_link: {
+			type: DataTypes.STRING(50),
+			allowNull: true,
+			defaultValue: ''
+		},
+		init_price: {
+			type: DataTypes.STRING(50),
+			allowNull: true,
+			defaultValue: ''
+		},
+		launchpad: {
+			type: DataTypes.STRING(50),
+			allowNull: true,
+			defaultValue: ''
+		},
+		roi: {
+			type: DataTypes.STRING(50),
+			allowNull: true,
+			defaultValue: ''
+		},
+		softcap: {
+			type: DataTypes.STRING(50),
+			allowNull: true,
+			defaultValue: ''
+		},
+		hardcap: {
+			type: DataTypes.STRING(50),
+			allowNull: true,
+			defaultValue: ''
+		},
+		raised: {
+			type: DataTypes.STRING(50),
+			allowNull: true,
+			defaultValue: ''
+		},
+		bonuses: {
+			type: DataTypes.STRING(50),
+			allowNull: true,
+			defaultValue: ''
+		},
+		bounties: {
+			type: DataTypes.STRING(50),
+			allowNull: true,
+			defaultValue: ''
+		},
+		distribution: {
+			type: DataTypes.STRING(400),
+			allowNull: true,
+			defaultValue: ''
+		},
 		createTime: {
 			type: DataTypes.BIGINT,
 			allowNull: false

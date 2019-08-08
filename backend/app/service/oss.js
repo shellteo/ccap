@@ -33,6 +33,16 @@ class ossService extends Service {
       console.log(e)
     }
   }
+  wfile(data) {
+    const p = path.join(__dirname, '../public/ieos.json');
+    fs.writeFile(p, JSON.stringify(data), (err) => {
+      if(err) {
+        console.log("文件写入失败")
+      } else {
+        console.log("文件写入成功")
+      }
+    })
+  }
 }
 
 module.exports = ossService;

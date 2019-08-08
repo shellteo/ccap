@@ -8,6 +8,7 @@
           <td><img :src="item.logo" alt=""></td>
           <td><a :href="item.link">{{item.name}}</a></td>
           <td><b>{{item.symbol}}</b></td>
+          <td><b>{{item.platform}}</b></td>
         </tr>
       </table>
     </div>

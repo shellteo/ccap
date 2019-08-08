@@ -112,10 +112,11 @@ class ManagementController extends Controller {
     let list = [];
     $('tbody tr.ico-calendar-entry').each((idx, ele) => {
       list.push({
-        link: $(ele).find('td.entry-name a').attr('href'),
+        detail_link: $(ele).find('td.entry-name a').attr('href'),
         logo: $(ele).find('td.entry-name a .ico-logo-wrapper img').attr('src'),
         symbol: $(ele).find('span.ico-symbol').first().text(),
-        name: $(ele).find('span.ico-name').first().text(),
+        coin_name: $(ele).find('span.ico-name').first().text(),
+        belong: 0  // 属于什么，0:IEOs,1:STOs,2:ICOs
       })
     });
     console.log(list);
@@ -124,6 +125,9 @@ class ManagementController extends Controller {
   async coinlist() {
     const { ctx } = this;
     let html = '';
+    // https://coincodex.com/ico-calendar/
+    // https://coincodex.com/ieo-list/
+    // https://coincodex.com/sto-list/
     try {
       html = await nightmare
         .goto('https://coincodex.com/ieo-list/')
@@ -142,6 +146,7 @@ class ManagementController extends Controller {
     }
     console.log(html);
     const coinList = this.loadCoinList(html)
+    ctx.service.oss.wfile(coinList)
     const msg = ctx.msg.success;
     ctx.body = {
       ...msg,
