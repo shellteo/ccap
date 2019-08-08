@@ -149,6 +149,11 @@ module.exports = app => {
 			allowNull: true,
 			defaultValue: ''
 		},
+		for_sale: {
+			type: DataTypes.STRING(50),
+			allowNull: true,
+			defaultValue: ''
+		},
 		softcap: {
 			type: DataTypes.STRING(50),
 			allowNull: true,
