@@ -114,8 +114,8 @@ class ManagementController extends Controller {
       list.push({
         link: $(ele).find('td.entry-name a').attr('href'),
         logo: $(ele).find('td.entry-name a .ico-logo-wrapper img').attr('src'),
-        symbol: $(ele).find('span.ico-symbol').html(),
-        name: $(ele).find('span.ico-name').html(),
+        symbol: $(ele).find('span.ico-symbol').first().text(),
+        name: $(ele).find('span.ico-name').first().text(),
       })
     });
     console.log(list);
