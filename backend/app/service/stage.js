@@ -9,22 +9,22 @@ class StageService extends Service {
     start,
     end,
     bonuses,
+    tokens_for_sale,
     softcap,
     hardcap,
     personalcap
   }) {
     const { ctx } = this;
-    const nowUnixTime = ctx.helper.nowUnixTime();
     const ret = await ctx.model.Stage.create({
       symbol,
       stage,
       start,
       end,
       bonuses,
+      tokens_for_sale,
       softcap,
       hardcap,
-      personalcap,
-      createTime: nowUnixTime,
+      personalcap
     });
     return ret;
   }

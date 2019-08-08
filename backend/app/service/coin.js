@@ -30,6 +30,17 @@ class CoinService extends Service {
     stages_end,
     belong,
     rating,
+    detail_link,
+    init_price,
+    launchpad,
+    roi,
+    for_sale,
+    softcap,
+    hardcap,
+    raised,
+    bonuses,
+    bounties,
+    distribution,
   }) {
     const { ctx } = this;
     const ret = ctx.msg.success;
@@ -61,6 +72,17 @@ class CoinService extends Service {
       stages_end,
       belong,
       rating,
+      detail_link,
+      init_price,
+      launchpad,
+      roi,
+      for_sale,
+      softcap,
+      hardcap,
+      raised,
+      bonuses,
+      bounties,
+      distribution,
       createTime: nowUnixTime,
     });
     ret.data = createResult;
@@ -109,6 +131,15 @@ class CoinService extends Service {
       result = await ctx.model.Coin.update(coinObj, { where: { symbol } });
     }
     return result;
+  }
+  async createSome(coinObj) {
+    const { ctx } = this;
+    const nowUnixTime = ctx.helper.nowUnixTime();
+    const ret = await ctx.model.Coin.create({
+      ...coinObj,
+      createTime: nowUnixTime,
+    });
+    return ret;
   }
 }
 

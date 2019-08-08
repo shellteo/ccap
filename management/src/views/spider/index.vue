@@ -44,8 +44,8 @@ export default {
     }
   },
   mounted() {
-    this.getSpider()
-    // this.getList()
+    // this.getSpider()
+    this.getList()
   }
 }
 </script>

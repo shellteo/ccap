@@ -8,7 +8,7 @@ const Nightmare = require('nightmare')
 const nightmare = Nightmare({ show: true })
 
 class CrawlerService extends Service {
-  async list(url) {
+  async list(url, belong) {
     const { ctx } = this;
     let html = '';
     // https://coincodex.com/ico-calendar/
@@ -30,7 +30,7 @@ class CrawlerService extends Service {
     } catch (e) {
       console.error(e);
     }
-    const coinList = this.loadList(html)
+    const coinList = this.loadList(html, belong)
     return coinList
   }
   async detail(url) {
@@ -41,7 +41,7 @@ class CrawlerService extends Service {
     await ctx.service.oss.uploadFile(result.logo);
     return result;
   }
-  loadList(html) {
+  loadList(html,belong) {
     const { ctx } = this;
     let $ = cheerio.load(html);
     let list = [];
@@ -51,7 +51,7 @@ class CrawlerService extends Service {
         logo: $(ele).find('td.entry-name a .ico-logo-wrapper img').attr('src'),
         symbol: $(ele).find('span.ico-symbol').first().text(),
         coin_name: $(ele).find('span.ico-name').first().text(),
-        belong: 0  // 属于什么，0:IEOs,1:STOs,2:ICOs
+        belong  // 属于什么，0:IEOs,1:STOs,2:ICOs
       })
     });
     console.log(list);
