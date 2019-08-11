@@ -6,6 +6,7 @@ const cheerio = require('cheerio');
 const moment = require('moment');
 const Nightmare = require('nightmare')
 const nightmare = Nightmare({ show: true })
+const path = require('path');
 
 class CrawlerService extends Service {
   async list(url, belong) {
@@ -30,7 +31,7 @@ class CrawlerService extends Service {
     } catch (e) {
       console.error(e);
     }
-    const coinList = this.loadList(html, belong)
+    const coinList = await this.loadList(html, belong)
     return coinList
   }
   async detail(url) {
@@ -38,19 +39,27 @@ class CrawlerService extends Service {
     const res = await superagent.get(`https://coincodex.com${url}`); // /ieo/top-network/
     const result = this.getCoinObj(res);
     // 上传图片到oss
-    await ctx.service.oss.uploadFile(result.logo);
+    // await ctx.service.oss.uploadFile(result.logo);
     return result;
   }
-  loadList(html,belong) {
+  async loadList(html,belong) {
     const { ctx } = this;
     let $ = cheerio.load(html);
     let list = [];
-    $('tbody tr.ico-calendar-entry').each((idx, ele) => {
+    $('tbody tr.ico-calendar-entry').each(async (idx, ele) => {
+      let logoUrl = $(ele).find('td.entry-name a .ico-logo-wrapper img').attr('src').trim().replace(':resizeboxcrop?32x32', '');
+      /*// 图片上传到oss
+      try {
+        await ctx.service.oss.uploadFile(logoUrl);
+      } catch (e) {
+        console.log(logoUrl);
+      }*/
+      let logoName = path.basename(logoUrl)
       list.push({
         detail_link: $(ele).find('td.entry-name a').attr('href'),
-        logo: $(ele).find('td.entry-name a .ico-logo-wrapper img').attr('src'),
-        symbol: $(ele).find('span.ico-symbol').first().text(),
-        coin_name: $(ele).find('span.ico-name').first().text(),
+        logo: `/coins/${logoName}`,
+        symbol: $(ele).find('span.ico-symbol').first().text().trim(),
+        coin_name: $(ele).find('span.ico-name').first().text().trim(),
         belong  // 属于什么，0:IEOs,1:STOs,2:ICOs
       })
     });
@@ -59,12 +68,14 @@ class CrawlerService extends Service {
   }
   getCoinObj(res) {
     const { ctx } = this;
+    const _2key = ctx.helper._2key
+    const _2value = ctx.helper._2value
     let $ = cheerio.load(res.text);
-    let Distribution = {}
+    let distribution = {}
     $('div.token-distribution ul li').each((idx, ele) => {
-      let name = $(ele).find('.distribution-name').text()
-      let val = $(ele).find('.value').text()
-      Distribution[name] = val
+      let name = _2key($(ele).find('.distribution-name').text())
+      let val = $(ele).find('.value').text().trim()
+      distribution[name] = val
     })
     let stages = []
     $('.section-ico-overview .ico-stages-entry').each((idx, ele) => {
@@ -72,24 +83,32 @@ class CrawlerService extends Service {
       $(ele).children('.entry-content').find('ul li').each((idx2, ele2) => {
         let name = $(ele2).text();
         let val = $(ele2).find('span').text();
-        funding[name.replace(val, '').trim()] = val
+        let key = _2key(name.replace(val, ''));
+        funding[key] = _2value(val)
       })
       let dates = $(ele).find('.ico-stage-dates').text().split('—')
-      let startDate = dates[0].trim()
-      let endDate = dates[1].trim()
       const fromFormat = 'MMM DD, YYYY'
       const toFormat = 'YYYY-MM-DD'
+      let start = null
+      let end = null
+      if (dates.length === 2) {
+        let startDate = dates[0].trim()
+        let endDate = dates[1].trim()
+        start = moment(startDate, fromFormat).format(toFormat)
+        end = moment(endDate, fromFormat).format(toFormat)
+      }
       stages.push({
         stage: $(ele).find('.ico-stage-name').text().trim(),
-        start: moment(startDate, fromFormat).format(toFormat),
-        end: moment(endDate, fromFormat).format(toFormat),
-        bonuses: $(ele).find('.col-7 span').text().trim(),
-        funding
+        start,
+        end,
+        bonuses: _2value($(ele).find('.col-7 span').text()),
+        ...funding
       })
     })
     let funding = {}
     $('.ico-data table tr.ico-data-entry').each((idx, ele) => {
-      funding[$(ele).find('th').text()] = $(ele).find('td').text()
+      let key = _2key($(ele).find('th').text());
+      funding[key] = _2value($(ele).find('td').text());
     })
     let news = []
     $('.news-feed .news-feed-entry').each((idx, ele) => {
@@ -106,12 +125,12 @@ class CrawlerService extends Service {
       })
     })
     return {
-      logo: $('.main-title img').attr('src').trim().replace(':resizebox?70x70', ''),
-      rating: $('.col .ico-rating .rating-value').html().trim(),
-      current_bonus: $('.current-bonus').find('span').text().trim(),
-      bounties: $('.bounties').find('.ico-bounties').text().trim(),
+      // logo: $('.main-title img').attr('src').trim().replace(':resizebox?70x70', ''),
+      rating: _2value($('.col .ico-rating .rating-value').html()),
+      current_bonus: _2value($('.current-bonus').find('span').text()),
+      bounties: _2value($('.bounties').find('.ico-bounties').text()),
       funding,
-      Distribution,
+      distribution: JSON.stringify(distribution),
       stages,
       news
     }

@@ -46,4 +46,8 @@ module.exports = app => {
   /*-----------------爬虫------------------*/
   router.get('/api/spider/coin', controller.management.spider);
   router.get('/api/spider/list', controller.management.coinlist);
+  router.get('/api/crawler/detail', controller.management.getCrawler);
+  router.get('/api/crawler/updateCoin', controller.management.updateCoin);
+  router.get('/api/crawler/createStage', controller.management.createStage);
+  router.get('/api/crawler/createNews', controller.management.createNews);
 };

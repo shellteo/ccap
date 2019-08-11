@@ -7,7 +7,8 @@ module.exports = app => {
 		id: {
 			type: DataTypes.INTEGER(11),
 			allowNull: false,
-			primaryKey: true
+			primaryKey: true,
+			autoIncrement: true
 		},
 		symbol: {
 			type: DataTypes.STRING(50),
@@ -20,12 +21,14 @@ module.exports = app => {
 			defaultValue: ''
 		},
 		start: {
-			type: DataTypes.INTEGER(11),
-			allowNull: true
+			type: DataTypes.STRING(30),
+			allowNull: true,
+			defaultValue: ''
 		},
 		end: {
-			type: DataTypes.INTEGER(11),
-			allowNull: true
+			type: DataTypes.STRING(30),
+			allowNull: true,
+			defaultValue: ''
 		},
 		bonuses: {
 			type: DataTypes.STRING(50),

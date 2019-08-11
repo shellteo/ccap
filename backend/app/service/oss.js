@@ -28,13 +28,13 @@ class ossService extends Service {
       stream.push(null);
       // use 'chunked encoding'
       let result = await client.putStream(`coins/${fileName}`, stream);
-      console.log(result);
+      // console.log(result);
     } catch (e) {
-      console.log(e)
+      // console.log(e)
     }
   }
-  wfile(data) {
-    const p = path.join(__dirname, '../public/ieos.json');
+  wfile(data, file) {
+    const p = path.join(__dirname, `../public/${file}`);
     fs.writeFile(p, JSON.stringify(data), (err) => {
       if(err) {
         console.log("文件写入失败")

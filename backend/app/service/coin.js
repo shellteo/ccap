@@ -132,6 +132,14 @@ class CoinService extends Service {
     }
     return result;
   }
+  async updateById(id, coinObj) {
+    const {ctx} = this;
+    let result = {};
+    if (!ctx.helper.isNull(coinObj)) {
+      result = await ctx.model.Coin.update(coinObj, { where: { id } });
+    }
+    return result;
+  }
   async createSome(coinObj) {
     const { ctx } = this;
     const nowUnixTime = ctx.helper.nowUnixTime();

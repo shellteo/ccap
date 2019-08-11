@@ -63,6 +63,10 @@ module.exports = app => {
 			type: DataTypes.TEXT,
 			allowNull: true
 		},
+		description_zh: {
+			type: DataTypes.TEXT,
+			allowNull: true
+		},
 		start: {
 			type: DataTypes.INTEGER(11),
 			allowNull: true
@@ -121,12 +125,16 @@ module.exports = app => {
 			type: DataTypes.INTEGER(11),
 			allowNull: true
 		},
+		social: {
+			type: DataTypes.TEXT,
+			allowNull: true
+		},
 		belong: {
 			type: DataTypes.INTEGER(1),
 			allowNull: true
 		},
 		rating: {
-			type: DataTypes.INTEGER(11),
+			type: DataTypes.DECIMAL,
 			allowNull: true
 		},
 		detail_link: {
@@ -175,7 +183,7 @@ module.exports = app => {
 			defaultValue: ''
 		},
 		bounties: {
-			type: DataTypes.STRING(50),
+			type: DataTypes.STRING(100),
 			allowNull: true,
 			defaultValue: ''
 		},
@@ -187,6 +195,11 @@ module.exports = app => {
 		createTime: {
 			type: DataTypes.BIGINT,
 			allowNull: false
+		},
+		isDelete: {
+			type: DataTypes.INTEGER(1),
+			allowNull: false,
+			defaultValue: 0
 		}
 	}, {
 		tableName: 'coin',

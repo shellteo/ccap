@@ -7,5 +7,9 @@ export default {
   login: `/management/login`,
   coin: `/api/coin`,
   spider: `/api/spider/coin`,
-  spiderList: `/api/spider/list`
+  spiderList: `/api/spider/list`,
+  crawler: `/api/crawler/detail`,
+  updateCoin: `/api/crawler/updateCoin`,
+  createStage: `/api/crawler/createStage`,
+  createNews: `/api/crawler/createNews`,
 }
