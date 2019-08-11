@@ -14,7 +14,7 @@ class NewsService extends Service {
   }) {
     const { ctx } = this;
     const nowUnixTime = ctx.helper.nowUnixTime();
-    const ret = await ctx.model.Stage.create({
+    const ret = await ctx.model.News.create({
       symbol,
       from,
       media,

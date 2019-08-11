@@ -92,6 +92,14 @@ class CoinService extends Service {
     const { ctx } = this;
     return ctx.model.Coin.find({ where: { symbol } });
   }
+  async findById(id) {
+    const { ctx } = this;
+    return ctx.model.Coin.find({ where: { id } });
+  }
+  async findDel() {
+    const { ctx } = this;
+    return ctx.model.Coin.findAll({ where: { isDelete: 1 } });
+  }
   async list(offset, limit, { status, query }) {
     const { ctx } = this;
     const result = {};

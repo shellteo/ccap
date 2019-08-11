@@ -28,6 +28,13 @@ class StageService extends Service {
     });
     return ret;
   }
+  async list() {
+    const { ctx } = this;
+    const result = {};
+    result.count = await ctx.model.Stage.count();
+    result.rows = await ctx.model.Stage.findAll();
+    return result;
+  }
 }
 
 module.exports = StageService;

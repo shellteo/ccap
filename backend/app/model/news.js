@@ -35,9 +35,8 @@ module.exports = app => {
       defaultValue: ''
     },
     title: {
-      type: DataTypes.STRING(100),
-      allowNull: true,
-      defaultValue: ''
+      type: DataTypes.TEXT,
+      allowNull: true
     },
     link: {
       type: DataTypes.STRING(1000),

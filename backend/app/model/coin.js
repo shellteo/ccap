@@ -81,9 +81,8 @@ module.exports = app => {
 			defaultValue: ''
 		},
 		message: {
-			type: DataTypes.STRING(50),
-			allowNull: true,
-			defaultValue: ''
+			type: DataTypes.TEXT,
+			allowNull: true
 		},
 		website: {
 			type: DataTypes.STRING(400),
@@ -183,7 +182,7 @@ module.exports = app => {
 			defaultValue: ''
 		},
 		bounties: {
-			type: DataTypes.STRING(100),
+			type: DataTypes.STRING(200),
 			allowNull: true,
 			defaultValue: ''
 		},

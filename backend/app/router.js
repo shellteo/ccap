@@ -50,4 +50,5 @@ module.exports = app => {
   router.get('/api/crawler/updateCoin', controller.management.updateCoin);
   router.get('/api/crawler/createStage', controller.management.createStage);
   router.get('/api/crawler/createNews', controller.management.createNews);
+  router.get('/api/crawler/insertCoin', controller.management.insertCoin);
 };

@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken')
 const ico = require('../public/ico.json')
 const ieo = require('../public/ieo.json')
 const sto = require('../public/sto.json')
+const del = require('../public/del.json')
 
 class ManagementController extends Controller {
   async login() {
@@ -157,9 +158,10 @@ class ManagementController extends Controller {
     }
   }
   async updateCoin() {
+    console.log('updateCoin');
     const { ctx } = this;
     const result = await ctx.service.coin.list(0, 1000, {})
-    const ixo = result.rows;
+    /*const ixo = result.rows;
     const l = ixo.length;
     for (let i=165; i<l; i++) {
       if(Boolean(ixo[i].isDelete)) continue;
@@ -199,8 +201,60 @@ class ManagementController extends Controller {
       const coinResult = await ctx.service.coin.updateById(id, updateObj);
 
       ctx.logger.info('update coin', coinResult);
-    }
+    }*/
     const msg = ctx.msg.success;
+    ctx.body = {
+      ...msg,
+      data: result
+    }
+  }
+  async insertCoin() {
+    const { ctx } = this;
+    const msg = ctx.msg.success;
+    const result = await ctx.service.stage.list();
+    // const result = await ctx.service.coin.findDel();
+    /*const result = await ctx.service.coin.list(0, 1000, {})
+    const ixo = result.rows;
+    const l = ixo.length;
+    for (let i=0; i<l; i++) {
+      if(Boolean(ixo[i].isDelete)) continue;
+      const id = ixo[i].id;
+      const belong = ixo[i].belong;
+      const coin_name = ixo[i].coin_name;
+      const detail_link = ixo[i].detail_link;
+      const ajaxData = await ctx.service.coincodex.get_coin(ixo[i].symbol, coin_name);
+      ctx.logger.info('ajax info', ajaxData);
+
+      const symbol = ajaxData.symbol;
+      const detailData = await ctx.service.crawler.detail(detail_link);
+      let init_price_key = ['ico_price', 'sto_price', 'ieo_price'];
+      let init_price = detailData.funding[init_price_key[belong]] || '';
+      let crawlerObj = {
+        rating: detailData.rating,
+        init_price,
+        launchpad: detailData.funding.launchpad || '',
+        roi: detailData.funding.roi || '',
+        for_sale: detailData.funding.for_sale || '',
+        softcap: detailData.funding.softcap || '',
+        hardcap: detailData.funding.hardcap || '',
+        raised: detailData.funding.raised || '',
+        bonuses: detailData.funding.bonuses || '',
+        bounties: detailData.bounties || '',
+        distribution: detailData.distribution || '{}',
+      };
+      ctx.logger.info('crawlerObj', crawlerObj);
+      let updateObj = ajaxData === false ? {
+        ...crawlerObj,
+        isDelete: 1
+      } : {
+        ...ajaxData,
+        ...crawlerObj
+      };
+
+      const coinResult = await ctx.service.coin.updateById(id, updateObj);
+
+      ctx.logger.info('update coin', coinResult);
+    }*/
     ctx.body = {
       ...msg,
       data: result
@@ -211,20 +265,21 @@ class ManagementController extends Controller {
     const result = await ctx.service.coin.list(0, 1000, {})
     const ixo = result.rows;
     const l = ixo.length;
-    for (let i=0; i<1; i++) {
+    for (let i=425; i<l; i++) {
       if(Boolean(ixo[i].isDelete)) continue;
       const symbol = ixo[i].symbol;
       const detail_link = ixo[i].detail_link;
 
       const detailData = await ctx.service.crawler.detail(detail_link);
-      const { stages = [] } = detailData
+      const { stages = [] } = detailData;
+      ctx.logger.info('stages', stages);
 
       for (let j=0; j<stages.length; j++) {
         const stageResult = await ctx.service.stage.create({
           symbol,
-          ...stages[i]
+          ...stages[j]
         });
-        ctx.logger.info('create stage', stageResult);
+        ctx.logger.info('create stage success', stageResult.dataValues);
       }
     }
     const msg = ctx.msg.success;
@@ -238,21 +293,22 @@ class ManagementController extends Controller {
     const result = await ctx.service.coin.list(0, 1000, {})
     const ixo = result.rows;
     const l = ixo.length;
-    for (let i=0; i<1; i++) {
+    for (let i=393; i<l; i++) {
       if(Boolean(ixo[i].isDelete)) continue;
       const symbol = ixo[i].symbol;
       const detail_link = ixo[i].detail_link;
 
       const detailData = await ctx.service.crawler.detail(detail_link);
       const { news = [] } = detailData
+      ctx.logger.info(`news' ${symbol}`, news);
 
       for (let j=0; j<news.length; j++) {
-        const newsResult = await ctx.service.stage.create({
+        const newsResult = await ctx.service.news.create({
           symbol,
           mediaLogo: '',
-          ...news[i]
+          ...news[j]
         });
-        ctx.logger.info('create news', newsResult);
+        ctx.logger.info('create news success', newsResult.dataValues);
       }
     }
     const msg = ctx.msg.success;

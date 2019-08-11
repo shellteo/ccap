@@ -12,4 +12,5 @@ export default {
   updateCoin: `/api/crawler/updateCoin`,
   createStage: `/api/crawler/createStage`,
   createNews: `/api/crawler/createNews`,
+  insertCoin: `/api/crawler/insertCoin`,
 }

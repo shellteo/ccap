@@ -33,11 +33,11 @@
           <el-button type="primary" @click="updateCoin">更新coin</el-button>
         </el-form-item>
       </el-form>
-      <el-form :inline="true" class="search-list">
+      <!--<el-form :inline="true" class="search-list">
         <el-form-item>
           <el-button type="primary" @click="createStage">创建stage</el-button>
         </el-form-item>
-      </el-form>
+      </el-form>-->
       <el-form :inline="true" class="search-list">
         <el-form-item>
           <el-button type="primary" @click="createNews">创建news</el-button>
@@ -67,7 +67,7 @@ export default {
   methods: {
     updateCoin() {
       this.request({
-        url: this.apis.updateCoin,
+        url: this.apis.insertCoin,
         method: 'get'
       }).then(res => {
         console.log(res);
