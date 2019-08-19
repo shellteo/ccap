@@ -22,6 +22,7 @@ module.exports = app => {
   router.delete('/api/favorite/:id', passport, controller.favorite.destroy);
   // news
   router.get('/api/news', controller.news.index);
+  router.get('/api/news/:symbol', controller.news.show);
   // ieo
   router.get('/api/ieo', controller.ieo.index);
   router.get('/api/ieo/:id', controller.ieo.show);

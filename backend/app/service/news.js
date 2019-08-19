@@ -26,6 +26,21 @@ class NewsService extends Service {
     });
     return ret;
   }
+  async count(symbol) {
+    const { ctx } = this;
+    const count = await ctx.model.News.count({where: {symbol}});
+    return count;
+  }
+  async find(symbol) {
+    const { ctx } = this;
+    const sql = ' Select distinct link,`from`,media,publishTime,mediaLogo,title FROM News WHERE symbol = :symbol'
+    const rows = await ctx.model.query(sql, {
+      raws: true,
+      model: ctx.model.News,
+      replacements: { symbol },
+    });
+    return rows;
+  }
 }
 
 module.exports = NewsService;

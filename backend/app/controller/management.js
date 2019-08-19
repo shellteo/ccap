@@ -293,9 +293,10 @@ class ManagementController extends Controller {
     const result = await ctx.service.coin.list(0, 1000, {})
     const ixo = result.rows;
     const l = ixo.length;
-    for (let i=393; i<l; i++) {
-      if(Boolean(ixo[i].isDelete)) continue;
+    for (let i=434; i<l; i++) {
       const symbol = ixo[i].symbol;
+      const count = await ctx.service.news.count(symbol);
+      if(count > 0) continue;
       const detail_link = ixo[i].detail_link;
 
       const detailData = await ctx.service.crawler.detail(detail_link);
@@ -314,7 +315,7 @@ class ManagementController extends Controller {
     const msg = ctx.msg.success;
     ctx.body = {
       ...msg,
-      data: result
+      data: count
     }
   }
 }
