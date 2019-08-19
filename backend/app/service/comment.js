@@ -34,6 +34,10 @@ class CommentService extends Service {
       data,
     };
   }
+  async find(symbol) {
+    const { ctx } = this;
+    return ctx.model.Comment.findAll({ where: { symbol } });
+  }
 }
 
 module.exports = CommentService;

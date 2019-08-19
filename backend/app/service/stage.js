@@ -35,6 +35,10 @@ class StageService extends Service {
     result.rows = await ctx.model.Stage.findAll();
     return result;
   }
+  async find(symbol) {
+    const { ctx } = this;
+    return ctx.model.Stage.findAll({ where: { symbol } });
+  }
 }
 
 module.exports = StageService;

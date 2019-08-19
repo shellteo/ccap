@@ -16,6 +16,7 @@ module.exports = app => {
   // comment
   router.get('/api/comment', controller.comment.index);
   router.post('/api/comment', passport, controller.comment.create);
+  router.get('/api/comment/:symbol', controller.comment.show);
   // favorite
   router.get('/api/favorite', passport, controller.favorite.index);
   router.post('/api/favorite', passport, controller.favorite.create);
@@ -39,6 +40,8 @@ module.exports = app => {
   // coin
   router.get('/api/coin', controller.coin.index);
   router.get('/api/coin/:symbol', controller.coin.show);
+  // stage
+  router.get('/api/stage/:symbol', controller.stage.show);
 
   /*-----------------后台管理系统接口------------------*/
   router.post('/management/login', controller.management.login);
