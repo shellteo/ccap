@@ -5,7 +5,15 @@
         <el-input v-model="symbol" placeholder="请输入coin symbol" clearable size="small"/>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="searchCoin">查询</el-button>
+        <el-button type="primary" @click="searchCoin">查询ajax</el-button>
+      </el-form-item>
+    </el-form>
+    <el-form :inline="true" class="search-list">
+      <el-form-item label="crawler">
+        <el-input v-model="crawler" placeholder="请输入" clearable size="small"/>
+      </el-form-item>
+      <el-form-item>
+        <el-button type="primary" @click="searchCrawler">查询crawler</el-button>
       </el-form-item>
     </el-form>
     <BaseInfo :project-obj="projectObj" :is-create="true"/>
@@ -51,12 +59,24 @@ export default {
         rating: null,
       },
       projectId: null,
-      symbol: null
+      symbol: null,
+      crawler: null
     }
   },
   mounted() {
   },
   methods: {
+    searchCrawler() {
+      this.request({
+        url: this.apis.crawler,
+        params: {
+          coin: this.crawler
+        },
+        method: 'get'
+      }).then(res => {
+        console.log(res);
+      })
+    },
     searchCoin() {
       this.request({
         url: `${this.apis.get_coin}/${this.symbol}`,

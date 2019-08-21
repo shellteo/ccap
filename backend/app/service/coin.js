@@ -30,6 +30,17 @@ class CoinService extends Service {
     stages_end,
     belong,
     rating,
+    detail_link,
+    init_price,
+    launchpad,
+    roi,
+    for_sale,
+    softcap,
+    hardcap,
+    raised,
+    bonuses,
+    bounties,
+    distribution,
   }) {
     const { ctx } = this;
     const ret = ctx.msg.success;
@@ -61,6 +72,17 @@ class CoinService extends Service {
       stages_end,
       belong,
       rating,
+      detail_link,
+      init_price,
+      launchpad,
+      roi,
+      for_sale,
+      softcap,
+      hardcap,
+      raised,
+      bonuses,
+      bounties,
+      distribution,
       createTime: nowUnixTime,
     });
     ret.data = createResult;
@@ -69,6 +91,14 @@ class CoinService extends Service {
   async find(symbol) {
     const { ctx } = this;
     return ctx.model.Coin.find({ where: { symbol } });
+  }
+  async findById(id) {
+    const { ctx } = this;
+    return ctx.model.Coin.find({ where: { id } });
+  }
+  async findDel() {
+    const { ctx } = this;
+    return ctx.model.Coin.findAll({ where: { isDelete: 1 } });
   }
   async list(offset, limit, { status, query }) {
     const { ctx } = this;
@@ -109,6 +139,23 @@ class CoinService extends Service {
       result = await ctx.model.Coin.update(coinObj, { where: { symbol } });
     }
     return result;
+  }
+  async updateById(id, coinObj) {
+    const {ctx} = this;
+    let result = {};
+    if (!ctx.helper.isNull(coinObj)) {
+      result = await ctx.model.Coin.update(coinObj, { where: { id } });
+    }
+    return result;
+  }
+  async createSome(coinObj) {
+    const { ctx } = this;
+    const nowUnixTime = ctx.helper.nowUnixTime();
+    const ret = await ctx.model.Coin.create({
+      ...coinObj,
+      createTime: nowUnixTime,
+    });
+    return ret;
   }
 }
 

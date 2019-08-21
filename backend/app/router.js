@@ -16,12 +16,14 @@ module.exports = app => {
   // comment
   router.get('/api/comment', controller.comment.index);
   router.post('/api/comment', passport, controller.comment.create);
+  router.get('/api/comment/:symbol', controller.comment.show);
   // favorite
   router.get('/api/favorite', passport, controller.favorite.index);
   router.post('/api/favorite', passport, controller.favorite.create);
   router.delete('/api/favorite/:id', passport, controller.favorite.destroy);
   // news
   router.get('/api/news', controller.news.index);
+  router.get('/api/news/:symbol', controller.news.show);
   // ieo
   router.get('/api/ieo', controller.ieo.index);
   router.get('/api/ieo/:id', controller.ieo.show);
@@ -38,6 +40,8 @@ module.exports = app => {
   // coin
   router.get('/api/coin', controller.coin.index);
   router.get('/api/coin/:symbol', controller.coin.show);
+  // stage
+  router.get('/api/stage/:symbol', controller.stage.show);
 
   /*-----------------后台管理系统接口------------------*/
   router.post('/management/login', controller.management.login);
@@ -46,4 +50,9 @@ module.exports = app => {
   /*-----------------爬虫------------------*/
   router.get('/api/spider/coin', controller.management.spider);
   router.get('/api/spider/list', controller.management.coinlist);
+  router.get('/api/crawler/detail', controller.management.getCrawler);
+  router.get('/api/crawler/updateCoin', controller.management.updateCoin);
+  router.get('/api/crawler/createStage', controller.management.createStage);
+  router.get('/api/crawler/createNews', controller.management.createNews);
+  router.get('/api/crawler/insertCoin', controller.management.insertCoin);
 };

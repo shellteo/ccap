@@ -34,5 +34,22 @@ module.exports = {
       return urlparts[0] + (pars.length > 0 ? '?' + pars.join('&') : '');
     }
     return url;
-  }
+  },
+  _2key(key) {
+    return key.trim().toLowerCase().split(' ').join('_')
+  },
+  _2value(v) {
+    v = v.trim();
+    if (v === 'n/a' || v === '') {
+      return null
+    }
+    return v
+  },
+  fromUnixTimestamp(v) {
+    return v * 1000
+  },
+  toUnixTimestamp(v) {
+    let result = new Date(v);
+    return Math.round(result / 1000)
+  },
 };

@@ -20,6 +20,13 @@ class commentController extends Controller {
     const ret = await ctx.service.comment.create({ symbol, email, content });
     ctx.body = ret;
   }
+  async show() {
+    const { ctx } = this;
+    const symbol = ctx.params.symbol;
+    const msg = ctx.msg.success;
+    msg.data = await ctx.service.comment.find(symbol);
+    ctx.body = msg;
+  }
 }
 
 module.exports = commentController;

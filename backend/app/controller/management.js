@@ -2,12 +2,10 @@
 
 const Controller = require('egg').Controller;
 const jwt = require('jsonwebtoken')
-const superagent = require('superagent');
-const cheerio = require('cheerio');
-const moment = require('moment');
-const Nightmare = require('nightmare')
-const nightmare = Nightmare({ show: true })
-
+const ico = require('../public/ico.json')
+const ieo = require('../public/ieo.json')
+const sto = require('../public/sto.json')
+const del = require('../public/del.json')
 
 class ManagementController extends Controller {
   async login() {
@@ -35,121 +33,291 @@ class ManagementController extends Controller {
       token_type: 'Bearer',
     };
   }
-  getCoinObj(res) {
-    const { ctx } = this;
-    let $ = cheerio.load(res.text);
-    let Distribution = {}
-    $('div.token-distribution ul li').each((idx, ele) => {
-      let name = $(ele).find('.distribution-name').text()
-      let val = $(ele).find('.value').text()
-      Distribution[name] = val
-    })
-    let stages = []
-    $('.section-ico-overview .ico-stages-entry').each((idx, ele) => {
-      let funding = {}
-      $(ele).children('.entry-content').find('ul li').each((idx2, ele2) => {
-        let name = $(ele2).text();
-        let val = $(ele2).find('span').text();
-        funding[name.replace(val, '').trim()] = val
-      })
-      let dates = $(ele).find('.ico-stage-dates').text().split('—')
-      let startDate = dates[0].trim()
-      let endDate = dates[1].trim()
-      const fromFormat = 'MMM DD, YYYY'
-      const toFormat = 'YYYY-MM-DD'
-      stages.push({
-        stage: $(ele).find('.ico-stage-name').text().trim(),
-        start: moment(startDate, fromFormat).format(toFormat),
-        end: moment(endDate, fromFormat).format(toFormat),
-        bonuses: $(ele).find('.col-7 span').text().trim(),
-        funding
-      })
-    })
-    let funding = {}
-    $('.ico-data table tr.ico-data-entry').each((idx, ele) => {
-      funding[$(ele).find('th').text()] = $(ele).find('td').text()
-    })
-    let news = []
-    $('.news-feed .news-feed-entry').each((idx, ele) => {
-      if ($(ele).find('span.tag').text() === 'Sponsored') return true;
-      const link = $(ele).find('.entry-data a.entry-title').attr('href')
-      const h = $(ele).find('.entry-meta span').first().text().split(' ')
-      const publishTime = moment().subtract(parseInt(h[0]), h[1]).unix()
-      news.push({
-        from: $(ele).find('img.logo').attr('alt'), // 来自哪
-        media: $(ele).find('.entry-meta span').last().text(), // 账号
-        publishTime,
-        title: $(ele).find('.entry-data a.entry-title span').text(),
-        link: ctx.helper.removeURLParameter(link, 'utm_source')
-      })
-    })
-    return {
-      logo: $('.main-title img').attr('src').trim().replace(':resizebox?70x70', ''),
-      rating: $('.col .ico-rating .rating-value').html().trim(),
-      current_bonus: $('.current-bonus').find('span').text().trim(),
-      bounties: $('.bounties').find('.ico-bounties').text().trim(),
-      funding,
-      Distribution,
-      stages,
-      news
-    }
-  }
   async spider() {
     const { ctx } = this;
-    const res = await superagent.get('https://coincodex.com/ieo/top-network/');
+    // const result = await ctx.service.crawler.detail('/ieo/top-network/')
+    const result = await ctx.service.coin.list(0, 1000, {})
+    const ixo = result.rows;
+    const l = ixo.length;
+    for (let i=0; i<10; i++) {
+      const id = ixo[i].id;
+      const belong = ixo[i].belong;
+      const coin_name = ixo[i].coin_name;
+      const detail_link = ixo[i].detail_link;
+      const ajaxData = await ctx.service.coincodex.get_coin(ixo[i].symbol, coin_name);
+      ctx.logger.info('ajax info', ajaxData);
+
+      const symbol = ajaxData.symbol;
+      const detailData = await ctx.service.crawler.detail(detail_link);
+      let init_price_key = ['ico_price', 'sto_price', 'ieo_price'];
+      let init_price = detailData.funding[init_price_key[belong]] || '';
+      let crawlerObj = {
+        rating: detailData.rating,
+        init_price,
+        launchpad: detailData.funding.launchpad || '',
+        roi: detailData.funding.roi || '',
+        for_sale: detailData.funding.for_sale || '',
+        softcap: detailData.funding.softcap || '',
+        hardcap: detailData.funding.hardcap || '',
+        raised: detailData.funding.raised || '',
+        bonuses: detailData.funding.bonuses || '',
+        bounties: detailData.bounties || '',
+        distribution: detailData.distribution || '{}',
+      }
+      ctx.logger.info('crawlerObj', crawlerObj);
+
+      const coinResult = await ctx.service.coin.updateById(id, {
+        ...ajaxData,
+        ...crawlerObj
+      });
+
+      ctx.logger.info('update coin', coinResult);
+      const { stages = [], news = [] } = detailData
+      for (let j=0; j<stages.length; j++) {
+        const stageResult = await ctx.service.stage.create({
+          symbol,
+          ...stages[i]
+        });
+        ctx.logger.info('create stage', stageResult);
+      }
+      for (let j=0; j<news.length; j++) {
+        const newsResult = await ctx.service.stage.create({
+          symbol,
+          mediaLogo: '',
+          ...news[i]
+        });
+        ctx.logger.info('create news', newsResult);
+      }
+    }
     const msg = ctx.msg.success;
-    const result = this.getCoinObj(res);
-    await ctx.service.oss.uploadFile(result.logo);
     ctx.body = {
       ...msg,
-      data: result,
-      html: res.text
+      data: result
     }
-  }
-  loadCoinList(html) {
-    const { ctx } = this;
-    let $ = cheerio.load(html);
-    let list = [];
-    $('tbody tr.ico-calendar-entry').each((idx, ele) => {
-      list.push({
-        link: $(ele).find('td.entry-name a').attr('href'),
-        logo: $(ele).find('td.entry-name a .ico-logo-wrapper img').attr('src'),
-        symbol: $(ele).find('span.ico-symbol').html(),
-        name: $(ele).find('span.ico-name').html(),
-      })
-    });
-    console.log(list);
-    return list;
   }
   async coinlist() {
     const { ctx } = this;
-    let html = '';
-    try {
-      html = await nightmare
-        .goto('https://coincodex.com/ieo-list/')
-        .wait(() => {
-          let loadMoreText = document.querySelector('.load-more span.button');
-          if (loadMoreText == null) return true;
-          document.querySelector('.load-more span.button').click();
-          return false;
-        })
-        .evaluate(() => {
-          console.log(document.querySelector("div.main-content").innerHTML);
-          return document.querySelector("div.main-content").innerHTML
-        })
-    } catch (e) {
-      console.error(e);
+    // https://coincodex.com/ico-calendar/
+    // https://coincodex.com/ieo-list/
+    // https://coincodex.com/sto-list/
+    /*
+    * detail_link
+    * logo
+    * symbol
+    * coin_name
+    * belong: 0  // 属于什么，0:ICOs,1:STOs,2:IEOs
+    * */
+    const calendar = {
+      ico: {
+        url: 'https://coincodex.com/ico-calendar/',
+        idx: 0,
+        filename: 'ico.json'
+      },
+      sto: {
+        url: 'https://coincodex.com/sto-list/',
+        idx: 1,
+        filename: 'sto.json'
+      },
+      ieo: {
+        url: 'https://coincodex.com/ieo-list/',
+        idx: 2,
+        filename: 'ieo.json'
+      },
+    };
+    /*const current = calendar.ieo;
+    const result = await ctx.service.crawler.list(current.url, current.idx);
+    // 写入文件
+    await ctx.service.oss.wfile(result,current.filename);*/
+    // 存储到数据库
+    const result = [
+      ...ico,
+      ...sto,
+      ...ieo
+    ];
+    for(let item of result) {
+      try {
+        await ctx.service.coin.createSome(item)
+      } catch (e) {
+        console.error('写入数据库报错', item);
+      }
     }
-    console.log(html);
-    const coinList = this.loadCoinList(html)
     const msg = ctx.msg.success;
     ctx.body = {
       ...msg,
-      data: coinList
+      data: result
     }
+  }
+  async getCrawler() {
+    const { ctx } = this;
+    const coin = ctx.query.coin
+    const result = await ctx.service.crawler.detail(coin) // '/ieo/top-network/'
+    const msg = ctx.msg.success;
+    ctx.body = {
+      ...msg,
+      data: result
+    }
+  }
+  async updateCoin() {
+    console.log('updateCoin');
+    const { ctx } = this;
+    const result = await ctx.service.coin.list(0, 1000, {})
+    /*const ixo = result.rows;
+    const l = ixo.length;
+    for (let i=165; i<l; i++) {
+      if(Boolean(ixo[i].isDelete)) continue;
+      const id = ixo[i].id;
+      const belong = ixo[i].belong;
+      const coin_name = ixo[i].coin_name;
+      const detail_link = ixo[i].detail_link;
+      const ajaxData = await ctx.service.coincodex.get_coin(ixo[i].symbol, coin_name);
+      ctx.logger.info('ajax info', ajaxData);
 
+      const symbol = ajaxData.symbol;
+      const detailData = await ctx.service.crawler.detail(detail_link);
+      let init_price_key = ['ico_price', 'sto_price', 'ieo_price'];
+      let init_price = detailData.funding[init_price_key[belong]] || '';
+      let crawlerObj = {
+        rating: detailData.rating,
+        init_price,
+        launchpad: detailData.funding.launchpad || '',
+        roi: detailData.funding.roi || '',
+        for_sale: detailData.funding.for_sale || '',
+        softcap: detailData.funding.softcap || '',
+        hardcap: detailData.funding.hardcap || '',
+        raised: detailData.funding.raised || '',
+        bonuses: detailData.funding.bonuses || '',
+        bounties: detailData.bounties || '',
+        distribution: detailData.distribution || '{}',
+      }
+      ctx.logger.info('crawlerObj', crawlerObj);
+      let updateObj = ajaxData === false ? {
+        ...crawlerObj,
+        isDelete: 1
+      } : {
+        ...ajaxData,
+        ...crawlerObj
+      };
+
+      const coinResult = await ctx.service.coin.updateById(id, updateObj);
+
+      ctx.logger.info('update coin', coinResult);
+    }*/
+    const msg = ctx.msg.success;
+    ctx.body = {
+      ...msg,
+      data: result
+    }
+  }
+  async insertCoin() {
+    const { ctx } = this;
+    const msg = ctx.msg.success;
+    const result = await ctx.service.stage.list();
+    // const result = await ctx.service.coin.findDel();
+    /*const result = await ctx.service.coin.list(0, 1000, {})
+    const ixo = result.rows;
+    const l = ixo.length;
+    for (let i=0; i<l; i++) {
+      if(Boolean(ixo[i].isDelete)) continue;
+      const id = ixo[i].id;
+      const belong = ixo[i].belong;
+      const coin_name = ixo[i].coin_name;
+      const detail_link = ixo[i].detail_link;
+      const ajaxData = await ctx.service.coincodex.get_coin(ixo[i].symbol, coin_name);
+      ctx.logger.info('ajax info', ajaxData);
+
+      const symbol = ajaxData.symbol;
+      const detailData = await ctx.service.crawler.detail(detail_link);
+      let init_price_key = ['ico_price', 'sto_price', 'ieo_price'];
+      let init_price = detailData.funding[init_price_key[belong]] || '';
+      let crawlerObj = {
+        rating: detailData.rating,
+        init_price,
+        launchpad: detailData.funding.launchpad || '',
+        roi: detailData.funding.roi || '',
+        for_sale: detailData.funding.for_sale || '',
+        softcap: detailData.funding.softcap || '',
+        hardcap: detailData.funding.hardcap || '',
+        raised: detailData.funding.raised || '',
+        bonuses: detailData.funding.bonuses || '',
+        bounties: detailData.bounties || '',
+        distribution: detailData.distribution || '{}',
+      };
+      ctx.logger.info('crawlerObj', crawlerObj);
+      let updateObj = ajaxData === false ? {
+        ...crawlerObj,
+        isDelete: 1
+      } : {
+        ...ajaxData,
+        ...crawlerObj
+      };
+
+      const coinResult = await ctx.service.coin.updateById(id, updateObj);
+
+      ctx.logger.info('update coin', coinResult);
+    }*/
+    ctx.body = {
+      ...msg,
+      data: result
+    }
+  }
+  async createStage() {
+    const { ctx } = this;
+    const result = await ctx.service.coin.list(0, 1000, {})
+    const ixo = result.rows;
+    const l = ixo.length;
+    for (let i=425; i<l; i++) {
+      if(Boolean(ixo[i].isDelete)) continue;
+      const symbol = ixo[i].symbol;
+      const detail_link = ixo[i].detail_link;
+
+      const detailData = await ctx.service.crawler.detail(detail_link);
+      const { stages = [] } = detailData;
+      ctx.logger.info('stages', stages);
+
+      for (let j=0; j<stages.length; j++) {
+        const stageResult = await ctx.service.stage.create({
+          symbol,
+          ...stages[j]
+        });
+        ctx.logger.info('create stage success', stageResult.dataValues);
+      }
+    }
+    const msg = ctx.msg.success;
+    ctx.body = {
+      ...msg,
+      data: result
+    }
+  }
+  async createNews() {
+    const { ctx } = this;
+    const result = await ctx.service.coin.list(0, 1000, {})
+    const ixo = result.rows;
+    const l = ixo.length;
+    for (let i=434; i<l; i++) {
+      const symbol = ixo[i].symbol;
+      const count = await ctx.service.news.count(symbol);
+      if(count > 0) continue;
+      const detail_link = ixo[i].detail_link;
+
+      const detailData = await ctx.service.crawler.detail(detail_link);
+      const { news = [] } = detailData
+      ctx.logger.info(`news' ${symbol}`, news);
+
+      for (let j=0; j<news.length; j++) {
+        const newsResult = await ctx.service.news.create({
+          symbol,
+          mediaLogo: '',
+          ...news[j]
+        });
+        ctx.logger.info('create news success', newsResult.dataValues);
+      }
+    }
+    const msg = ctx.msg.success;
+    ctx.body = {
+      ...msg,
+      data: count
+    }
   }
 }
-
 
 module.exports = ManagementController;
