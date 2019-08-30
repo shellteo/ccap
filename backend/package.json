@@ -9,8 +9,10 @@
   "dependencies": {
     "ali-oss": "^6.1.1",
     "cheerio": "^1.0.0-rc.3",
+    "crypto-js": "^3.1.9-1",
     "egg": "^2.15.1",
     "egg-cors": "^2.2.0",
+    "egg-oss": "^2.0.0",
     "egg-redis": "^2.3.1",
     "egg-scripts": "^2.11.0",
     "egg-security": "^2.5.0",

@@ -9,7 +9,7 @@ class CommentService extends Service {
     result.rows = await ctx.model.Comment.findAll({ offset, limit, where: { symbol } });
     return result;
   }
-  async create({ symbol, email, content }) {
+  async create({ symbol, email, content, rating }) {
     const { ctx } = this;
     const userRow = await ctx.service.user.find(email);
     if (userRow === null) {
@@ -25,6 +25,7 @@ class CommentService extends Service {
       createUserEmail: email,
       createUserName: userRow.nickname,
       createUserAvatar: userRow.avatar,
+      rating,
       content,
       createTime: nowUnixTime,
     });
@@ -37,6 +38,11 @@ class CommentService extends Service {
   async find(symbol) {
     const { ctx } = this;
     return ctx.model.Comment.findAll({ where: { symbol } });
+  }
+  async likeComment(id) {
+    const { ctx } = this;
+    const comment = await ctx.model.Comment.findById(id)
+    return comment.increment('liked');
   }
 }
 

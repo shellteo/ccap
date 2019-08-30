@@ -33,6 +33,18 @@ class ossService extends Service {
       // console.log(e)
     }
   }
+  async uploadImg() {
+    const { ctx } = this;
+    const client = new oss({
+      accessKeyId: 'LTAIZolpNW0wfr3c',
+      accessKeySecret: 'QiG8RBDaCEXDvyo0LcCfZAWn6DbVnO',
+      bucket: 'max-well',
+      region: 'oss-cn-shanghai',
+    });
+    const stream = await ctx.getFileStream();
+    let result = await client.putStream(`coins/${fileName}`, stream);
+    return result;
+  }
   wfile(data, file) {
     const p = path.join(__dirname, `../public/${file}`);
     fs.writeFile(p, JSON.stringify(data), (err) => {

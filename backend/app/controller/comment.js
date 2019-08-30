@@ -15,17 +15,28 @@ class commentController extends Controller {
   }
   async create() {
     const { ctx } = this;
-    const { content, symbol } = ctx.request.body;
+    const { content, rating, symbol } = ctx.request.body;
     const email = ctx.user.email;
-    const ret = await ctx.service.comment.create({ symbol, email, content });
+    const ret = await ctx.service.comment.create({ symbol, email, rating, content });
     ctx.body = ret;
   }
   async show() {
     const { ctx } = this;
     const symbol = ctx.params.symbol;
-    const msg = ctx.msg.success;
-    msg.data = await ctx.service.comment.find(symbol);
-    ctx.body = msg;
+    const data = await ctx.service.comment.find(symbol);
+    ctx.body = {
+      ...ctx.msg.success,
+      data,
+    };
+  }
+  async likeComment() {
+    const { ctx } = this;
+    const id = ctx.params.id;
+    const data = await ctx.service.comment.likeComment(id);
+    ctx.body = {
+      ...ctx.msg.success,
+      data,
+    };
   }
 }
 

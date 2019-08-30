@@ -5,18 +5,21 @@
  */
 module.exports = app => {
   // 前端jwt鉴权
-  const passport = app.middleware.passport({management: false});
+  const passport = app.middleware.passport({ management: false });
   // 后台管理系统jwt鉴权
-  const managementPassport = app.middleware.passport({management: true});
+  const managementPassport = app.middleware.passport({ management: true });
 
   const { router, controller } = app;
   router.post('/api/user/register', controller.user.register);
   router.post('/api/user/login', controller.user.login);
+  router.get('/api/user/info', passport, controller.user.userInfo);
+  router.put('/api/user/info', passport, controller.user.update);
   router.post('/api/upload', passport, controller.user.upload);
   // comment
   router.get('/api/comment', controller.comment.index);
   router.post('/api/comment', passport, controller.comment.create);
   router.get('/api/comment/:symbol', controller.comment.show);
+  router.put('/api/likecomment/:id', controller.comment.likeComment);
   // favorite
   router.get('/api/favorite', passport, controller.favorite.index);
   router.post('/api/favorite', passport, controller.favorite.create);
@@ -43,11 +46,11 @@ module.exports = app => {
   // stage
   router.get('/api/stage/:symbol', controller.stage.show);
 
-  /*-----------------后台管理系统接口------------------*/
+  /* -----------------后台管理系统接口------------------*/
   router.post('/management/login', controller.management.login);
   router.post('/api/coin', managementPassport, controller.coin.create);
   router.put('/api/coin/:symbol', managementPassport, controller.coin.update);
-  /*-----------------爬虫------------------*/
+  /* -----------------爬虫------------------*/
   router.get('/api/spider/coin', controller.management.spider);
   router.get('/api/spider/list', controller.management.coinlist);
   router.get('/api/crawler/detail', controller.management.getCrawler);

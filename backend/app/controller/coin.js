@@ -13,11 +13,13 @@ class CoinController extends Controller {
     // 名称可以搜索 symbol 和 name
     const {
       status,
-      query,
+      name,
+      belong
     } = ctx.query;
     msg.data = await ctx.service.coin.list(offset, pageSize, {
       status,
-      query,
+      name,
+      belong
     });
     ctx.body = msg;
   }

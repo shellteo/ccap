@@ -30,6 +30,16 @@ module.exports = app => {
       allowNull: true,
       defaultValue: '',
     },
+    rating: {
+      type: DataTypes.INTEGER(11),
+      allowNull: false,
+      defaultValue: 0
+    },
+    liked: {
+      type: DataTypes.INTEGER(11),
+      allowNull: false,
+      defaultValue: 0
+    },
     content: {
       type: DataTypes.STRING(1000),
       allowNull: false,

@@ -100,35 +100,56 @@ class CoinService extends Service {
     const { ctx } = this;
     return ctx.model.Coin.findAll({ where: { isDelete: 1 } });
   }
-  async list(offset, limit, { status, query }) {
+  async list(offset, limit, { status, name, belong }) {
     const { ctx } = this;
+    const { isNull } = ctx.helper;
     const result = {};
-    if (ctx.helper.isNull(status) && ctx.helper.isNull(query)) {
+    if (ctx.helper.isNull(status) && ctx.helper.isNull(name) && ctx.helper.isNull(belong)) {
       result.count = await ctx.model.Coin.count();
       result.rows = await ctx.model.Coin.findAll({ offset, limit });
     } else {
-      let sql = '';
-      if (!ctx.helper.isNull(query)) {
-        sql = 'SELECT * FROM coin WHERE symbol LIKE \'%:Name%\' OR name LIKE \'%:Name%\' ';
+      let sql = 'SELECT * FROM coin';
+      let countSql = 'SELECT COUNT(1) as count FROM coin'
+      let whereArr = [];
+      let replaceArr = {};
+      if (!isNull(belong)) {
+        whereArr.push('`belong` = :belong')
+        replaceArr['belong'] = belong
+      }
+      if (!ctx.helper.isNull(name)) {
+        whereArr.push('(symbol LIKE :Name OR coin_name LIKE :Name)')
+        replaceArr['Name'] = `%${name}%`
       }
       // status: ongoing[进行中], upcoming[未开始], ended[已结束]
       if (!ctx.helper.isNull(status)) {
         if (status === 'ongoing') {
-          sql += 'OR startTime <= UNIX_TIMESTAMP(NOW()) AND endTime >= UNIX_TIMESTAMP(NOW())';
+          whereArr.push('(`start` <= UNIX_TIMESTAMP(NOW()) AND `end` >= UNIX_TIMESTAMP(NOW()))')
         }
         if (status === 'upcoming') {
-          sql += 'OR startTime >= UNIX_TIMESTAMP(NOW()) ';
+          whereArr.push('`start` >= UNIX_TIMESTAMP(NOW())')
         }
         if (status === 'ended') {
-          sql += 'endTime <= UNIX_TIMESTAMP(NOW())';
+          whereArr.push('`end` <= UNIX_TIMESTAMP(NOW())')
         }
+      }
+      if (whereArr.length > 0) {
+        let whereStr = ' WHERE ' + whereArr.join(' AND ')
+        sql += whereStr
+        countSql += whereStr
+
       }
       sql += ' LIMIT :offset, :limit ';
       result.rows = await ctx.model.query(sql, {
         raw: true,
         model: ctx.model.Coin,
-        replacements: { Name: query, offset, limit },
+        replacements: { ...replaceArr, offset, limit },
       });
+      let count = await ctx.model.query(countSql, {
+        raw: true,
+        model: ctx.model.Coin,
+        replacements: { ...replaceArr, offset, limit },
+      });
+      result.count = count[0].count
     }
     return result;
   }

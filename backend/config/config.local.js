@@ -26,6 +26,18 @@ module.exports = () => {
   config.login = {
     username: 'admin',
     password: 'admin'
-  }
+  };
+  config.oss = {
+    client: {
+      accessKeyId: 'LTAIZolpNW0wfr3c',
+      accessKeySecret: 'QiG8RBDaCEXDvyo0LcCfZAWn6DbVnO',
+      bucket: 'max-well',
+      endpoint: 'oss-cn-shanghai.aliyuncs.com', // oss-cn-shanghai.aliyuncs.com
+      timeout: '60s',
+    },
+  };
+  config.multipart = {
+    mode: 'file',
+  };
   return config;
 };
