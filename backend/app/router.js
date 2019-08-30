@@ -19,7 +19,7 @@ module.exports = app => {
   router.get('/api/comment', controller.comment.index);
   router.post('/api/comment', passport, controller.comment.create);
   router.get('/api/comment/:symbol', controller.comment.show);
-  router.put('/api/likecomment/:id', controller.comment.likeComment);
+  router.post('/api/likecomment/:id', passport, controller.comment.likeComment);
   // favorite
   router.get('/api/favorite', passport, controller.favorite.index);
   router.post('/api/favorite', passport, controller.favorite.create);

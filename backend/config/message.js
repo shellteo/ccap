@@ -21,6 +21,8 @@ module.exports = {
       createFailed: { code: 2000006, message: '创建失败' },
       mailSendFailed: { code: 2000007, message: '邮件发送失败' },
       uploadFailure: { code: 2000008, message: '文件上传失败' },
+      likedFailure: { code: 2000009, message: '点赞失败' },
+      hasLiked: { code: 2000010, message: '已经点过赞' },
 
       loginFailed: { code: 3000001, message: '登录失败' },
     };

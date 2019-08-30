@@ -33,10 +33,13 @@ class commentController extends Controller {
     const { ctx } = this;
     const id = ctx.params.id;
     const data = await ctx.service.comment.likeComment(id);
-    ctx.body = {
-      ...ctx.msg.success,
-      data,
-    };
+    if (data === 1) {
+      ctx.body = ctx.msg.hasLiked
+    } else if (data === 2) {
+      ctx.body = ctx.msg.likedFailure
+    } else {
+      ctx.body = ctx.msg.success
+    }
   }
 }
 

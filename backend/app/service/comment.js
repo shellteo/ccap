@@ -39,10 +39,34 @@ class CommentService extends Service {
     const { ctx } = this;
     return ctx.model.Comment.findAll({ where: { symbol } });
   }
-  async likeComment(id) {
+  // 1：已经点过赞了，0：点赞成功，2：点赞失败
+  async likeComment(comment_id) {
     const { ctx } = this;
-    const comment = await ctx.model.Comment.findById(id)
-    return comment.increment('liked');
+    const user_id = ctx.user.id;
+
+    const userLiked = await ctx.model.UserLike.find({ where: { user_id, comment_id  } });
+    // 已经点过赞了
+    if (userLiked) {
+      return 1;
+    }
+
+    const transaction = await ctx.model.transaction();
+    /* const trans = await ctx.model.transaction({
+      isolationLevel: this.app.Sequelize.Transaction.ISOLATION_LEVELS.REPEATABLE_READ, // SERIALIZABLE,
+    }); */
+    try {
+      await ctx.model.UserLike.create({
+        user_id, comment_id
+      }, { transaction });
+      const comment = await ctx.model.Comment.findById(comment_id);
+      await comment.increment('liked', { transaction });
+      await transaction.commit();
+      return 0;
+    } catch (e) {
+      this.logger.error('In UserController::userinfo error %j', e);
+      await transaction.rollback();
+      return 2;
+    }
   }
 }
 

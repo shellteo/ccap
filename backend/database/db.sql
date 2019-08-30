@@ -162,3 +162,19 @@ CREATE TABLE `stage`  (
   `personalcap` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT '个人顶',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = 'stage' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for 用户点赞表
+-- ----------------------------
+DROP TABLE IF EXISTS `user_like`;
+CREATE TABLE `user_like`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `user_id` int(11) NOT NULL comment '点赞的用户id',
+  `comment_id` int(11) NOT NULL comment '被点赞的评论id',
+  `create_time` timestamp not null default current_timestamp comment '创建时间',
+  `update_time` timestamp not null default current_timestamp on update current_timestamp comment '修改时间',
+  `status` tinyint(1) default 1 comment '点赞状态，0取消，1点赞',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `user_id`(`user_id`),
+	INDEX `comment_id`(`comment_id`)
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = 'stage' ROW_FORMAT = Dynamic;

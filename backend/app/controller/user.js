@@ -20,7 +20,10 @@ class UserController extends Controller {
     };
     const ret = await ctx.service.user.create(user);
     if (ret.code === 0) {
-      await this.jwtSign(user, { email });
+      await this.jwtSign({
+        id: ret.id,
+        email
+      }, { email });
     } else {
       ctx.body = ret;
     }
@@ -35,8 +38,8 @@ class UserController extends Controller {
       ctx.body = ctx.msg.psdError;
     } else {
       const user = {
+        id: userRow.id,
         email,
-        password,
       };
       const { nickname, avatar, bio } = userRow;
       await this.jwtSign(user, { email, nickname, avatar, bio });
