@@ -1,0 +1,20 @@
+@charset "utf-8";
+
+// Import Bulma's core
+@import "~bulma/sass/utilities/_all";
+
+// Import material design icons
+@import "~@mdi/font/css/materialdesignicons.min.css";
+
+// Import font
+@import "gilroy";
+@import "graphik";
+
+// Import variables
+@import "variables/index";
+
+// Import Bulma
+@import "~bulma";
+
+// Init Storyscript by rewriting bulma
+@import "custom/index";

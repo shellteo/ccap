@@ -1,0 +1,21 @@
+.tag {
+  &.is-outline {
+    background-color: $white;
+    border: 1px solid nth($grays, 4);
+
+    @each $color,
+    $value in $colors {
+      &.is-#{$color} {
+        border: none;
+      }
+    }
+
+    font-weight: 600;
+    font-size: nth($sizes, 8);
+    color: nth($grays, 2);
+    letter-spacing: 1.5px;
+    border-radius: .3rem;
+    padding: .375rem .75rem;
+    height: 2rem;
+  }
+}

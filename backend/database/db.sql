@@ -50,6 +50,7 @@ DROP TABLE IF EXISTS `comment`;
 CREATE TABLE `comment`  (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `symbol` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '标识符',
+  `createUserId` int(11) NOT NULL COMMENT '评论用户ID',
   `createUserEmail` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '评论用户邮箱',
   `createUserName` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT '评论用户名',
   `createUserAvatar` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '' COMMENT '评论用户头像url',

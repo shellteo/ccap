@@ -1,0 +1,105 @@
+{
+  "name": "storyscript-hub",
+  "version": "0.3.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "serve:local": "VUE_APP_API_BASEURL=http://localhost:8090/ VUE_APP_GRAPHQL_HTTP=http://localhost:5000/graphql vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint",
+    "test:unit": "vue-cli-service test:unit",
+    "svgo": "svgo -f src/icons/svg --config=src/icons/svgo.yml"
+  },
+  "dependencies": {
+    "@storyscript/vue": "^2.11.2",
+    "axios": "^0.18.0",
+    "compressorjs": "^1.0.5",
+    "cropperjs": "^1.5.5",
+    "crypto-js": "^3.1.9-1",
+    "echarts": "^4.2.1",
+    "laue": "^0.2.0",
+    "moment": "^2.24.0",
+    "prismjs": "^1.15.0",
+    "vue": "^2.6.5",
+    "vue-apollo": "^3.0.0-beta.28",
+    "vue-material": "^1.0.0-beta-11",
+    "vue-notification": "^1.3.16",
+    "vue-prism-component": "^1.1.1",
+    "vue-router": "^3.0.2",
+    "vue-star-rating": "^1.6.1",
+    "vue-upload-component": "^2.8.20",
+    "vuelidate": "^0.7.4",
+    "vuex": "^3.1.0"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^3.4.0",
+    "@vue/cli-plugin-eslint": "^3.4.0",
+    "@vue/cli-plugin-unit-jest": "^3.4.0",
+    "@vue/cli-service": "^3.4.0",
+    "@vue/eslint-config-standard": "^4.0.0",
+    "@vue/test-utils": "^1.0.0-beta.29",
+    "babel-core": "7.0.0-bridge.0",
+    "babel-jest": "^24.1.0",
+    "babel-preset-env": "^1.7.0",
+    "chunk": "^0.0.2",
+    "eslint-plugin-graphql": "^3.0.3",
+    "graphql-tag": "^2.10.1",
+    "jest-transform-graphql": "^2.1.0",
+    "lint-staged": "^8.1.3",
+    "node-emoji": "^1.8.1",
+    "node-sass": "^4.11.0",
+    "pretty-data": "^0.40.0",
+    "raven-js": "^3.27.0",
+    "sass-loader": "^7.1.0",
+    "sitemap-webpack-plugin": "^0.6.0",
+    "svg-sprite-loader": "^4.1.6",
+    "svgo": "^1.3.0",
+    "vue-cli-plugin-apollo": "^0.19.1",
+    "vue-clipboard2": "^0.3.0",
+    "vue-markdown": "^2.2.4",
+    "vue-perfect-scrollbar": "^0.1.0",
+    "vue-template-compiler": "^2.6.5",
+    "vue2-scrollspy": "^2.3.1",
+    "vuejs-uib-pagination": "^1.0.6"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "plugins": [
+      "graphql"
+    ],
+    "extends": [
+      "plugin:vue/recommended",
+      "@vue/standard"
+    ],
+    "rules": {},
+    "parserOptions": {
+      "parser": "babel-eslint"
+    }
+  },
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {}
+    }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ],
+  "gitHooks": {
+    "pre-commit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.js": [
+      "vue-cli-service lint",
+      "git add"
+    ],
+    "*.vue": [
+      "vue-cli-service lint",
+      "git add"
+    ]
+  }
+}

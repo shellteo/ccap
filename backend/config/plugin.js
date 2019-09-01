@@ -28,5 +28,10 @@ module.exports = {
   oss: {
     enable: true,
     package: 'egg-oss',
-  }
+  },
+  // config/plugin.js
+  validate: {
+    enable: true,
+    package: 'egg-validate',
+  },
 };

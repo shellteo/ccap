@@ -25,6 +25,7 @@ module.exports = {
       hasLiked: { code: 2000010, message: '已经点过赞' },
 
       loginFailed: { code: 3000001, message: '登录失败' },
+      verifyFailed: { code: 4000001, message: '校验失败' },
     };
     let message;
 

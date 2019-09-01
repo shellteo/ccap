@@ -1,0 +1,82 @@
+.readme-md {
+  font-size: .9rem;
+
+  &>*:first-child {
+    margin-top: 0 !important;
+  }
+
+  &>*:last-child {
+    margin-bottom: 0 !important;
+  }
+
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    line-height: 2 !important;
+    margin: 10px 0 10px !important;
+    padding: 0 !important;
+    font-weight: bold;
+    cursor: text;
+    color: $dark;
+  }
+
+  h1 {
+    font-size: 1.2rem;
+  }
+
+  h2 {
+    font-size: 1.1rem;
+    border-bottom: 1px solid $light;
+  }
+
+  h3 {
+    font-size: 1rem;
+  }
+
+  h4 {
+    font-size: .9rem;
+  }
+
+  h5 {
+    font-size: .8rem;
+  }
+
+  h6 {
+    font-size: .7rem;
+  }
+
+  p,
+  blockquote,
+  ul,
+  ol,
+  dl,
+  li,
+  table,
+  pre {
+    margin: 5px 0;
+  }
+
+
+  hr {
+    border: 0 none;
+    color: #cccccc;
+    height: 4px;
+    padding: 0;
+  }
+
+
+  blockquote {
+    border-left: 4px solid #dddddd;
+    padding: 0 15px;
+    color: #777777;
+  }
+
+
+  img {
+    max-width: 100%;
+  }
+}

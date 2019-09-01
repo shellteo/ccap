@@ -90,7 +90,20 @@ class CoinService extends Service {
   }
   async find(symbol) {
     const { ctx } = this;
-    return ctx.model.Coin.find({ where: { symbol } });
+    const sql = 'SELECT round(AVG(`rating`),2) AS avgRating FROM `comment` WHERE `symbol` = :symbol ';
+    const ret2 = await ctx.model.query(sql, {
+      raw: true,
+      model: ctx.model.Comment,
+      replacements: { symbol },
+    });
+    const ret = await ctx.model.Coin.find({ where: { symbol } });
+    if (ret2[0].avgRating) {
+      return {
+        ...ret.dataValues,
+        rating: ret2[0].avgRating,
+      };
+    }
+    return ret;
   }
   async findById(id) {
     const { ctx } = this;
@@ -109,33 +122,33 @@ class CoinService extends Service {
       result.rows = await ctx.model.Coin.findAll({ offset, limit });
     } else {
       let sql = 'SELECT * FROM coin';
-      let countSql = 'SELECT COUNT(1) as count FROM coin'
-      let whereArr = [];
-      let replaceArr = {};
+      let countSql = 'SELECT COUNT(1) as count FROM coin';
+      const whereArr = [];
+      const replaceArr = {};
       if (!isNull(belong)) {
-        whereArr.push('`belong` = :belong')
-        replaceArr['belong'] = belong
+        whereArr.push('`belong` = :belong');
+        replaceArr.belong = belong;
       }
       if (!ctx.helper.isNull(name)) {
-        whereArr.push('(symbol LIKE :Name OR coin_name LIKE :Name)')
-        replaceArr['Name'] = `%${name}%`
+        whereArr.push('(symbol LIKE :Name OR coin_name LIKE :Name)');
+        replaceArr.Name = `%${name}%`;
       }
       // status: ongoing[进行中], upcoming[未开始], ended[已结束]
       if (!ctx.helper.isNull(status)) {
         if (status === 'ongoing') {
-          whereArr.push('(`start` <= UNIX_TIMESTAMP(NOW()) AND `end` >= UNIX_TIMESTAMP(NOW()))')
+          whereArr.push('(`start` <= UNIX_TIMESTAMP(NOW()) AND `end` >= UNIX_TIMESTAMP(NOW()))');
         }
         if (status === 'upcoming') {
-          whereArr.push('`start` >= UNIX_TIMESTAMP(NOW())')
+          whereArr.push('`start` >= UNIX_TIMESTAMP(NOW())');
         }
         if (status === 'ended') {
-          whereArr.push('`end` <= UNIX_TIMESTAMP(NOW())')
+          whereArr.push('`end` <= UNIX_TIMESTAMP(NOW())');
         }
       }
       if (whereArr.length > 0) {
-        let whereStr = ' WHERE ' + whereArr.join(' AND ')
-        sql += whereStr
-        countSql += whereStr
+        const whereStr = ' WHERE ' + whereArr.join(' AND ');
+        sql += whereStr;
+        countSql += whereStr;
 
       }
       sql += ' LIMIT :offset, :limit ';
@@ -144,17 +157,17 @@ class CoinService extends Service {
         model: ctx.model.Coin,
         replacements: { ...replaceArr, offset, limit },
       });
-      let count = await ctx.model.query(countSql, {
+      const count = await ctx.model.query(countSql, {
         raw: true,
         model: ctx.model.Coin,
         replacements: { ...replaceArr, offset, limit },
       });
-      result.count = count[0].count
+      result.count = count[0].count;
     }
     return result;
   }
   async update(symbol, coinObj) {
-    const {ctx} = this;
+    const { ctx } = this;
     let result = {};
     if (!ctx.helper.isNull(coinObj)) {
       result = await ctx.model.Coin.update(coinObj, { where: { symbol } });
@@ -162,7 +175,7 @@ class CoinService extends Service {
     return result;
   }
   async updateById(id, coinObj) {
-    const {ctx} = this;
+    const { ctx } = this;
     let result = {};
     if (!ctx.helper.isNull(coinObj)) {
       result = await ctx.model.Coin.update(coinObj, { where: { id } });

@@ -5,8 +5,39 @@ class CommentService extends Service {
   async list(offset, limit, symbol) {
     const { ctx } = this;
     const result = {};
+    let sql = '';
+    const replacements = {
+      symbol,
+      limit,
+      offset,
+    };
+    if (ctx.user && ctx.user.id) {
+      sql = `SELECT c.*, ur.email, ur.avatar, ur.nickname, (CASE uk.user_id WHEN :userId THEN TRUE ELSE  FALSE END) AS islike 
+      FROM comment AS c 
+      LEFT JOIN user_like AS uk 
+      ON uk.comment_id=c.id
+      LEFT JOIN user AS ur 
+      ON c.createUserId=ur.id
+      WHERE c.symbol=:symbol 
+      GROUP BY c.id HAVING islike>-1
+      ORDER BY c.createTime DESC
+      LIMIT :limit OFFSET :offset`;
+      replacements.userId = ctx.user.id;
+    } else {
+      sql = `SELECT c.*, ur.email, ur.avatar, ur.nickname
+      FROM comment c 
+      LEFT JOIN user ur 
+      ON c.createUserId = ur.id 
+      WHERE c.symbol=:symbol 
+      ORDER BY c.createTime DESC
+      LIMIT :limit OFFSET :offset `;
+    }
     result.count = await ctx.model.Comment.count({ where: { symbol } });
-    result.rows = await ctx.model.Comment.findAll({ offset, limit, where: { symbol } });
+    result.rows = await ctx.model.query(sql, {
+      raws: true,
+      model: ctx.model.Comment,
+      replacements,
+    });
     return result;
   }
   async create({ symbol, email, content, rating }) {
@@ -22,6 +53,7 @@ class CommentService extends Service {
     const nowUnixTime = ctx.helper.nowUnixTime();
     const data = await ctx.model.Comment.create({
       symbol,
+      createUserId: userRow.id,
       createUserEmail: email,
       createUserName: userRow.nickname,
       createUserAvatar: userRow.avatar,
@@ -44,7 +76,7 @@ class CommentService extends Service {
     const { ctx } = this;
     const user_id = ctx.user.id;
 
-    const userLiked = await ctx.model.UserLike.find({ where: { user_id, comment_id  } });
+    const userLiked = await ctx.model.UserLike.find({ where: { user_id, comment_id } });
     // 已经点过赞了
     if (userLiked) {
       return 1;
@@ -56,7 +88,7 @@ class CommentService extends Service {
     }); */
     try {
       await ctx.model.UserLike.create({
-        user_id, comment_id
+        user_id, comment_id,
       }, { transaction });
       const comment = await ctx.model.Comment.findById(comment_id);
       await comment.increment('liked', { transaction });

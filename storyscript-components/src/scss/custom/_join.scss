@@ -1,0 +1,44 @@
+.join-beta {
+  .story {
+    .column {
+      @include touch {
+        text-align: center;
+      }
+    }
+  }
+
+  h2 {
+    @include touch {
+      text-align: center !important;
+    }
+
+    @include mobile {
+      padding: 0;
+    }
+  }
+
+  .is-half {
+
+    .form-beta {
+      margin-right: 0;
+
+      @include touch {
+        margin-right: auto;
+      }
+    }
+  }
+
+  .footer-container {
+    padding-bottom: 5rem;
+
+    ul {
+      li+li {
+        margin-top: 1.5rem;
+      }
+
+      li.list-head+li {
+        margin-top: 2rem;
+      }
+    }
+  }
+}

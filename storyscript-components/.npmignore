@@ -1,0 +1,41 @@
+#unit tests
+tests
+
+#sources and node_modules
+src/assets
+src/components
+src/directives
+src/docs
+src/utils
+src/main.js
+node_modules
+
+#styleguide
+styleguide
+styleguide.config.js
+
+
+#build tools
+.circleci
+
+#linter
+.eslintrc*
+
+#editor settings
+.idea
+.editorconfig
+
+#config files
+.gitignore
+vue.config.js
+yarn-error.log
+package-lock.json
+yarn.lock
+postcss.config.js
+jest.config.js
+babel.config.js
+.browserslistrc
+
+#build unnecessary files (demo.html + unminified umd file)
+dist/demo.html
+dist/storyscript-vue.umd.js

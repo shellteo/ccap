@@ -1,0 +1,25 @@
+$fonts: ( // Thin: 100,
+  // UltraLight: 200,
+  // Light: 300,
+  Regular: 400,
+  Medium: 500,
+  SemiBold: 600,
+  // Bold: 700,
+  // ExtraBold: 800,
+  // Black: 900,
+  // Heavy: 1000,
+);
+
+@each $style,
+$weight in $fonts {
+  @font-face {
+    font-family: "Gilroy";
+    src: url("../assets/fonts/Gilroy#{$style}.eot");
+    src: url("../assets/fonts/Gilroy#{$style}.eot") format("embedded-opentype"),
+    url('../assets/fonts/Gilroy#{$style}.woff2') format('woff2'),
+    url('../assets/fonts/Gilroy#{$style}.woff') format('woff'),
+    url('../assets/fonts/Gilroy#{$style}.ttf') format('truetype'),
+    url('../assets/fonts/Gilroy#{$style}.svg#Gilroy') format('svg');
+    font-weight: $weight;
+  }
+}

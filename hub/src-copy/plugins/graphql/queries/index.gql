@@ -1,0 +1,14 @@
+{
+  recentlyAddedServices: searchServices(searchTerms: "microservice", first: 10) {
+    nodes {
+      uuid
+      alias
+      description
+      topics
+      name
+      owner {
+        username
+      }
+    }
+  }
+}

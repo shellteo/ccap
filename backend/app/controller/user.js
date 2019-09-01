@@ -5,10 +5,33 @@ const jwt = require('jsonwebtoken');
 const moment = require('moment');
 const md5 = require('crypto-js/md5');
 
+const createLoginRule = {
+  email: {
+    type: 'email',
+    required: true,
+  },
+  password: {
+    type: 'string',
+    required: true,
+    min: 6,
+    max: 20,
+  },
+};
+const createRegisterRule = {
+  ...createLoginRule,
+  code: {
+    type: 'string',
+    required: true,
+    min: 6,
+    max: 6,
+  },
+};
+
 class UserController extends Controller {
   async register() {
     const { ctx } = this;
     const { email, password, code } = ctx.request.body;
+    ctx.validate(createRegisterRule, ctx.request.body);
     const verifyCode = await ctx.service.mail.verify(email, code);
     if (!verifyCode) {
       ctx.body = ctx.msg.codeError;
@@ -22,7 +45,7 @@ class UserController extends Controller {
     if (ret.code === 0) {
       await this.jwtSign({
         id: ret.id,
-        email
+        email,
       }, { email });
     } else {
       ctx.body = ret;
@@ -31,6 +54,8 @@ class UserController extends Controller {
   async login() {
     const { ctx } = this;
     const { email, password } = ctx.request.body;
+    ctx.validate(createLoginRule, ctx.request.body);
+
     const userRow = await ctx.service.user.find(email);
     if (userRow === null) {
       ctx.body = ctx.msg.userNotExist;
@@ -45,7 +70,7 @@ class UserController extends Controller {
       await this.jwtSign(user, { email, nickname, avatar, bio });
     }
   }
-  async jwtSign(user, {email = null, nickname = null, avatar = null, bio = null}) {
+  async jwtSign(user, { email = null, nickname = null, avatar = null, bio = null }) {
     const { ctx, config } = this;
     const token = jwt.sign(user, config.login.secretKey, {
       expiresIn: config.login.expires,
@@ -57,7 +82,7 @@ class UserController extends Controller {
       nickname,
       avatar,
       email,
-      bio
+      bio,
     };
     ctx.body = ret;
   }
@@ -75,19 +100,38 @@ class UserController extends Controller {
           nickname,
           avatar,
           email,
-          bio
-        }
-      }
+          bio,
+        },
+      };
     }
   }
   async update() {
     const { ctx } = this;
     const email = ctx.user.email;
     const { nickname, bio, avatar } = ctx.request.body;
-    const userRow = await ctx.service.user.update({nickname, bio, avatar}, email);
+    // 判断nickname入参
+    if (nickname) {
+      ctx.validate({
+        nickname: {
+          type: 'string',
+          min: 2,
+          max: 16,
+        },
+      }, ctx.request.body);
+    }
+    // 判断bio入参
+    if (bio) {
+      ctx.validate({
+        bio: {
+          type: 'string',
+          max: 50,
+        },
+      }, ctx.request.body);
+    }
+    const userRow = await ctx.service.user.update({ nickname, bio, avatar }, email);
     ctx.body = {
       ...ctx.msg.success,
-      data: userRow
+      data: userRow,
     };
 
   }

@@ -26,15 +26,15 @@ class UserService extends Service {
     const { ctx } = this;
     return ctx.model.User.find({ where: { email } });
   }
-  async update({ nickname = null, bio = null, avatar = null}, email) {
+  async update({ nickname = null, bio = null, avatar = null }, email) {
     const { ctx } = this;
-    let updates = {};
-    if(nickname) updates.nickname = nickname;
-    if(bio) updates.bio = bio;
-    if(avatar) updates.avatar = avatar;
+    const updates = {};
+    if (nickname) updates.nickname = nickname;
+    if (bio) updates.bio = bio;
+    if (avatar) updates.avatar = avatar;
     ctx.model.User.update(updates, {
-      where: { email }
-    })
+      where: { email },
+    });
   }
   async uploadImage(filename, filelocation) {
     const { ctx } = this;

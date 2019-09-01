@@ -3,17 +3,17 @@
 const Controller = require('egg').Controller;
 
 class MailController extends Controller {
-  // sendcloud 发送短信验证码
+  // 邮箱验证码
   async send() {
     const { ctx } = this;
     const { mail } = ctx.request.body;
-    const ret = await ctx.service.mail.send(mail);
-    ctx.body = ret;
-  }
-
-  // 验证手机号
-  async verify() {
-    const { ctx } = this;
+    // 判断邮箱是否注册
+    const userRow = await ctx.service.user.find(mail);
+    if (userRow !== null) {
+      ctx.body = ctx.msg.mailHadUsed;
+    } else {
+      ctx.body = await ctx.service.mail.send(mail);
+    }
   }
 }
 

@@ -1,0 +1,506 @@
+$steps-default-color: nth($grays, 4) !default;
+$steps-default-text-color: nth($grays, 3) !default;
+$steps-completed-color: #a8a9bf !default;
+$steps-active-color: #a8a9bf !default;
+$steps-horizontal-min-width: 3rem !default;
+$steps-vertical-min-height: 10rem !default;
+$steps-marker-size: 4.5 !default;
+$steps-divider-size: 2px !default;
+$steps-gap-size: 1.5rem !default;
+$steps-hollow-border-size: 2px !default;
+$steps-thin-border-size: 1px !default;
+$steps-thin-divider-size: 1px !default;
+$steps-thin-marker-size: 0.8em !default;
+$size-small: nth($sizes, 8);
+$size-normal: nth($sizes, 6);
+$size-medium: nth($sizes, 5);
+$size-large: nth($sizes, 4);
+
+@mixin steps-horizontal {
+  @include tablet {
+    &:not(.is-vertical) {
+      @content;
+    }
+  }
+
+
+  &.is-horizontal {
+    @content;
+  }
+}
+
+@mixin steps-vertical {
+  @include mobile {
+    &:not(.is-horizontal) {
+      @content;
+    }
+
+    .steps-segment {
+
+      .steps-marker,
+      &:before {
+        display: none;
+      }
+
+      &:after {
+        margin-top: 2rem;
+        display: none !important;
+      }
+
+      .steps-content {
+        margin-top: 0;
+      }
+    }
+  }
+
+
+  &.is-vertical {
+    @content;
+  }
+}
+
+@mixin steps-all-segments {
+  &.steps .steps-segment {
+    @content;
+  }
+}
+
+@mixin steps-active-segment {
+  &.steps .steps-segment.is-active {
+    @content;
+  }
+}
+
+@mixin steps-inactive-segments {
+  &.steps .steps-segment.is-active~.steps-segment {
+    @content;
+  }
+}
+
+.steps {
+  @include block;
+
+  .steps-segment {
+    position: relative;
+
+    .steps-content {
+      color: $steps-default-text-color;
+    }
+
+    &:not(:last-child):after {
+      // This will contain the horizontal or vertical divider
+      content: " ";
+      display: block;
+      position: absolute;
+    }
+
+    &:before {
+      content: '';
+      display: block;
+      position: absolute;
+      width: 16.6667%;
+    }
+  }
+
+  @include steps-vertical {
+    .steps-segment {
+      display: block;
+
+      &:not(:last-child) {
+        min-height: $steps-vertical-min-height;
+      }
+    }
+  }
+
+
+  @include steps-horizontal {
+    display: flex;
+
+    .steps-segment:not(:last-child) {
+      flex-basis: 1rem;
+      flex-grow: 1;
+      flex-shrink: 1;
+    }
+
+    &.is-narrow {
+      .steps-segment {
+        flex-grow: 0;
+
+        &:not(:last-child) {
+          min-width: $steps-horizontal-min-width;
+        }
+      }
+    }
+
+    &.is-narrow.is-centered {
+      justify-content: center;
+    }
+
+    &.is-narrow.is-right {
+      justify-content: flex-end;
+    }
+
+    &.has-content-centered {
+      text-align: center;
+    }
+
+    &.is-balanced,
+    &.has-content-centered {
+      .steps-segment:last-child {
+        flex-basis: 1rem;
+        flex-grow: 1;
+        flex-shrink: 1;
+      }
+    }
+
+    &.is-narrow.has-content-centered {
+      .steps-segment:last-child {
+        flex-grow: 0;
+        min-width: $steps-horizontal-min-width;
+      }
+    }
+
+    .steps-content.is-divider-content {
+      text-align: center;
+    }
+  }
+
+
+  // Marker style
+  .steps-marker {
+    align-items: center;
+    display: flex;
+    border-radius: 50%;
+    font-weight: $weight-bold;
+    justify-content: center;
+
+    // Position & z-index are needed to put it above the divider
+    position: relative;
+    z-index: 10;
+  }
+}
+
+// Use a mixin to define all ratios in the same spot
+@mixin steps-size($size) {
+  font-size: $size-medium;
+
+  .steps-marker {
+    height: $size * $steps-marker-size;
+    width: $size * $steps-marker-size;
+
+    // svg {
+    //   stroke: $primary;
+    //   stroke-width: .4px;
+    //   stroke-miterlimit: 5;
+    //   fill-opacity: 1;
+    //   fill-rule: nonzero;
+    //   transition: all .3s ease-in-out;
+    //   stroke-dashArray: 1100;
+    //   stroke-dashoffset: 1100;
+    // }
+  }
+
+  .steps-segment.is-active .steps-marker {
+    // svg {
+    //   transition-delay: 1s;
+    //   animation-timing-function: ease-in-out;
+    //   animation-fill-mode: forwards;
+    //   animation-iteration-count: 1;
+    //   animation-name: DrawLine, FadeStroke;
+    //   animation-duration: 5s, .5s;
+    //   animation-delay: 0s, 1.5s;
+    // }
+  }
+
+  // @keyframes DrawLine {
+  //   to {
+  //     stroke-dashOffset: 0;
+  //   }
+  // }
+
+  // @keyframes FadeStroke {
+  //   to {
+  //     stroke-opacity: 0;
+  //   }
+  // }
+
+  @include steps-vertical {
+
+    // Draw a vertical divider
+    .steps-segment:not(:nth-last-child(2)):after {
+      // top and bottom position is almost touching the inner side of a hollow border marker
+      bottom: -$steps-gap-size * 0.8;
+      left: calc(#{$size * $steps-marker-size / 2} - (#{$steps-divider-size / 2}));
+      top: $size * $steps-marker-size - $steps-gap-size * 0.8;
+      width: $steps-divider-size;
+    }
+
+    // Align the content with the marker
+    .steps-content {
+      // margin-left: calc(#{$size * $steps-marker-size / 2} + 2em);
+      margin-top: calc(#{-$size * $steps-marker-size} + 1rem);
+    }
+
+    .steps-content.is-divider-content {
+      margin-top: 0;
+      padding-bottom: 0;
+    }
+
+    &.has-content-centered {
+      .steps-content {
+        padding-top: calc(#{$size * $steps-marker-size / 2} + (#{$steps-divider-size / 2}));
+      }
+    }
+
+    .steps-segment:before {
+      top: calc(#{$size * $steps-marker-size / 2} + (#{$steps-divider-size / 2}));
+      height: $steps-thin-divider-size;
+      left: 0;
+    }
+
+    &:not(.is-thin) {
+
+      &.has-gaps .steps-segment,
+      .steps-segment.has-gaps {
+        &:not(:last-child):after {
+          top: $size * $steps-marker-size + $steps-gap-size;
+          bottom: $steps-gap-size;
+        }
+      }
+    }
+  }
+
+
+  @include steps-horizontal {
+
+    // Draw a horizontal divider
+    .steps-segment:not(:last-child):after {
+      height: $steps-divider-size;
+
+      // top and bottom position is almost touching the inner side of a hollow border marker
+      left: $size * $steps-marker-size - $steps-gap-size * 0.8;
+      right: -$steps-gap-size * 0.8;
+      top: calc(#{$size * $steps-marker-size / 2} - (#{$steps-divider-size / 2}));
+    }
+
+    &.is-thin {
+      .steps-segment:not(:last-child):after {
+        height: $steps-thin-divider-size;
+      }
+    }
+
+    // Align the content with the marker
+    .steps-content {
+      margin-left: $size * $steps-marker-size / 2;
+
+      &:not(:last-child) {
+        margin-right: -$size * $steps-marker-size / 2;
+      }
+
+      &.is-divider-content {
+        margin-right: -$size * $steps-marker-size / 2;
+        padding-left: 2em;
+        padding-right: 2em;
+      }
+    }
+
+    &.has-content-centered {
+      .steps-segment:not(:last-child):after {
+        left: 50%;
+        right: -50%;
+      }
+
+      .steps-marker {
+        position: absolute;
+        left: calc(50% - #{$size * $steps-marker-size / 2});
+      }
+
+      .steps-content {
+        margin-top: $size * $steps-marker-size;
+        margin-left: 0.5em;
+        margin-right: 0.5em;
+        padding-top: 0.2em;
+      }
+    }
+
+    &.has-gaps .steps-segment,
+    .steps-segment.has-gaps {
+      &:not(:last-child):after {
+        left: $size * $steps-marker-size + $steps-gap-size;
+        right: $steps-gap-size;
+      }
+    }
+
+    &.has-content-centered {
+
+      &.has-gaps .steps-segment,
+      .steps-segment.has-gaps {
+        &:not(:last-child):after {
+          left: calc(50% + #{$size * $steps-marker-size / 2 + $steps-gap-size});
+          right: calc(-50% + #{$size * $steps-marker-size / 2 + $steps-gap-size});
+        }
+      }
+    }
+  }
+}
+
+.steps {
+  @include steps-size($size-normal);
+}
+
+.steps.is-small {
+  @include steps-size($size-small);
+}
+
+.steps.is-medium {
+  @include steps-size($size-medium);
+}
+
+.steps.is-large {
+  @include steps-size($size-large);
+}
+
+// Divider Default Colors
+.steps-segment {
+
+  &:after,
+  &:before {
+    background-color: $steps-default-color;
+  }
+
+  &.is-active {
+
+    &:after,
+    &:before {
+      background-color: $steps-default-color;
+    }
+  }
+
+  &.is-active~.steps-segment {
+
+    &:after,
+    &:before {
+      background-color: $steps-default-color;
+    }
+  }
+}
+
+// Marker Default Colors
+.steps:not(.is-hollow) {
+  .steps-marker:not(.is-hollow) {
+    background-color: $steps-completed-color;
+    color: findColorInvert($steps-completed-color);
+  }
+
+  .steps-segment.is-active {
+    .steps-marker:not(.is-hollow) {
+      background-color: $steps-active-color;
+      color: findColorInvert($steps-active-color);
+    }
+  }
+
+  .steps-segment.is-active {
+    &~.steps-segment .steps-marker:not(.is-hollow) {
+      background-color: $steps-default-color;
+      color: findColorInvert($steps-default-color);
+    }
+  }
+}
+
+// Hollow style
+.steps.is-hollow .steps-marker,
+.steps-marker.is-hollow {
+  border: $steps-hollow-border-size solid $steps-default-color;
+  background-color: $light;
+
+  svg {
+    fill: $steps-completed-color;
+  }
+}
+
+// Hollow thin style
+.steps.is-hollow.is-thin .steps-marker,
+.steps-marker.is-hollow.is-thin {
+  border: $steps-thin-border-size solid $steps-default-color;
+}
+
+.steps.is-hollow .is-active .steps-marker,
+.steps .is-active .steps-marker.is-hollow {
+  svg {
+    fill: $steps-active-color;
+  }
+}
+
+.steps.is-active-primary .is-active {
+
+  .steps-marker,
+  .steps-content {
+    svg {
+      fill: $primary;
+    }
+
+    color: $primary;
+  }
+}
+
+.steps.is-hollow .steps-segment.is-active~.steps-segment .steps-marker,
+.steps-segment.is-active~.steps-segment .steps-marker.is-hollow {
+  border-color: $steps-default-color;
+}
+
+// Override marker color per step
+@each $name,
+$pair in $colors {
+  $color: nth($pair, 1);
+  $color-invert: nth($pair, 2);
+
+  .steps:not(.is-hollow) .steps-marker:not(.is-hollow) {
+    &.is-#{$name} {
+      background-color: $color !important;
+      color: $color-invert !important;
+    }
+  }
+
+  .steps.is-hollow .steps-marker,
+  .steps .steps-marker.is-hollow {
+    &.is-#{$name} {
+      border-color: $color !important;
+    }
+  }
+}
+
+// Divider dashed style
+@mixin steps-divider-background($angle, $color, $size) {
+  background: repeating-linear-gradient($angle, $color, $color $size, transparent $size, transparent #{$size * 2});
+}
+
+.steps {
+  @include steps-vertical {
+
+    &.is-dashed .steps-segment,
+    .steps-segment.is-dashed {
+      &:after {
+        @include steps-divider-background(0deg, $steps-default-color, 5px);
+        background-size: 100% 1%;
+        background-position: center;
+      }
+
+      &:before {
+        @include steps-divider-background(0deg, $steps-default-color, 5px);
+      }
+    }
+
+    &.is-dashed .steps-segment.is-active,
+    &.is-dashed .steps-segment.is-active~.steps-segment,
+    .steps-segment.is-active.is-dashed,
+    .steps-segment.is-active~.steps-segment.is-dashed {
+      &:after {
+        background-size: 100% 100%;
+      }
+
+      &:before {
+        @include steps-divider-background(0deg, $steps-default-color, 5px);
+      }
+    }
+  }
+}

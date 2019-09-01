@@ -13,7 +13,11 @@ module.exports = app => {
     symbol: {
       type: DataTypes.STRING(50),
       allowNull: false,
-      defaultValue: ''
+      defaultValue: '',
+    },
+    createUserId: {
+      type: DataTypes.INTEGER(11),
+      allowNull: false,
     },
     createUserEmail: {
       type: DataTypes.STRING(100),

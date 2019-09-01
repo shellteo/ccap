@@ -1,0 +1,72 @@
+<template>
+  <svg
+    width="32"
+    height="26"
+    viewBox="0 0 32 26"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M14.4153 25.4375C-10.2923 16.0763 1.35943 -8.43973 15.3021 2.96574C15.6983 3.28983 16.3017 3.28983 16.6979 2.96574C30.6406 -8.43973 42.2923 16.0763 17.5847 25.4375C16.5766 25.8194 15.4234 25.8194 14.4153 25.4375Z"
+      fill="url(#paint0_linear)"
+    />
+    <defs>
+      <linearGradient
+        id="paint0_linear"
+        x1="-4"
+        y1="6"
+        x2="16"
+        y2="26"
+        gradientUnits="userSpaceOnUse"
+      >
+        <stop stop-color="#EB0927" />
+        <stop
+          offset="0.199999"
+          stop-color="#EB0927"
+        />
+        <stop
+          offset="0.2"
+          stop-color="#FFA509"
+        />
+        <stop
+          offset="0.399999"
+          stop-color="#FFA509"
+        />
+        <stop
+          offset="0.4"
+          stop-color="#FFE806"
+        />
+        <stop
+          offset="0.599999"
+          stop-color="#FFE806"
+        />
+        <stop
+          offset="0.6"
+          stop-color="#3AD42C"
+        />
+        <stop
+          offset="0.799999"
+          stop-color="#3AD42C"
+        />
+        <stop
+          offset="0.8"
+          stop-color="#0198CF"
+        />
+        <stop
+          offset="0.999999"
+          stop-color="#0198CF"
+        />
+        <stop
+          offset="1"
+          stop-color="#B34DC4"
+        />
+      </linearGradient>
+    </defs>
+  </svg>
+</template>
+
+<script>
+export default {
+  name: 'SIconHeart'
+}
+</script>

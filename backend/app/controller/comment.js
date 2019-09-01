@@ -1,7 +1,20 @@
 'use strict';
 
 const Controller = require('egg').Controller;
-
+const createCommentRule = {
+  content: {
+    type: 'string',
+    required: true,
+    min: 6,
+    max: 300,
+  },
+  rating: {
+    type: 'int',
+    required: true,
+    min: 0,
+    max: 5,
+  },
+};
 class commentController extends Controller {
   async index() {
     const { ctx } = this;
@@ -16,6 +29,7 @@ class commentController extends Controller {
   async create() {
     const { ctx } = this;
     const { content, rating, symbol } = ctx.request.body;
+    ctx.validate(createCommentRule, ctx.request.body);
     const email = ctx.user.email;
     const ret = await ctx.service.comment.create({ symbol, email, rating, content });
     ctx.body = ret;
@@ -34,11 +48,11 @@ class commentController extends Controller {
     const id = ctx.params.id;
     const data = await ctx.service.comment.likeComment(id);
     if (data === 1) {
-      ctx.body = ctx.msg.hasLiked
+      ctx.body = ctx.msg.hasLiked;
     } else if (data === 2) {
-      ctx.body = ctx.msg.likedFailure
+      ctx.body = ctx.msg.likedFailure;
     } else {
-      ctx.body = ctx.msg.success
+      ctx.body = ctx.msg.success;
     }
   }
 }

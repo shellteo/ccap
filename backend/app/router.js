@@ -6,18 +6,23 @@
 module.exports = app => {
   // 前端jwt鉴权
   const passport = app.middleware.passport({ management: false });
+  const parseUser = app.middleware.parseUser();
   // 后台管理系统jwt鉴权
   const managementPassport = app.middleware.passport({ management: true });
+  // geetest
+  const gtVerify = app.middleware.geetest();
+  // 加载app
+  require('./validate')(app);
 
   const { router, controller } = app;
-  router.post('/api/user/register', controller.user.register);
-  router.post('/api/user/login', controller.user.login);
+  router.post('/api/user/register', gtVerify, controller.user.register);
+  router.post('/api/user/login', gtVerify, controller.user.login);
   router.get('/api/user/info', passport, controller.user.userInfo);
   router.put('/api/user/info', passport, controller.user.update);
   router.post('/api/upload', passport, controller.user.upload);
   // comment
-  router.get('/api/comment', controller.comment.index);
-  router.post('/api/comment', passport, controller.comment.create);
+  router.get('/api/comment', parseUser, controller.comment.index);
+  router.post('/api/comment', passport, gtVerify, controller.comment.create);
   router.get('/api/comment/:symbol', controller.comment.show);
   router.post('/api/likecomment/:id', passport, controller.comment.likeComment);
   // favorite
@@ -31,8 +36,8 @@ module.exports = app => {
   router.get('/api/ieo', controller.ieo.index);
   router.get('/api/ieo/:id', controller.ieo.show);
   router.post('/api/ieo', controller.ieo.create);
-  // mail
-  router.post('/api/mail', controller.mail.send);
+  // mail，geetest校验
+  router.post('/api/mail', gtVerify, controller.mail.send);
   // coincodex
   router.get('/api/all_coins', controller.coincodex.all_coins);
   router.get('/api/get_firstpage_history/:days/:samples/:coins_limit', controller.coincodex.get_firstpage_history);
@@ -45,6 +50,10 @@ module.exports = app => {
   router.get('/api/coin/:symbol', controller.coin.show);
   // stage
   router.get('/api/stage/:symbol', controller.stage.show);
+
+  /* -----------------geetest------------------ */
+  router.get('/gt/register-slide', controller.geetest.register);
+  router.post('/gt/validate-slide', controller.geetest.validate);
 
   /* -----------------后台管理系统接口------------------*/
   router.post('/management/login', controller.management.login);

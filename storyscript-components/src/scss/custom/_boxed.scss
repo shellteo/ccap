@@ -1,0 +1,15 @@
+.boxed-container {
+  margin: 0 auto;
+  padding: 1rem;
+  color: nth($grays, 2);
+  background-color: $light;
+  border-radius: 1rem;
+  &.shadowed {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, .089);
+  }
+  .boxed-content {
+    padding: 2rem 1rem;
+    border: 1px solid #935DFF;
+    border-radius: .5rem;
+  }
+}

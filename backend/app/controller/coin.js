@@ -14,12 +14,12 @@ class CoinController extends Controller {
     const {
       status,
       name,
-      belong
+      belong,
     } = ctx.query;
     msg.data = await ctx.service.coin.list(offset, pageSize, {
       status,
       name,
-      belong
+      belong,
     });
     ctx.body = msg;
   }
