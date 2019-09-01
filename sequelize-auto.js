@@ -1,5 +1,7 @@
+'use strict';
+
 const EggSequelizeAuto = require('egg-sequelize-auto');
-const auto = new EggSequelizeAuto('ieo', 'root', 'root', {
+const auto = new EggSequelizeAuto('ccap', 'root', '123456', {
   host: '',
   dialect: 'mysql',
   port: '3306',
