@@ -19,10 +19,10 @@
           slot="logo"
           class="smb-logo">
           <img
-            src="../assets/logo2.jpg"
+            src="https://max-well.oss-cn-shanghai.aliyuncs.com/smbzdm/logo.jpg"
             alt="logo">
           <img
-            src="../assets/logo-text-blue.png"
+            src="https://max-well.oss-cn-shanghai.aliyuncs.com/smbzdm/logo-text2.png"
             class="smb-logo-text"
             alt="什么币值得买">
         </div>
@@ -62,10 +62,10 @@
           slot="logo"
           class="smb-logo">
           <img
-            src="../assets/logo2.jpg"
+            src="https://max-well.oss-cn-shanghai.aliyuncs.com/smbzdm/logo.jpg"
             alt="logo">
           <img
-            src="../assets/logo-text.png"
+            src="https://max-well.oss-cn-shanghai.aliyuncs.com/smbzdm/logo-text.png"
             class="smb-logo-text"
             alt="什么币值得买">
         </div>

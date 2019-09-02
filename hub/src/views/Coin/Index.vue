@@ -83,7 +83,7 @@
                   <figure
                     class="image is-32x32 is-avatar">
                     <img
-                      src="@/assets/logo2.jpg"
+                      src="https://max-well.oss-cn-shanghai.aliyuncs.com/smbzdm/logo.jpg"
                       alt="">
                   </figure>
                 </div>

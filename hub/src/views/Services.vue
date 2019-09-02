@@ -228,7 +228,7 @@ export default {
     isUserServicesLoading: false,
     isSearchLoading: true,
     isSearchCategoryLoading: true,
-    coinList: [],
+    coinList: [{}, {}, {}],
     coinCount: 0,
     showLoadMore: false,
     pageIndex: 1
