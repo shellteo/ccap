@@ -8,7 +8,7 @@ import { getCookie } from '@/utils'
 // axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
 let config = {
-  baseURL: 'http://127.0.0.1:7001'
+  baseURL: process.env.VUE_APP_API
   // baseURL: process.env.baseURL || process.env.apiUrl || ""
   // timeout: 60 * 1000, // Timeout
   // withCredentials: true, // Check cross-site Access-Control
