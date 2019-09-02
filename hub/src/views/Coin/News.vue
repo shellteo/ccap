@@ -1,6 +1,5 @@
 <template>
   <div
-    v-scroll-spy
     class="service-container">
     <section>
       <div class="card-bordered">
