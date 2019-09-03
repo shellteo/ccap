@@ -242,7 +242,7 @@ export default {
     confirmUpdateUser () {
       this.$axios.put(this.apis.userInfo, {
         [this.currentType]: this.currentValue
-      }).then((res) => {
+      }, {loading: true}).then((res) => {
         this.$notify({
           group: 'smb',
           type: 'success',

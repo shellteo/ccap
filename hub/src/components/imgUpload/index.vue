@@ -256,7 +256,8 @@ export default {
       this.$axios({
         method: 'POST',
         url: this.apis.upload,
-        data: formdata
+        data: formdata,
+        loading: true
       }).then((res) => {
         if (res.code === 0) {
           this.$emit('doneImageUpload', {

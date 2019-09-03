@@ -1,7 +1,7 @@
 <template>
   <form
     novalidate
-    class="md-layout"
+    class="smb-layout"
     @submit.prevent="validateUser">
     <h3 class="smb-title">登录</h3>
     <md-field
@@ -100,7 +100,7 @@ export default {
         geetest_challenge: gt.geetest_challenge,
         geetest_validate: gt.geetest_validate,
         geetest_seccode: gt.geetest_seccode
-      }).then((res) => {
+      }, {loading: true}).then((res) => {
         if (res.code === 0) {
           this.$notify({
             group: 'smb',
@@ -162,8 +162,5 @@ export default {
   .smb-send-code {
     margin-bottom: 24px;
   }
-}
-.smb-bottom-btn {
-  width: 100%;
 }
 </style>

@@ -12,7 +12,6 @@ import {
   Raven,
   createProvider
 } from '@/plugins'
-
 import moment from 'moment'
 
 Vue.config.productionTip = false

@@ -6,7 +6,8 @@ export default {
       this.$axios.request({
         url: `${this.apis.gtRegister}?t=${(new Date()).getTime()}`,
         method: 'get',
-        dataType: 'json'
+        dataType: 'json',
+        loading: true
       }).then((res) => {
         window.initGeetest({
           // 以下 4 个配置参数为必须，不能缺少

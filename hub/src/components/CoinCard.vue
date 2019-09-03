@@ -11,7 +11,7 @@
         <s-text
           p="1"
           bold
-          color="dark-blue"
+          color="dark-blue smb-break-all"
         >{{ coinName }}</s-text>
         <s-text p="2">
           <span><svg-icon

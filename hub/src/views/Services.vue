@@ -216,7 +216,7 @@ export default {
       console.log('user clicked on ', contribute ? 'contribute' : 'create')
     },
     async getCoinList ({ status, name, belong }, pageIndex = 1) {
-      if (pageSize === 1) this.coinCount = [{}, {}, {}];
+      if (pageSize === 1) this.coinList = [{}, {}, {}];
       const ixoOptions = {
         'ICOs': 0,
         'STOs': 1,
@@ -227,7 +227,7 @@ export default {
       if (name !== undefined) params.name = name
       if (belong !== undefined) params.belong = ixoOptions[belong]
       const pageSize = 10
-      await this.$axios.get(this.apis.coin, {
+      this.$axios.get(this.apis.coin, {
         params: {
           pageSize,
           pageIndex,

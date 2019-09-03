@@ -1,7 +1,7 @@
 <template>
   <form
     novalidate
-    class="md-layout"
+    class="smb-layout"
     @submit.prevent="validateUser">
     <h3 class="smb-title">注册</h3>
     <md-field
@@ -152,12 +152,12 @@ export default {
         geetest_challenge: gt.geetest_challenge,
         geetest_validate: gt.geetest_validate,
         geetest_seccode: gt.geetest_seccode
-      }).then((res) => {
+      }, {loading: true}).then((res) => {
         if (res.code === 0) {
           this.$notify({
             group: 'smb',
             type: 'success',
-            title: '注册成功'
+            title: '注册成功，自动登录'
           })
           this.$store.commit('setLoginModal', false)
           const { nickname, avatar, email, bio } = res.data
@@ -165,6 +165,7 @@ export default {
             nickname, avatar, email, bio
           })
           this.$store.dispatch('storeAccessToken', res.data.access_token)
+          window.location.reload()
         } else {
           this.$notify({
             group: 'smb',
@@ -210,7 +211,7 @@ export default {
         geetest_challenge: gt.geetest_challenge,
         geetest_validate: gt.geetest_validate,
         geetest_seccode: gt.geetest_seccode
-      }).then((res) => {
+      }, {loading: true}).then((res) => {
         this.disabledSendCode = false
         if (res.code === 0) {
           this.countDown()
@@ -258,6 +259,8 @@ export default {
   width: 100%;
 }
 .md-verify-code {
+  width: 144px;
+  box-sizing: border-box;
   display: flex;
   align-items: flex-end;
   justify-content: flex-start;
@@ -265,7 +268,15 @@ export default {
     margin-bottom: 24px;
   }
 }
-.smb-bottom-btn {
-  width: 100%;
+@media screen and (min-width: 1024px) {
+  .md-verify-code {
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+    .smb-send-code {
+      margin-bottom: 24px;
+    }
+  }
 }
 </style>

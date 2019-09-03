@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import axios from 'axios'
 import { getCookie } from '@/utils'
+import { Loading } from 'element-ui';
+import 'element-ui/lib/theme-chalk/loading.css'
 
 // Full config:  https://github.com/axios/axios#request-config
 // axios.defaults.baseURL = process.env.baseURL || process.env.apiUrl || '';
@@ -14,10 +16,17 @@ let config = {
   // withCredentials: true, // Check cross-site Access-Control
 }
 
+// this.$axios.request({loading:true})
+// get this.$axios.get(url, { params: {email}, noLoading: true })
+// post this.$axios.post(url, { email }, { noLoading: true })
 const _axios = axios.create(config)
-
+let loadingInstance = null;
 _axios.interceptors.request.use(
   function (config) {
+    console.log(config);
+    if (config.loading) loadingInstance = Loading.service({
+      background: 'rgba(0, 0, 0, 0.5)'
+    });
     if (getCookie('access_token')) {
       config.headers.authorization = 'Bearer ' + getCookie('access_token')
     }
@@ -32,10 +41,12 @@ _axios.interceptors.request.use(
 // Add a response interceptor
 _axios.interceptors.response.use(
   function (response) {
+    if(loadingInstance) loadingInstance.close();
     // Do something with response data
     return response.data
   },
   function (error) {
+    if(loadingInstance) loadingInstance.close();
     // Do something with response error
     return Promise.reject(error)
   }

@@ -42,7 +42,7 @@
                     >
                   </div>
                   <s-text
-                    :class="{'loading-shimmer': !coinName}"
+                    :class="['smb-break-all', {'loading-shimmer': !coinName}]"
                     head="3">
                     {{ coinName }}
                   </s-text>
@@ -436,7 +436,7 @@ export default {
   },
   methods: {
     async getCoinDetail (symbol) {
-      this.$axios.get(`${this.apis.coin}/${symbol}`).then((res) => {
+      this.$axios.get(`${this.apis.coin}/${symbol}`, { loading: true }).then((res) => {
         this.coin = res.data || {}
         this.$refs.overview.drawPie(this.coin.distribution)
       })

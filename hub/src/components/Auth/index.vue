@@ -49,12 +49,32 @@ export default {
 
 <style lang="scss">
 .smb-auth {
-  width: 340px;
+  max-width: 340px;
   padding: 20px;
   box-sizing: border-box;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+.smb-layout {
+  width: 100%;
+}
+
+.smb-bottom-btn {
+  width: 100%;
+  box-sizing: border-box;
+  margin: 20px 0!important;
+}
+@media screen and (min-width: 1024px) {
+  .smb-auth {
+    width: 400px;
+    padding: 20px;
+    box-sizing: border-box;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 }
 </style>
