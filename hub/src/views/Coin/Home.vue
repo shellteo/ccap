@@ -1,6 +1,5 @@
 <template>
   <div
-    v-scroll-spy
     class="service-container"
   >
     <h1>测试2</h1>

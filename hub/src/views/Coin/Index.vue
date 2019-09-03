@@ -132,8 +132,6 @@
                 class="has-background-lighter sticky left-sidebar"
               >
                 <ul
-                  v-scroll-spy-active
-                  v-scroll-spy-link
                   class="topics-list"
                 >
                   <li
