@@ -44,7 +44,7 @@ class UserController extends Controller {
     const ret = await ctx.service.user.create(user);
     if (ret.code === 0) {
       await this.jwtSign({
-        id: ret.id,
+        id: ret.data.id,
         email,
       }, { email });
     } else {
@@ -71,6 +71,7 @@ class UserController extends Controller {
     }
   }
   async jwtSign(user, { email = null, nickname = null, avatar = null, bio = null }) {
+    this.logger.error('in Controller::user jwt sign %j', user);
     const { ctx, config } = this;
     const token = jwt.sign(user, config.login.secretKey, {
       expiresIn: config.login.expires,
