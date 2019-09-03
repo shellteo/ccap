@@ -1,5 +1,6 @@
 <template>
   <div
+    v-scroll-spy
     class="service-container smb-overview"
   >
     <section>

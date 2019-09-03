@@ -6,7 +6,7 @@ import '@/plugins/components'
 import '@/plugins/filters'
 import '@/plugins/prism'
 import '@/plugins/chart'
-// import '@/plugins/scrollspy'
+import '@/plugins/scrollspy'
 import '@/plugins/scrollbar'
 import '@/plugins/markdown'
 
