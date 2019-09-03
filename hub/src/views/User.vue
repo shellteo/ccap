@@ -230,9 +230,13 @@ export default {
       this.showDialog = true
     },
     updateUser () {
-      this.$v.$touch()
-      if (!this.$v.$invalid) {
+      if (this.currentType === 'avatar') {
         this.confirmUpdateUser()
+      } else {
+        this.$v.$touch()
+        if (!this.$v.$invalid) {
+          this.confirmUpdateUser()
+        }
       }
     },
     confirmUpdateUser () {

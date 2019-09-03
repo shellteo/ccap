@@ -76,6 +76,8 @@ class CommentService extends Service {
     const { ctx } = this;
     const user_id = ctx.user.id;
 
+    this.logger.error('in service::comment like Comment user %j', ctx.user);
+
     const userLiked = await ctx.model.UserLike.find({ where: { user_id, comment_id } });
     // 已经点过赞了
     if (userLiked) {
@@ -95,7 +97,7 @@ class CommentService extends Service {
       await transaction.commit();
       return 0;
     } catch (e) {
-      this.logger.error('In UserController::userinfo error %j', e);
+      this.logger.error('in service::comment like Comment error %j', e);
       await transaction.rollback();
       return 2;
     }
