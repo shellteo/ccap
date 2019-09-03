@@ -149,70 +149,6 @@ export default {
       default: undefined
     }
   },
-  apollo: {
-    data: {
-      query: IndexQuery,
-      update: data => ({
-        recentServices: data.recentlyAddedServices.nodes
-      })
-    },
-    userServices: {
-      query: UserQuery,
-      skip () { this.isUserServicesLoading = true; this.userServices = [{}, {}, {}]; return this.getOwnerUuid === '' || !this.category || this.category !== 'self' },
-      variables: function () {
-        return {
-          uuid: this.getOwnerUuid
-        }
-      },
-      update: function (data) {
-        this.isUserServicesLoading = false
-        if (data.ownerByUuid.services) {
-          this.userServicesTotal = data.ownerByUuid.services.totalCount
-          return data.ownerByUuid.services.nodes
-        }
-        this.userServicesTotal = 0
-        return []
-      }
-    },
-    searchResultsByCategory: {
-      query: SearchQuery,
-      skip () { this.isSearchCategoryLoading = true; this.searchResultsByCategory = [{}, {}, {}]; return !this.category || this.category === 'self' },
-      variables: function () {
-        return {
-          searchTerm: this.category || ' '
-        }
-      },
-      update: function (data) {
-        this.isSearchCategoryLoading = false
-        if (data.searchServices) {
-          this.searchResultsByCategoryTotal = data.searchServices.totalCount
-          return data.searchServices.edges.map(e => e.node)
-        } else {
-          this.searchResultsByCategoryTotal = 0
-        }
-        return []
-      }
-    },
-    searchResults: {
-      query: SearchQuery,
-      skip () { this.isSearchLoading = true; this.searchResults = [{}, {}, {}]; return !this.search },
-      variables: function () {
-        return {
-          searchTerm: this.search || ' '
-        }
-      },
-      update: function (data) {
-        this.isSearchLoading = false
-        if (data.searchServices) {
-          this.searchTotalItems = data.searchServices.totalCount
-          return data.searchServices.edges.map(e => e.node)
-        } else {
-          this.searchTotalItems = 0
-        }
-        return []
-      }
-    }
-  },
   data: () => ({
     data: {
       recentServices: [{}, {}, {}, {}, {}, {}]
@@ -256,7 +192,6 @@ export default {
   },
   mounted: function () {
     this.searchInput = this.$route ? (this.$route.query.search || '') : ''
-    this.getNews()
     this.getCoinList(this.parseRouteQuery(this.$route.query || {}))
   },
   methods: {
@@ -279,11 +214,6 @@ export default {
     },
     clickOnContribute: function (contribute) {
       console.log('user clicked on ', contribute ? 'contribute' : 'create')
-    },
-    async getNews () {
-      await this.$axios.get(`${this.apis.news}/EVA`).then((res) => {
-        console.log(res)
-      })
     },
     async getCoinList ({ status, name, belong }, pageIndex = 1) {
       const ixoOptions = {

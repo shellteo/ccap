@@ -33,7 +33,7 @@ class NewsService extends Service {
   }
   async find(symbol) {
     const { ctx } = this;
-    const sql = ' Select distinct link,`from`,media,publishTime,mediaLogo,title FROM News WHERE symbol = :symbol'
+    const sql = ' Select distinct link,`from`,media,publishTime,mediaLogo,title FROM news WHERE symbol = :symbol'
     const rows = await ctx.model.query(sql, {
       raws: true,
       model: ctx.model.News,
