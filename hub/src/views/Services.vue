@@ -216,6 +216,7 @@ export default {
       console.log('user clicked on ', contribute ? 'contribute' : 'create')
     },
     async getCoinList ({ status, name, belong }, pageIndex = 1) {
+      if (pageSize === 1) this.coinCount = [{}, {}, {}];
       const ixoOptions = {
         'ICOs': 0,
         'STOs': 1,

@@ -66,7 +66,7 @@
           class="md-error">验证码为6位数字</span>
       </md-field>
       <md-button
-        :disabled="$v.registerForm.email.$invalid || !!timer"
+        :disabled="$v.registerForm.email.$invalid || !!timer || disabledSendCode"
         class="md-raised smb-send-code"
         @click="sendCode">{{ timer ? `${count}S` : `发送验证码` }}</md-button>
     </div>
@@ -104,7 +104,8 @@ export default {
       },
       count: '',
       timer: null,
-      disabled: false
+      disabled: false,
+      disabledSendCode: false
     }
   },
   validations: {
@@ -203,12 +204,14 @@ export default {
       }
     },
     confirmSendCode (gt) {
+      this.disabledSendCode = true
       this.$axios.post(this.apis.sendMail, {
         mail: this.registerForm.email,
         geetest_challenge: gt.geetest_challenge,
         geetest_validate: gt.geetest_validate,
         geetest_seccode: gt.geetest_seccode
       }).then((res) => {
+        this.disabledSendCode = false
         if (res.code === 0) {
           this.countDown()
           this.$notify({
